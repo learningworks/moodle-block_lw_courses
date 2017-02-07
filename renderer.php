@@ -358,27 +358,65 @@ class block_my_courses_renderer extends plugin_renderer_base {
     // Custom LearningWorks functions.
 
     public function course_image($course) {
-        global $CFG, $OUTPUT;
+        global $CFG;
 
         require_once($CFG->libdir.'/coursecatlib.php');
+        $course = new course_in_list($course);
 
-        foreach ($course->get_course_overviewfiles() as $file) {
-            $isimage = $file->is_valid_image();
-            $url = file_encode_url("$CFG->wwwroot/pluginfile.php",
-                '/'. $file->get_contextid(). '/'. $file->get_component(). '/'.
-                $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
-            if ($isimage) {
-                return html_writer::empty_tag('img', array('src' => $url));
-            } else if ($courseimagedefault = get_config('block_my_courses', 'courseimagedefault')) {
-                // Return an img element with the image in the block settings to use for the course.
-                $imageurl = block_my_courses_get_course_image_url($courseimagedefault);
-                return html_writer::empty_tag('img', array( 'src' => $imageurl ));
-            } else {
-                // We check for a default image in the my_courses pix folder named default.
-                $imageurl = $OUTPUT->pix_url('default', 'block_my_courses');
-                return html_writer::empty_tag('img', array( 'src' => $imageurl ));
+        // Check to see if a file has been set on the course level.
+        if ($course->get_course_overviewfiles()) {
+            foreach ($course->get_course_overviewfiles() as $file) {
+                $isimage = $file->is_valid_image();
+                $url = file_encode_url("$CFG->wwwroot/pluginfile.php",
+                    '/'. $file->get_contextid(). '/'. $file->get_component(). '/'.
+                    $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
+                if ($isimage) {
+                    $config = get_config('block_my_courses');
+                    if (is_null($config->my_courses_bgimage) || $config->my_courses_bgimage == BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE) {
+                        // Embed the image url as a img tag sweet...
+                        return html_writer::empty_tag('img', array( 'src' => $url, 'class' => 'course_image' ));
+                    } else {
+                        // We need a CSS soloution apparently lets give it to em.
+                        return html_writer::start_tag('div',
+                            array('class' => 'course_image',
+                                "style" => 'background:url('.$url.'); background-size:cover'));
+                    }
+                } else {
+                    return $this->course_image_defaults();
+                }
             }
+        } else {
+            // Lets try to find some default images eh?.
+            return $this->course_image_defaults();
         }
+        // Where are the default at even?.
+        return print_error('error');
+    }
+
+    public function course_image_defaults() {
+        global $OUTPUT;
+
+        $config = get_config('block_my_courses');
+
+        if ($courseimagedefault = get_config('block_my_courses', 'courseimagedefault')) {
+            // Return an img element with the image in the block settings to use for the course.
+            $imageurl = block_my_courses_get_course_image_url($courseimagedefault);
+        } else {
+            // We check for a default image in the my_courses pix folder named default aka our final hope.
+            $imageurl = $OUTPUT->pix_url('default', 'block_my_courses');
+        }
+
+        // Do we need a CSS soloution or is a img good enough?.
+        if (is_null($config->my_courses_bgimage) || $config->my_courses_bgimage == BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE) {
+            // Embed the image url as a img tag sweet...
+            return html_writer::empty_tag('img', array( 'src' => $imageurl, 'class' => 'course_image' ));
+        } else {
+            // We need a CSS soloution apparently lets give it to em.
+            return html_writer::start_tag('div',
+                array('class' => 'course_image',
+                    "style" => 'background:url('.$imageurl.'); background-size:cover'));
+        }
+        // Where are the default at even?.
         return print_error('filenotreadable');
     }
 }

@@ -70,3 +70,6 @@ $string['youhavenomessages'] = 'You have no unread ';
 
 $string['courseimagedefault'] = 'Default course image';
 $string['courseimagedefaultdesc'] = 'This image will be shown if a course lacks a course summary image file.';
+
+$string['my_courses_bgimage']   = "Embed images into background";
+$string['my_courses_bgimagedesc']   = "This will embed images into background as a CSS property";

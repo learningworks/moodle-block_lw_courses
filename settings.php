@@ -45,4 +45,11 @@ if ($ADMIN->fulltree) {
     $description = new lang_string('courseimagedefaultdesc', 'block_my_courses');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'courseimagedefault');
     $settings->add($setting);
+
+    $name = 'block_my_courses/my_courses_bgimage';
+    $title = new lang_string('my_courses_bgimage', 'block_my_courses');
+    $description = new lang_string('my_courses_bgimagedesc', 'block_my_courses');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE);
+    $settings->add($setting);
+
 }
