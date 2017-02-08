@@ -267,14 +267,16 @@ function build_progress($coursegrades, $iscompleted, $course) {
 
     $config = get_config('block_my_courses');
 
-    if ($config->progressenabled == BLOCKS_MY_COURSES_SHOWGRADES_YES) {
-        print_object('you wanna see progress');
-    } else {
-        print_object('no gains here');
+    if ($config->progressenabled == BLOCKS_MY_COURSES_SHOWGRADES_NO) {
+        return;
     }
 
     switch ($config->progress) {
-        case "grades":
+        case BLOCKS_MY_COURSES_PROGRESS_UNSET:
+            return 'unset';
+
+        case BLOCKS_MY_COURSES_PROGRESS_GRADES:
+            return 'grades';
             if (($coursegrades[$course->id]->grade / $coursegrades[$course->id]->item->grademax * 100) == 100) {
                 $iscompleted .= ' completed';
             }
@@ -282,7 +284,9 @@ function build_progress($coursegrades, $iscompleted, $course) {
                 $iscompleted .= ' passed';
             }
             return array($coursegrades);
-        case "completion":
+
+        case BLOCKS_MY_COURSES_PROGRESS_COMPLETION:
+            return 'completion';
             $newcourse = get_course($course->id);
             $completionstatus = new stdClass();
             if (isset($coursecompletions[$newcourse->id]->timecompleted)) {
