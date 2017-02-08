@@ -73,3 +73,6 @@ $string['courseimagedefaultdesc'] = 'This image will be shown if a course lacks 
 
 $string['my_courses_bgimage']   = "Embed images into background";
 $string['my_courses_bgimagedesc']   = "This will embed images into background as a CSS property";
+
+$string['summary_limit_desc'] = 'Limit the output of text to display as course summaries on the users home page';
+$string['summary_limit'] = 'Summary String Letter Limit';

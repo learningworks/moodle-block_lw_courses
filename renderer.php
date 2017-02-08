@@ -85,6 +85,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
         foreach ($courses as $key => $course) {
             print_object($this->course_image($course));
+            print_object($this->course_description($course));
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
@@ -418,5 +419,56 @@ class block_my_courses_renderer extends plugin_renderer_base {
         }
         // Where are the default at even?.
         return print_error('filenotreadable');
+    }
+
+
+    // todo
+    public function course_description($course) {
+
+        $course = new course_in_list($course); // todo : why does this fix so many issues?.
+        if ($course->has_summary()) {
+            $context = context_course::instance($course->id);
+            $options = array('overflowdiv' => true, 'noclean' => true, 'para' => false);
+            if (intval(get_config('block_my_courses', 'summary_limit')) > 0) {
+                $summaryexcerpt = $this->truncate_html($course->summary,
+                    intval(get_config('block_my_courses', 'summary_limit')));
+            } else {
+                $summaryexcerpt = $course->summary;
+            }
+
+            $summary = file_rewrite_pluginfile_urls($summaryexcerpt, 'pluginfile.php', $context->id, 'course', 'summary', null);
+
+            return format_text($summary, $course->summaryformat, $options, $course->id);
+        } else {
+            return ' ';
+        }
+
+        return print_error('error');
+    }
+
+    // todo
+    function truncate_html($s, $l, $e = '&hellip;', $ishtml = true) {
+        $s = trim($s);
+        $e = (strlen(strip_tags($s)) > $l) ? $e : '';
+        $i = 0;
+        $tags = array();
+
+        if ($ishtml) {
+            preg_match_all('/<[^>]+>([^<]*)/', $s, $m, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+            foreach ($m as $o) {
+                if ($o[0][1] - $i >= $l) {
+                    break;
+                }
+                $t = substr(strtok($o[0][0], " \t\n\r\0\x0B>"), 1);
+                if ($t[0] != '/') {
+                    $tags[] = $t;
+                } else if (end($tags) == substr($t, 1)) {
+                    array_pop($tags);
+                }
+                $i += $o[1][1] - $o[0][1];
+            }
+        }
+        $output = substr($s, 0, $l = min(strlen($s), $l + $i)) . $e .  (count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '');
+        return $output;
     }
 }

@@ -52,4 +52,8 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE);
     $settings->add($setting);
 
+    $settings->add(new admin_setting_configtext('block_my_courses/summary_limit',
+        get_string('summary_limit', 'block_my_courses'),
+        get_string('summary_limit_desc', 'block_my_courses'), 150, PARAM_INT));
+
 }
