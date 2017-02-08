@@ -56,4 +56,21 @@ if ($ADMIN->fulltree) {
         get_string('summary_limit', 'block_my_courses'),
         get_string('summary_limit_desc', 'block_my_courses'), 150, PARAM_INT));
 
+
+    $name = 'block_my_courses/progressenabled';
+    $title = new lang_string('progressenabled', 'block_my_courses');
+    $description = new lang_string('progressenabled_desc', 'block_my_courses');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_MY_COURSES_SHOWGRADES_NO);
+    $settings->add($setting);
+
+    $name = 'block_my_courses/progress';
+    $title = new lang_string('progress', 'block_my_courses');
+    $description = new lang_string('progress_desc', 'block_my_courses');
+    $setting = new admin_setting_configselect($name, $title, $description, 0, array(
+        BLOCKS_MY_COURSES_PROGRESS_UNSET => 'Unset',
+        BLOCKS_MY_COURSES_PROGRESS_COMPLETION => 'Completion',
+        BLOCKS_MY_COURSES_PROGRESS_GRADES => 'Grades')
+    );
+    $settings->add($setting);
+
 }

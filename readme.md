@@ -15,3 +15,5 @@ lassed out the images returned regardless of the embedded situation
 8/2/17
 
 Added functionality for course descriptions and truncation
+
+Began adding base for course grades or completion state. build_progress still needs a tidy

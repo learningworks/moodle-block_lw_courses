@@ -76,3 +76,10 @@ $string['my_courses_bgimagedesc']   = "This will embed images into background as
 
 $string['summary_limit_desc'] = 'Limit the output of text to display as course summaries on the users home page';
 $string['summary_limit'] = 'Summary String Letter Limit';
+
+$string['progress'] = 'Progress Type';
+$string['progress_desc'] = 'This will determine what type of course grades the block will try to render';
+
+$string['progressenabled'] = 'Coure progress bar';
+$string['progressenabled_desc'] = 'This will determine if the course progress bar will be shown to learners';
+
