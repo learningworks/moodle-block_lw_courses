@@ -262,7 +262,7 @@ function block_my_courses_get_course_image_url($fileorfilename) {
     return new moodle_url("/pluginfile.php/1/block_my_courses/courseimagedefault{$fileorfilename}");
 }
 
-function build_progress($coursegrades, $iscompleted, $course) {
+function build_progress(/*$coursegrades, $iscompleted, */$course) {
     global $OUTPUT, $USER;
 
     $config = get_config('block_my_courses');
@@ -286,67 +286,62 @@ function build_progress($coursegrades, $iscompleted, $course) {
             return array($coursegrades);
 
         case BLOCKS_MY_COURSES_PROGRESS_COMPLETION:
-            return 'completion';
-            $newcourse = get_course($course->id);
+            //return 'completion';
+            $course = get_course($course->id);
             $completionstatus = new stdClass();
-            if (isset($coursecompletions[$newcourse->id]->timecompleted)) {
-                $completionstatus->min = 1;
-                $completionstatus->max = 1;
-                $iscompleted .= ' completed';
-            } else {
-                // INSPIRED BY completionstatus BLOCK.
 
-                $context = context_course::instance($newcourse->id);
+            // Get course completion data.
+            $coursecompletiondata = new completion_info($course);
 
-                // Can edit settings?
-                $canedit = has_capability('moodle/course:update', $context);
+            // Don't display if completion isn't enabled!
+            if (!$coursecompletiondata->is_enabled()) {
+                return html_writer::tag('p','Progressbar enabled, but completion tracking not enabled for course!');
+            }
 
-                // Get course completion data.
-                $coursecompletiondata = new completion_info($newcourse);
+            // INSPIRED BY completionstatus BLOCK.
 
-                // Don't display if completion isn't enabled!
-                if (!$coursecompletiondata->is_enabled()) {
-                    if ($canedit) {
-                        $errornotification = $OUTPUT->notification('Progressbar enabled, but completion tracking not enabled for course!', 'notifytiny');
-                    }
+            // Load criteria to display.
+            $completions = $coursecompletiondata->get_completions($USER->id);
+
+            // For aggregating activity completion.
+            $activities = array();
+            $numberofactivitiescompleted = 0;
+
+            // Flag to set if current completion data is inconsistent with what is stored in the database.
+            $pendingupdate = false;
+
+            // Loop through course criteria.
+            foreach ($completions as $completion) {
+                $criteria = $completion->get_criteria();
+                $iscomplete = $completion->is_complete();
+
+                if (!$pendingupdate && $criteria->is_pending($completion)) {
+                    $pendingupdate = true;
                 }
 
-                // Load criteria to display.
-                $completions = $coursecompletiondata->get_completions($USER->id);
+                // Activities are a special case, so cache them and leave them till last.
+                if ($criteria->criteriatype == COMPLETION_CRITERIA_TYPE_ACTIVITY) {
+                    $activities[$criteria->moduleinstance] = $iscomplete;
 
-                // For aggregating activity completion.
-                $activities = array();
-                $numberofactivitiescompleted = 0;
-
-                // Flag to set if current completion data is inconsistent with what is stored in the database.
-                $pendingupdate = false;
-
-                // Loop through course criteria.
-                foreach ($completions as $completion) {
-                    $criteria = $completion->get_criteria();
-                    $iscomplete = $completion->is_complete();
-
-                    if (!$pendingupdate && $criteria->is_pending($completion)) {
-                        $pendingupdate = true;
+                    if ($iscomplete) {
+                        $numberofactivitiescompleted++;
                     }
-
-                    // Activities are a special case, so cache them and leave them till last.
-                    if ($criteria->criteriatype == COMPLETION_CRITERIA_TYPE_ACTIVITY) {
-                        $activities[$criteria->moduleinstance] = $iscomplete;
-
-                        if ($iscomplete) {
-                            $numberofactivitiescompleted++;
-                        }
-                        continue;
-                    }
-                }
-
-                // Aggregate activities.
-                if (!empty($activities)) {
-                    $completionstatus->min = $numberofactivitiescompleted;
-                    $completionstatus->max = count($activities);
+                    continue;
                 }
             }
-            return array($completionstatus);
+
+            // Aggregate activities.
+            if (!empty($activities)) {
+                $completionstatus->min = $numberofactivitiescompleted;
+                $completionstatus->max = count($activities);
+            }
+
+            $completionpercentage = $completionstatus->min /$completionstatus->max *100;
+
+            $bar = html_writer::div("$completionpercentage%",'progress-bar',array('aria-valuenow'=>"$completionpercentage", 'aria-valuemin'=>"0", 'aria-valuemax'=>"100", 'style'=>"width:$completionpercentage%"));
+            $progress = html_writer::div($bar,'progress');
+
+            return $progress;
+            //return array($completionstatus);
     }
 }

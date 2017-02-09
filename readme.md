@@ -17,3 +17,7 @@ lassed out the images returned regardless of the embedded situation
 Added functionality for course descriptions and truncation
 
 Began adding base for course grades or completion state. build_progress still needs a tidy
+
+9/2/17
+
+Working on the course completion enabled status case. Bootstrap progress bar currently within method. to abstract
