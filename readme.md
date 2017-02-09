@@ -21,3 +21,5 @@ Began adding base for course grades or completion state. build_progress still ne
 9/2/17
 
 Working on the course completion enabled status case. Bootstrap progress bar currently within method. to abstract
+
+Working proof of grades case with progress bar that is same but diff variables to completion case

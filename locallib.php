@@ -263,7 +263,9 @@ function block_my_courses_get_course_image_url($fileorfilename) {
 }
 
 function build_progress(/*$coursegrades, $iscompleted, */$course) {
-    global $OUTPUT, $USER;
+    global $CFG, $USER;
+
+    require_once($CFG->dirroot.'/grade/querylib.php');
 
     $config = get_config('block_my_courses');
 
@@ -276,17 +278,23 @@ function build_progress(/*$coursegrades, $iscompleted, */$course) {
             return 'unset';
 
         case BLOCKS_MY_COURSES_PROGRESS_GRADES:
-            return 'grades';
-            if (($coursegrades[$course->id]->grade / $coursegrades[$course->id]->item->grademax * 100) == 100) {
+            $gradeobject = grade_get_course_grade($USER->id, $course->id);
+            /*if (($coursegrades[$course->id]->grade / $coursegrades[$course->id]->item->grademax * 100) == 100) {
                 $iscompleted .= ' completed';
             }
             if (($coursegrades[$course->id]->grade >= $coursegrades[$course->id]->item->gradepass)) {
                 $iscompleted .= ' passed';
-            }
-            return array($coursegrades);
+            }*/
+
+            $completionpercentage = $gradeobject->grade /$gradeobject->item->grademax *100;
+
+            $bar = html_writer::div("$completionpercentage%",'progress-bar',array('aria-valuenow'=>"$completionpercentage", 'aria-valuemin'=>"0", 'aria-valuemax'=>"100", 'style'=>"width:$completionpercentage%"));
+            $progress = html_writer::div($bar,'progress');
+
+            return $progress;
+            //return array($coursegrades);
 
         case BLOCKS_MY_COURSES_PROGRESS_COMPLETION:
-            //return 'completion';
             $course = get_course($course->id);
             $completionstatus = new stdClass();
 
