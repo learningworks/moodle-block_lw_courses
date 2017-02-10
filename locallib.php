@@ -262,15 +262,15 @@ function block_my_courses_get_course_image_url($fileorfilename) {
     return new moodle_url("/pluginfile.php/1/block_my_courses/courseimagedefault{$fileorfilename}");
 }
 
-function build_progress(/*$coursegrades, $iscompleted, */$course) {
+function build_progress($course) {
     global $CFG, $USER;
 
     require_once($CFG->dirroot.'/grade/querylib.php');
-
+    require_once($CFG->dirroot.'/grade/lib.php');
     $config = get_config('block_my_courses');
 
     if ($config->progressenabled == BLOCKS_MY_COURSES_SHOWGRADES_NO) {
-        return;
+        return '';
     }
 
     switch ($config->progress) {
@@ -279,12 +279,6 @@ function build_progress(/*$coursegrades, $iscompleted, */$course) {
 
         case BLOCKS_MY_COURSES_PROGRESS_GRADES:
             $gradeobject = grade_get_course_grade($USER->id, $course->id);
-            /*if (($coursegrades[$course->id]->grade / $coursegrades[$course->id]->item->grademax * 100) == 100) {
-                $iscompleted .= ' completed';
-            }
-            if (($coursegrades[$course->id]->grade >= $coursegrades[$course->id]->item->gradepass)) {
-                $iscompleted .= ' passed';
-            }*/
 
             $completionpercentage = $gradeobject->grade /$gradeobject->item->grademax *100;
 
@@ -292,7 +286,6 @@ function build_progress(/*$coursegrades, $iscompleted, */$course) {
             $progress = html_writer::div($bar,'progress');
 
             return $progress;
-            //return array($coursegrades);
 
         case BLOCKS_MY_COURSES_PROGRESS_COMPLETION:
             $course = get_course($course->id);
@@ -350,6 +343,5 @@ function build_progress(/*$coursegrades, $iscompleted, */$course) {
             $progress = html_writer::div($bar,'progress');
 
             return $progress;
-            //return array($completionstatus);
     }
 }

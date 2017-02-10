@@ -86,9 +86,9 @@ class block_my_courses_renderer extends plugin_renderer_base {
         }
 
         foreach ($courses as $key => $course) {
-            print_object($this->course_image($course));
-            print_object($this->course_description($course));
-            print_object(build_progress($course));
+            //print_object($this->course_image($course));
+            //print_object($this->course_description($course));
+            //print_object(build_progress($course));
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
