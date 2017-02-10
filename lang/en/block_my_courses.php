@@ -68,6 +68,9 @@ $string['youhavenomessages'] = 'You have no unread ';
 
 // Custom LearningWorks Lang strings.
 
+$string['customsettings'] = 'Custom settings';
+$string['customsettings_desc'] = 'The following are settings for additions to the course overview block';
+
 $string['courseimagedefault'] = 'Default course image';
 $string['courseimagedefaultdesc'] = 'This image will be shown if a course lacks a course summary image file.';
 
@@ -82,4 +85,7 @@ $string['progress_desc'] = 'This will determine what type of course grades the b
 
 $string['progressenabled'] = 'Coure progress bar';
 $string['progressenabled_desc'] = 'This will determine if the course progress bar will be shown to learners';
+
+$string['startgrid'] = "Start as grid";
+$string['startgrid_desc'] = "This will render the courses in a grid straight away";
 

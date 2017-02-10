@@ -85,6 +85,10 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
         }
 
+        //LearningWorks
+        $listcss = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? 'grid' : '';
+        $html .= html_writer::tag('a', 'Change View', array('id' => 'box-or-lines', 'styles' => '', 'class' => $listcss));
+
         foreach ($courses as $key => $course) {
             //print_object($this->course_image($course));
             //print_object($this->course_description($course));

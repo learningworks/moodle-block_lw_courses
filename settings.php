@@ -40,6 +40,13 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configselect('block_my_courses/showcategories', new lang_string('showcategories', 'block_my_courses'),
         new lang_string('showcategoriesdesc', 'block_my_courses'), BLOCKS_MY_COURSES_SHOWCATEGORIES_NONE, $showcategories));
 
+    $name = 'block_my_courses/customsettings';
+    $title = new lang_string('customsettings', 'block_my_courses');
+    $description = new lang_string('customsettings_desc', 'block_my_courses');
+    $setting = new admin_setting_heading($name, $title, $description);
+    $settings->add($setting);
+
+
     $name = 'block_my_courses/courseimagedefault';
     $title = new lang_string('courseimagedefault', 'block_my_courses');
     $description = new lang_string('courseimagedefaultdesc', 'block_my_courses');
@@ -73,4 +80,9 @@ if ($ADMIN->fulltree) {
     );
     $settings->add($setting);
 
+    $name = 'block_my_courses/startgrid';
+    $title = new lang_string('startgrid', 'block_my_courses');
+    $description = new lang_string('startgrid_desc', 'block_my_courses');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_MY_COURSES_STARTGRID_NO);
+    $settings->add($setting);
 }
