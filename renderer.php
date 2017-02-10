@@ -39,9 +39,10 @@ class block_my_courses_renderer extends plugin_renderer_base {
      * @return string html to be displayed in my_courses block
      */
     public function my_courses($courses, $overviews) {
+        global $CFG, $PAGE;
         $html = '';
         //LearningWorks
-
+        $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/my_courses/js/custom.js'));
         $config = get_config('block_my_courses');
         if ($config->showcategories != BLOCKS_MY_COURSES_SHOWCATEGORIES_NONE) {
             global $CFG;
@@ -87,7 +88,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
         //LearningWorks
         $listcss = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? 'grid' : '';
-        $html .= html_writer::tag('a', 'Change View', array('id' => 'box-or-lines', 'styles' => '', 'class' => $listcss));
+        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => $listcss));
 
         foreach ($courses as $key => $course) {
             //print_object($this->course_image($course));
