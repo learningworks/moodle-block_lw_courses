@@ -63,7 +63,6 @@ if ($ADMIN->fulltree) {
         get_string('summary_limit', 'block_my_courses'),
         get_string('summary_limit_desc', 'block_my_courses'), 150, PARAM_INT));
 
-
     $name = 'block_my_courses/progressenabled';
     $title = new lang_string('progressenabled', 'block_my_courses');
     $description = new lang_string('progressenabled_desc', 'block_my_courses');
@@ -85,4 +84,8 @@ if ($ADMIN->fulltree) {
     $description = new lang_string('startgrid_desc', 'block_my_courses');
     $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_MY_COURSES_STARTGRID_NO);
     $settings->add($setting);
+
+    $settings->add(new admin_setting_configtext('block_my_courses/grid_row_limit',
+        get_string('grid_row_limit', 'block_my_courses'),
+        get_string('grid_row_limit_desc', 'block_my_courses'), BLOCKS_MY_COURSES_DEFAULT_COURSES_ROW, PARAM_INT));
 }

@@ -89,3 +89,7 @@ $string['progressenabled_desc'] = 'This will determine if the course progress ba
 $string['startgrid'] = "Start as grid";
 $string['startgrid_desc'] = "This will render the courses in a grid straight away";
 
+$string['grid_row_limit'] = "Course cards max per row";
+$string['grid_row_limit_desc'] = "This will set how many courses will appear beside each other on a row";
+
+

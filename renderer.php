@@ -76,20 +76,26 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $html .= $this->output->box_end();
 
             $moveurl = new moodle_url('/blocks/my_courses/move.php',
-                        array('sesskey' => sesskey(), 'moveto' => 0, 'courseid' => $movingcourseid));
+                array('sesskey' => sesskey(), 'moveto' => 0, 'courseid' => $movingcourseid));
             // Create move icon, so it can be used.
             $movetofirsticon = html_writer::empty_tag('img',
-                    array('src' => $this->output->pix_url('movehere'),
-                        'alt' => get_string('movetofirst', 'block_my_courses', $courses[$movingcourseid]->fullname),
-                        'title' => get_string('movehere')));
+                array('src' => $this->output->pix_url('movehere'),
+                    'alt' => get_string('movetofirst', 'block_my_courses', $courses[$movingcourseid]->fullname),
+                    'title' => get_string('movehere')));
             $moveurl = html_writer::link($moveurl, $movetofirsticon);
             $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
         }
 
         //LearningWorks
-        $listcss = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? 'grid' : '';
         $gridsplit = 12 / count($courses);
+        if ($gridsplit < BLOCKS_MY_COURSES_DEFAULT_COL_SIZE) {
+            $gridsplit = BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
+        }
+        $listcss = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? 'grid' : '';
+        $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "col-md-$gridsplit " : 'col-md-12 ';
+
         $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "col-md-12 $listcss"));
+        $html .= html_writer::div('','box flush');
 
         foreach ($courses as $key => $course) {
             //print_object($this->course_image($course));
@@ -99,14 +105,14 @@ class block_my_courses_renderer extends plugin_renderer_base {
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
             }
-            $html .= $this->output->box_start("coursebox col-md-$gridsplit", "course-{$course->id}");
+            $html .= $this->output->box_start("coursebox $courseclass", "course-{$course->id}");
             $html .= html_writer::start_tag('div', array('class' => 'course_title'));
             // If user is editing, then add move icons.
             if ($userediting && !$ismovingcourse) {
                 $moveicon = html_writer::empty_tag('img',
-                        array('src' => $this->pix_url('t/move')->out(false),
-                            'alt' => get_string('movecourse', 'block_my_courses', $course->fullname),
-                            'title' => get_string('move')));
+                    array('src' => $this->pix_url('t/move')->out(false),
+                        'alt' => get_string('movecourse', 'block_my_courses', $course->fullname),
+                        'title' => get_string('move')));
                 $moveurl = new moodle_url($this->page->url, array('sesskey' => sesskey(), 'movecourse' => 1, 'courseid' => $course->id));
                 $moveurl = html_writer::link($moveurl, $moveicon);
                 $html .= html_writer::tag('div', $moveurl, array('class' => 'move'));
@@ -125,8 +131,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $html .= $this->output->heading($link, 2, 'title');
             } else {
                 $html .= $this->output->heading(html_writer::link(
-                    new moodle_url('/auth/mnet/jump.php', array('hostid' => $course->hostid, 'wantsurl' => '/course/view.php?id='.$course->remoteid)),
-                    format_string($course->shortname, true), $attributes) . ' (' . format_string($course->hostname) . ')', 2, 'title');
+                        new moodle_url('/auth/mnet/jump.php', array('hostid' => $course->hostid, 'wantsurl' => '/course/view.php?id='.$course->remoteid)),
+                        format_string($course->shortname, true), $attributes) . ' (' . format_string($course->hostname) . ')', 2, 'title');
             }
             $html .= $this->output->box('', 'flush');
             $html .= html_writer::end_tag('div');
@@ -166,14 +172,14 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $courseordernumber++;
             if ($ismovingcourse) {
                 $moveurl = new moodle_url('/blocks/my_courses/move.php',
-                            array('sesskey' => sesskey(), 'moveto' => $courseordernumber, 'courseid' => $movingcourseid));
+                    array('sesskey' => sesskey(), 'moveto' => $courseordernumber, 'courseid' => $movingcourseid));
                 $a = new stdClass();
                 $a->movingcoursename = $courses[$movingcourseid]->fullname;
                 $a->currentcoursename = $course->fullname;
                 $movehereicon = html_writer::empty_tag('img',
-                        array('src' => $this->output->pix_url('movehere'),
-                            'alt' => get_string('moveafterhere', 'block_my_courses', $a),
-                            'title' => get_string('movehere')));
+                    array('src' => $this->output->pix_url('movehere'),
+                        'alt' => get_string('moveafterhere', 'block_my_courses', $a),
+                        'title' => get_string('movehere')));
                 $moveurl = html_writer::link($moveurl, $movehereicon);
                 $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
             }
@@ -253,7 +259,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $a = new stdClass();
             $a->coursecount = $total;
             $a->showalllink = html_writer::link(new moodle_url('/my/index.php', array('mynumber' => block_my_courses::SHOW_ALL_COURSES)),
-                    get_string('showallcourses'));
+                get_string('showallcourses'));
             $output .= get_string('hiddencoursecountwithshowall'.$plural, 'block_my_courses', $a);
         }
 
@@ -274,11 +280,11 @@ class block_my_courses_renderer extends plugin_renderer_base {
      * @return bool if true, return the HTML as a string, rather than printing it.
      */
     protected function collapsible_region($contents, $classes, $id, $caption, $userpref = '', $default = false) {
-            $output  = $this->collapsible_region_start($classes, $id, $caption, $userpref, $default);
-            $output .= $contents;
-            $output .= $this->collapsible_region_end();
+        $output  = $this->collapsible_region_start($classes, $id, $caption, $userpref, $default);
+        $output .= $contents;
+        $output .= $this->collapsible_region_end();
 
-            return $output;
+        return $output;
     }
 
     /**
@@ -356,7 +362,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $output .= get_string('youhavenomessages', 'block_my_courses');
             }
             $output .= html_writer::link(new moodle_url('/message/index.php'),
-                    get_string('message'.$plural, 'block_my_courses'));
+                get_string('message'.$plural, 'block_my_courses'));
         }
         $output .= $this->output->box_end();
         $output .= $this->output->box('', 'flush');
