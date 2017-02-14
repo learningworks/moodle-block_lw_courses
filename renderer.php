@@ -88,7 +88,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
         //LearningWorks
         $listcss = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? 'grid' : '';
-        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => $listcss));
+        $gridsplit = 12 / count($courses);
+        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "col-md-12 $listcss"));
 
         foreach ($courses as $key => $course) {
             //print_object($this->course_image($course));
@@ -98,7 +99,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
             }
-            $html .= $this->output->box_start('coursebox', "course-{$course->id}");
+            $html .= $this->output->box_start("coursebox col-md-$gridsplit", "course-{$course->id}");
             $html .= html_writer::start_tag('div', array('class' => 'course_title'));
             // If user is editing, then add move icons.
             if ($userediting && !$ismovingcourse) {
