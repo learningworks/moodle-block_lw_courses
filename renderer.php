@@ -88,13 +88,15 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
         //LearningWorks
         $gridsplit = 12 / count($courses);
+
+        // Set a minimum size for the course 'cards'
         if ($gridsplit < BLOCKS_MY_COURSES_DEFAULT_COL_SIZE) {
             $gridsplit = BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
         }
-        $listcss = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? 'grid' : '';
-        $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "col-md-$gridsplit " : 'col-md-12 ';
 
-        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "col-md-12 $listcss"));
+        $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "col-md-$gridsplit " : "col-md-12 col-md-$gridsplit ";
+
+        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "col-md-12"));
         $html .= html_writer::div('','box flush');
 
         foreach ($courses as $key => $course) {
