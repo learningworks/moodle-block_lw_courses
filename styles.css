@@ -16,8 +16,9 @@
 }
 
 .block_my_courses .coursebox {
-    padding: 15px;
+    padding: 15px !important;
     border: solid;
+    background-clip: content-box;
 }
 
 .block_my_courses .profilepicture {
