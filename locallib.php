@@ -283,7 +283,11 @@ function build_progress($course) {
         case BLOCKS_MY_COURSES_PROGRESS_GRADES:
             $gradeobject = grade_get_course_grade($USER->id, $course->id);
 
-            $completionpercentage = $gradeobject->grade /$gradeobject->item->grademax *100;
+            // The max grade has not been set within the course
+            if ($gradeobject->item->grademax == 0) {
+                return html_writer::div(html_writer::tag('p','Completion not enabled'), 'no-progress');
+            }
+            $completionpercentage = $gradeobject->grade / $gradeobject->item->grademax *100;
 
             $bar = html_writer::div("$completionpercentage%",'progress-bar',array('aria-valuenow'=>"$completionpercentage", 'aria-valuemin'=>"0", 'aria-valuemax'=>"100", 'style'=>"width:$completionpercentage%"));
             $progress = html_writer::div($bar,'progress');

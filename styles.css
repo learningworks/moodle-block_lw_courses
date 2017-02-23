@@ -103,9 +103,12 @@
     transition: width .6s ease;
 }
 
-.block_my_courses .progress {
+.no-progress, .block_my_courses .progress {
     height: 20px;
     margin-bottom: 20px;
+}
+
+.block_my_courses .progress {
     overflow: hidden;
     background-color: #f5f5f5;
     border-radius: 4px;
@@ -124,3 +127,7 @@
 .block_my_courses #box-or-lines.grid, [data-block='my_courses'] #box-or-lines.grid {
     background-position: right top;
     transition: all 0.5s ease; }
+
+.block_my_courses .coursebox img {
+    width: 100%;
+}
