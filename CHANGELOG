@@ -37,3 +37,9 @@ Added settings for max courses in row of grid format and fixed JS issue
 15/2/17
 
 Removed max grid row limit as conflicts with other calculations
+
+6/3/17
+
+Fixing Travis issues
+
+Removed behat till I can learn it

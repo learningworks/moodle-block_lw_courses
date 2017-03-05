@@ -8,7 +8,7 @@ M.block_my_courses.add_handles = function(Y) {
     };
 
     YUI().use('dd-constrain', 'dd-proxy', 'dd-drop', 'dd-plugin', function(Y) {
-        //Static Vars
+        // Static Vars.
         var goingUp = false, lastY = 0;
 
         var list = Y.Node.all('.my_courses_list .coursebox');
@@ -33,9 +33,9 @@ M.block_my_courses.add_handles = function(Y) {
         });
 
         Y.DD.DDM.on('drag:start', function(e) {
-            //Get our drag object
+            // Get our drag object.
             var drag = e.target;
-            //Set some styles here
+            // Set some styles here.
             drag.get('node').setStyle('opacity', '.25');
             drag.get('dragNode').addClass('block_my_courses');
             drag.get('dragNode').set('innerHTML', drag.get('node').get('innerHTML'));
@@ -48,7 +48,7 @@ M.block_my_courses.add_handles = function(Y) {
 
         Y.DD.DDM.on('drag:end', function(e) {
             var drag = e.target;
-            //Put our styles back
+            // Put our styles back.
             drag.get('node').setStyles({
                 visibility: '',
                 opacity: '1'
@@ -57,34 +57,34 @@ M.block_my_courses.add_handles = function(Y) {
         });
 
         Y.DD.DDM.on('drag:drag', function(e) {
-            //Get the last y point
+            // Get the last y point.
             var y = e.target.lastXY[1];
-            //is it greater than the lastY var?
+            // Is it greater than the lastY var?
             if (y < lastY) {
-                //We are going up
+                // We are going up.
                 goingUp = true;
             } else {
-                //We are going down.
+                // We are going down.
                 goingUp = false;
             }
-            //Cache for next check
+            // Cache for next check.
             lastY = y;
         });
 
         Y.DD.DDM.on('drop:over', function(e) {
-            //Get a reference to our drag and drop nodes
+            // Get a reference to our drag and drop nodes.
             var drag = e.drag.get('node'),
                 drop = e.drop.get('node');
 
-            //Are we dropping on a li node?
+            // Are we dropping on a li node?
             if (drop.hasClass('coursebox')) {
-                //Are we not going up?
+                // Are we not going up?
                 if (!goingUp) {
                     drop = drop.get('nextSibling');
                 }
-                //Add the node to this list
+                // Add the node to this list.
                 e.drop.get('node').get('parentNode').insertBefore(drag, drop);
-                //Resize this nodes shim, so we can drop on it later.
+                // Resize this nodes shim, so we can drop on it later.
                 e.drop.sizeShim();
             }
         });
@@ -93,7 +93,7 @@ M.block_my_courses.add_handles = function(Y) {
             var drop = e.drop.get('node'),
                 drag = e.drag.get('node');
 
-            //if we are not on an li, we must have been dropped on a ul
+            // If we are not on an li, we must have been dropped on a ul.
             if (!drop.hasClass('coursebox')) {
                 if (!drop.contains(drag)) {
                     drop.appendChild(drag);
@@ -113,7 +113,7 @@ M.block_my_courses.save = function() {
         sesskey : M.cfg.sesskey,
         sortorder : sortorder
     };
-    Y.io(M.cfg.wwwroot+'/blocks/my_courses/save.php', {
+    Y.io(M.cfg.wwwroot + '/blocks/my_courses/save.php', {
         method: 'POST',
         data: build_querystring(params),
         context: this
@@ -147,32 +147,32 @@ M.block_my_courses.collapsible = function(Y, id, userpref, strtooltip) {
  * @param {String} strtooltip
  */
 M.block_my_courses.CollapsibleRegion = function(Y, id, userpref, strtooltip) {
-    // Record the pref name
+    // Record the pref name.
     this.userpref = userpref;
 
     // Find the divs in the document.
-    this.div = Y.one('#'+id);
+    this.div = Y.one('#' + id);
 
-    // Get the caption for the collapsible region
-    var caption = this.div.one('#'+id + '_caption');
+    // Get the caption for the collapsible region.
+    var caption = this.div.one('#' + id + '_caption');
     caption.setAttribute('title', strtooltip);
 
-    // Create a link
+    // Create a link.
     var a = Y.Node.create('<a href="#"></a>');
-    // Create a local scoped lamba function to move nodes to a new link
+    // Create a local scoped lamba function to move nodes to a new link.
     var movenode = function(node){
         node.remove();
         a.append(node);
     };
-    // Apply the lamba function on each of the captions child nodes
+    // Apply the lamba function on each of the captions child nodes.
     caption.get('children').each(movenode, this);
     caption.prepend(a);
 
-    // Get the height of the div at this point before we shrink it if required
+    // Get the height of the div at this point before we shrink it if required.
     var height = this.div.get('offsetHeight');
     if (this.div.hasClass('collapsed')) {
-        // Shrink the div as it is collapsed by default
-        this.div.setStyle('height', caption.get('offsetHeight')+'px');
+        // Shrink the div as it is collapsed by default.
+        this.div.setStyle('height', caption.get('offsetHeight') + 'px');
     }
 
     // Create the animation.
@@ -227,4 +227,3 @@ M.block_my_courses.CollapsibleRegion.prototype.div = null;
  * @type Y.Node
  */
 M.block_my_courses.CollapsibleRegion.prototype.icon = null;
-
