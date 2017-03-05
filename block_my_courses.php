@@ -21,6 +21,7 @@
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die;
 require_once($CFG->dirroot.'/blocks/my_courses/locallib.php');
 
 /**
@@ -48,10 +49,10 @@ class block_my_courses extends block_base {
      * @return stdClass contents of block
      */
     public function get_content() {
-        global $USER, $CFG, $DB;
+        global $USER, $CFG;
         require_once($CFG->dirroot.'/user/profile/lib.php');
 
-        if($this->content !== NULL) {
+        if ($this->content !== null) {
             return $this->content;
         }
 
@@ -60,8 +61,6 @@ class block_my_courses extends block_base {
         $this->content = new stdClass();
         $this->content->text = '';
         $this->content->footer = '';
-
-        $content = array();
 
         $updatemynumber = optional_param('mynumber', -1, PARAM_INT);
         if ($updatemynumber >= 0) {
@@ -87,7 +86,7 @@ class block_my_courses extends block_base {
         }
 
         if (empty($sortedcourses)) {
-            $this->content->text .= get_string('nocourses','my');
+            $this->content->text .= get_string('nocourses', 'my');
         } else {
             // For each course, build category cache.
             $this->content->text .= $renderer->my_courses($sortedcourses, $overviews);

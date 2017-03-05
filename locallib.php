@@ -21,7 +21,7 @@
  * @copyright  2012 Adam Olley <adam.olley@netspot.com.au>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+defined('MOODLE_INTERNAL') || die;
 define('BLOCKS_MY_COURSES_SHOWCATEGORIES_NONE', '0');
 define('BLOCKS_MY_COURSES_SHOWCATEGORIES_ONLY_PARENT_NAME', '1');
 define('BLOCKS_MY_COURSES_SHOWCATEGORIES_FULL_PATH', '2');
@@ -77,7 +77,8 @@ function block_my_courses_update_mynumber($number) {
 function block_my_courses_update_myorder($sortorder) {
     $value = implode(',', $sortorder);
     if (core_text::strlen($value) > 1333) {
-        // The value won't fit into the user preference. Remove courses in the end of the list (mostly likely user won't even notice).
+        // The value won't fit into the user preference. Remove courses in the end of the list
+        // (mostly likely user won't even notice).
         $value = preg_replace('/,[\d]*$/', '', core_text::substr($value, 0, 1334));
     }
     set_user_preference('my_courses_course_sortorder', $value);
@@ -151,11 +152,11 @@ function block_my_courses_get_child_shortnames($courseid) {
  * @return int maximum number of courses
  */
 function block_my_courses_get_max_user_courses($showallcourses = false) {
-    // Get block configuration
+    // Get block configuration.
     $config = get_config('block_my_courses');
     $limit = $config->defaultmaxcourses;
 
-    // If max course is not set then try get user preference
+    // If max course is not set then try get user preference.
     if (empty($config->forcedefaultmaxcourses)) {
         if ($showallcourses) {
             $limit = 0;
@@ -180,7 +181,7 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
     $courses = enrol_get_my_courses();
     $site = get_site();
 
-    if (array_key_exists($site->id,$courses)) {
+    if (array_key_exists($site->id, $courses)) {
         unset($courses[$site->id]);
     }
 
@@ -197,7 +198,7 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
     if (is_enabled_auth('mnet')) {
         $remotecourses = get_my_remotecourses();
     }
-    // Remote courses will have -ve remoteid as key, so it can be differentiated from normal courses
+    // Remote courses will have -ve remoteid as key, so it can be differentiated from normal courses.
     foreach ($remotecourses as $id => $val) {
         $remoteid = $val->remoteid * -1;
         $val->id = $remoteid;
@@ -220,7 +221,7 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
             $counter++;
         }
     }
-    // Append unsorted courses if limit allows
+    // Append unsorted courses if limit allows.
     foreach ($courses as $c) {
         if (($limit != 0) && ($counter >= $limit)) {
             break;
@@ -231,7 +232,7 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
         }
     }
 
-    // From list extract site courses for overview
+    // From list extract site courses for overview.
     $sitecourses = array();
     foreach ($sortedcourses as $key => $course) {
         if ($course->id > 0) {
@@ -283,14 +284,15 @@ function build_progress($course) {
         case BLOCKS_MY_COURSES_PROGRESS_GRADES:
             $gradeobject = grade_get_course_grade($USER->id, $course->id);
 
-            // The max grade has not been set within the course
+            // The max grade has not been set within the course.
             if ($gradeobject->item->grademax == 0) {
-                return html_writer::div(html_writer::tag('p','Completion not enabled'), 'no-progress');
+                return html_writer::div(html_writer::tag('p', 'Completion not enabled'), 'no-progress');
             }
-            $completionpercentage = $gradeobject->grade / $gradeobject->item->grademax *100;
+            $completionpercentage = $gradeobject->grade / $gradeobject->item->grademax * 100;
 
-            $bar = html_writer::div("$completionpercentage%",'progress-bar',array('aria-valuenow'=>"$completionpercentage", 'aria-valuemin'=>"0", 'aria-valuemax'=>"100", 'style'=>"width:$completionpercentage%"));
-            $progress = html_writer::div($bar,'progress');
+            $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
+                'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
+            $progress = html_writer::div($bar, 'progress');
 
             return $progress;
 
@@ -303,7 +305,7 @@ function build_progress($course) {
 
             // Don't display if completion isn't enabled!
             if (!$coursecompletiondata->is_enabled()) {
-                return html_writer::tag('p','Progressbar enabled, but completion tracking not enabled for course!');
+                return html_writer::tag('p', 'Progressbar enabled, but completion tracking not enabled for course!');
             }
 
             // INSPIRED BY completionstatus BLOCK.
@@ -313,7 +315,7 @@ function build_progress($course) {
 
             // For aggregating activity completion.
             $activities = array();
-            $numberofactivitiescompleted = 0;
+            $activitiescompleted = 0;
 
             // Flag to set if current completion data is inconsistent with what is stored in the database.
             $pendingupdate = false;
@@ -332,7 +334,7 @@ function build_progress($course) {
                     $activities[$criteria->moduleinstance] = $iscomplete;
 
                     if ($iscomplete) {
-                        $numberofactivitiescompleted++;
+                        $activitiescompleted++;
                     }
                     continue;
                 }
@@ -340,14 +342,15 @@ function build_progress($course) {
 
             // Aggregate activities.
             if (!empty($activities)) {
-                $completionstatus->min = $numberofactivitiescompleted;
+                $completionstatus->min = $activitiescompleted;
                 $completionstatus->max = count($activities);
             }
 
-            $completionpercentage = $completionstatus->min /$completionstatus->max *100;
+            $completionpercentage = $completionstatus->min / $completionstatus->max * 100;
 
-            $bar = html_writer::div("$completionpercentage%",'progress-bar',array('aria-valuenow'=>"$completionpercentage", 'aria-valuemin'=>"0", 'aria-valuemax'=>"100", 'style'=>"width:$completionpercentage%"));
-            $progress = html_writer::div($bar,'progress');
+            $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
+                'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
+            $progress = html_writer::div($bar, 'progress');
 
             return $progress;
     }
