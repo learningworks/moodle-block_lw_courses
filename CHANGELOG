@@ -43,3 +43,5 @@ Removed max grid row limit as conflicts with other calculations
 Fixing Travis issues
 
 Removed behat till I can learn it
+
+Added JQuery to make all divs as tall as tallest item

@@ -41,6 +41,11 @@
     float:left;
     margin:0 0 .5em;
     position:relative;
+    width: 100%;
+}
+
+.block_my_courses .content h2.title a{
+    width: 100%;
 }
 
 .block_my_courses .course_title {
@@ -121,6 +126,10 @@
 
 .block_my_courses .my_courses_list,.block_my_courses .coursebox img {
     width:100%;
+}
+
+.block_my_courses .coursebox img {
+    max-width: 300px;
 }
 
 .block_my_courses div.flush,.block_my_courses .activity_info {
