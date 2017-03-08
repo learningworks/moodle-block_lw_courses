@@ -1,3 +1,1 @@
-#Change log
-
-To be written.
+[![Build Status](https://travis-ci.org/learningworks/moodle-block_my_courses.svg?branch=master)](https://travis-ci.org/learningworks/moodle-block_my_courses)

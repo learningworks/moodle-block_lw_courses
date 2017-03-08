@@ -3,7 +3,8 @@ require(['jquery'],function($) {
     $('#box-or-lines').click(function(e){
         e.preventDefault();
         $(this).toggleClass("grid");
-        $(".my_courses_list .coursebox").toggleClass('col-md-12');
+        $(".my_courses_list .coursebox").toggleClass('col-md-12 list');
+        equalheight('.my_courses_list .coursebox');
     });
     /* Thanks to CSS Tricks for pointing out this bit of jQuery
      http://css-tricks.com/equal-height-blocks-in-rows/*/
@@ -40,11 +41,14 @@ require(['jquery'],function($) {
     }
 
     $(document).ready(function(){
+        equalheight('.my_courses_list .coursebox .image_wrap');
         equalheight('.my_courses_list .coursebox');
     });
 
     $(window).resize(function(){
+        equalheight('.my_courses_list .coursebox .image_wrap');
         equalheight('.my_courses_list .coursebox');
+
     });
 
-});
+    });

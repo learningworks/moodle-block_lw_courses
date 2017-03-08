@@ -5,6 +5,7 @@
 
 .block_my_courses .categorypath {
     text-align:right;
+    margin-top: auto;
 }
 
 .block_my_courses .content {
@@ -45,6 +46,7 @@
 }
 
 .block_my_courses .content h2.title a{
+    display: block;
     width: 100%;
 }
 
@@ -109,7 +111,7 @@
     overflow:hidden;
 }
 
-.block_my_courses #box-or-lines,[data-block='my_courses'] #box-or-lines {
+.block_my_courses #box-or-lines, [data-block='my_courses'] #box-or-lines {
     background:url([[pix:block_my_courses|block_lines]]) no-repeat left top;
     float:right;
     height:29px;
@@ -119,19 +121,118 @@
     width:37px;
 }
 
-.block_my_courses #box-or-lines.grid,[data-block='my_courses'] #box-or-lines.grid {
+.block_my_courses #box-or-lines.grid, [data-block='my_courses'] #box-or-lines.grid {
     background-position:right top;
     transition:all .5s ease;
 }
 
-.block_my_courses .my_courses_list,.block_my_courses .coursebox img {
-    width:100%;
+.block_my_courses .my_courses_list, .block_my_courses .coursebox img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
-.block_my_courses .coursebox img {
+.block_my_courses .coursebox .image_wrap {
     max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.block_my_courses div.flush,.block_my_courses .activity_info {
+.block_my_courses .coursebox .course_image_embed {
+    background-position: center top;
+    max-height: 300px;
+    max-width: 300px;
+    width: 100%;
+    height: 300px;
+}
+.block_my_courses .coursebox {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.block_my_courses .coursebox.list {
+    display: block;
+}
+
+.block_my_courses div.flush, .block_my_courses .activity_info {
     clear:both;
+}
+
+.block_my_courses .coursebox.list .image_wrap, .block_my_courses .coursebox.list .course_image_embed {
+    float: left;
+    margin-right: 15px;
+}
+
+.block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+    float: left;
+    width:calc(100% - 315px);
+}
+
+.block_my_courses .coursebox.list .box.flush {
+    display: none;
+}
+
+@media screen and (max-width: 1400px) {
+    .block_my_courses .coursebox.list .image_wrap, .block_my_courses .coursebox .course_image_embed {
+        max-width: 200px;
+    }
+    .block_my_courses .coursebox .course_image_embed {
+        max-height: 200px;
+    }
+    .block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+        float: left;
+        width:calc(100% - 215px);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .block_my_courses .coursebox.list .image_wrap, .block_my_courses .coursebox .course_image_embed {
+        max-width: 150px;
+    }
+    .block_my_courses .coursebox .course_image_embed {
+        max-height: 150px;
+    }
+    .block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+        float: left;
+        width:calc(100% - 165px);
+    }
+
+    .block_my_courses .coursebox h2 {
+        font-size: 1.5rem;
+    }
+
+    .block_my_courses .coursebox .categorypath {
+        font-size: .75rem;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .block_my_courses .coursebox.list .image_wrap, .block_my_courses .coursebox .course_image_embed {
+        max-width: 100px;
+    }
+    .block_my_courses .coursebox .course_image_embed {
+        max-height: 100px;
+    }
+    .block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .no-progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+        float: left;
+        width:calc(100% - 115px);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .block_my_courses .coursebox.list .image_wrap {
+        height: 100px;
+    }
+    .block_my_courses .coursebox:not(.list) .course_image_embed {
+        float: none;
+        max-width: 300px;
+        max-height: 300px;
+        margin: 0 auto;
+    }
+
+    .block_my_courses .coursebox:not(.list) .progress, .block_my_courses .coursebox:not(.list) .no-progress, .block_my_courses .coursebox:not(.list) .course_title, .block_my_courses .coursebox:not(.list) .categorypath, .block_my_courses .coursebox:not(.list) .course_description {
+
+        width:100%;
+    }
 }

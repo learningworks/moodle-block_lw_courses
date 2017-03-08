@@ -88,3 +88,6 @@ $string['progressenabled_desc'] = 'This will determine if the course progress ba
 
 $string['startgrid'] = "Start as grid";
 $string['startgrid_desc'] = "This will render the courses in a grid straight away";
+
+$string['noprogress'] = "Progressbar enabled, but completion tracking not enabled for course!";
+$string['nocompletion'] = "Completion not enabled";
