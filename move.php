@@ -19,6 +19,7 @@
  *
  * @package    block_my_courses
  * @copyright  2012 Adam Olley <adam.olley@netspot.com.au>
+ * @copyright  2017 Mathew May <mathewm@hotmail.co.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(__DIR__ . '/../../config.php');

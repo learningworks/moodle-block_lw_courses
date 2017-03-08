@@ -19,6 +19,7 @@
  *
  * @package    block_my_courses
  * @copyright  2012 Adam Olley <adam.olley@netspot.com.au>
+ * @copyright  2017 Mathew May <mathewm@hotmail.co.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
@@ -286,7 +287,7 @@ function build_progress($course) {
 
             // The max grade has not been set within the course.
             if ($gradeobject->item->grademax == 0) {
-                return html_writer::div(html_writer::tag('p', 'Completion not enabled'), 'no-progress');
+                return html_writer::div(html_writer::tag('p', get_string('nocompletion', 'block_my_courses')), 'no-progress');
             }
             $completionpercentage = $gradeobject->grade / $gradeobject->item->grademax * 100;
 
@@ -305,7 +306,7 @@ function build_progress($course) {
 
             // Don't display if completion isn't enabled!
             if (!$coursecompletiondata->is_enabled()) {
-                return html_writer::tag('p', 'Progressbar enabled, but completion tracking not enabled for course!');
+                return html_writer::tag('p', get_string('noprogress', 'block_my_courses'));
             }
 
             // INSPIRED BY completionstatus BLOCK.

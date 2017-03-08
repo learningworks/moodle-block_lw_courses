@@ -19,6 +19,7 @@
  *
  * @package    block_my_courses
  * @copyright  2012 Adam Olley <adam.olley@netspot.com.au>
+ * @copyright  2017 Mathew May <mathewm@hotmail.co.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
@@ -93,7 +94,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $gridsplit = BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
         }
 
-        $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "col-md-$gridsplit " : "col-md-12 col-md-$gridsplit ";
+        $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "col-md-$gridsplit " : "col-md-12 list col-md-$gridsplit ";
 
         $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "col-md-12"));
         $html .= html_writer::div('', 'box flush');
@@ -106,7 +107,6 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
             $html .= $this->output->box_start("coursebox $courseclass", "course-{$course->id}");
             $html .= $this->course_image($course);
-            $html .= $this->course_description($course);
             $html .= build_progress($course);
 
             $html .= html_writer::start_tag('div', array('class' => 'course_title'));
@@ -151,6 +151,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
             if (isset($overviews[$course->id]) && !$ismovingcourse) {
                 $html .= $this->activity_display($course->id, $overviews[$course->id]);
             }
+
+            $html .= $this->course_description($course);
 
             if ($config->showcategories != BLOCKS_MY_COURSES_SHOWCATEGORIES_NONE) {
                 // List category parent or categories path here.
@@ -393,12 +395,12 @@ class block_my_courses_renderer extends plugin_renderer_base {
                     $config = get_config('block_my_courses');
                     if (is_null($config->my_courses_bgimage) || $config->my_courses_bgimage == BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE) {
                         // Embed the image url as a img tag sweet...
-                        return html_writer::empty_tag('img', array( 'src' => $url, 'class' => 'course_image' ));
+                        $image = html_writer::empty_tag('img', array( 'src' => $url, 'class' => 'course_image' ));
+                        return html_writer::div($image, 'image_wrap');
                     } else {
                         // We need a CSS soloution apparently lets give it to em.
-                        return html_writer::start_tag('div',
-                            array('class' => 'course_image',
-                                "style" => 'background:url('.$url.'); background-size:cover'));
+                        return html_writer::div('', 'course_image_embed',
+                            array("style" => 'background-image:url('.$url.'); background-size:cover'));
                     }
                 } else {
                     return $this->course_image_defaults();
@@ -428,12 +430,12 @@ class block_my_courses_renderer extends plugin_renderer_base {
         // Do we need a CSS soloution or is a img good enough?.
         if (is_null($config->my_courses_bgimage) || $config->my_courses_bgimage == BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE) {
             // Embed the image url as a img tag sweet...
-            return html_writer::empty_tag('img', array( 'src' => $imageurl, 'class' => 'course_image' ));
+            $image = html_writer::empty_tag('img', array( 'src' => $imageurl, 'class' => 'course_image' ));
+            return html_writer::div($image, 'image_wrap');
         } else {
             // We need a CSS soloution apparently lets give it to em.
-            return html_writer::start_tag('div',
-                array('class' => 'course_image',
-                    "style" => 'background:url('.$imageurl.'); background-size:cover'));
+            return html_writer::div('', 'course_image_embed',
+                    array("style" => 'background-image:url('.$imageurl.'); background-size:cover'));
         }
         // Where are the default at even?.
         return print_error('filenotreadable');
@@ -446,7 +448,6 @@ class block_my_courses_renderer extends plugin_renderer_base {
         $course = new course_in_list($course); // Todo : why does this fix so many issues?.
         if ($course->has_summary()) {
             $context = context_course::instance($course->id);
-            $options = array('overflowdiv' => true, 'noclean' => true, 'para' => false);
             if (intval(get_config('block_my_courses', 'summary_limit')) > 0) {
                 $summaryexcerpt = $this->truncate_html($course->summary,
                     intval(get_config('block_my_courses', 'summary_limit')));
@@ -456,7 +457,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
             $summary = file_rewrite_pluginfile_urls($summaryexcerpt, 'pluginfile.php', $context->id, 'course', 'summary', null);
 
-            return format_text($summary, $course->summaryformat, $options, $course->id);
+            return html_writer::div($summary, 'course_description');
         } else {
             return ' ';
         }
