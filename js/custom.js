@@ -13,7 +13,7 @@ require(['jquery'],function($) {
 
         var currentTallest = 0,
             currentRowStart = 0,
-            rowDivs = new Array(),
+            rowDivs = [],
             $el,
             topPosition = 0;
         $(container).each(function() {
@@ -22,7 +22,7 @@ require(['jquery'],function($) {
             $($el).height('auto')
             topPostion = $el.position().top;
 
-            if (currentRowStart != topPostion) {
+            if (currentRowStart !== topPostion) {
                 for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
                     rowDivs[currentDiv].height(currentTallest);
                 }

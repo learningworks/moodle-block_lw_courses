@@ -1,1 +1,3 @@
 [![Build Status](https://travis-ci.org/learningworks/moodle-block_my_courses.svg?branch=master)](https://travis-ci.org/learningworks/moodle-block_my_courses)
+[![Code Climate](https://codeclimate.com/github/learningworks/moodle-block_my_courses/badges/gpa.svg)](https://codeclimate.com/github/learningworks/moodle-block_my_courses/)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/learningworks/moodle-block_my_courses/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/learningworks/moodle-block_my_courses/?branch=master)
