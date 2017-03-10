@@ -341,7 +341,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
     }
 
     /**
-     * Cretes html for welcome area
+     * Creates html for welcome area
      *
      * @param int $msgcount number of messages
      * @return string html string for welcome area.
@@ -378,6 +378,12 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
     // Custom LearningWorks functions.
 
+    /**
+     * Get the image for a course if it exists
+     *
+     * @param object $course The course whose image we want
+     * @return string|void
+     */
     public function course_image($course) {
         global $CFG;
 
@@ -414,6 +420,11 @@ class block_my_courses_renderer extends plugin_renderer_base {
         return print_error('error');
     }
 
+    /**
+     * There was no image for a course give a default
+     *
+     * @return string|void
+     */
     public function course_image_defaults() {
         global $OUTPUT;
 
@@ -441,8 +452,12 @@ class block_my_courses_renderer extends plugin_renderer_base {
         return print_error('filenotreadable');
     }
 
-
-    // Todo.
+    /**
+     * Get the Course description for a given course
+     *
+     * @param object $course The course whose description we want
+     * @return string|void
+     */
     public function course_description($course) {
 
         $course = new course_in_list($course); // Todo : why does this fix so many issues?.
@@ -465,28 +480,34 @@ class block_my_courses_renderer extends plugin_renderer_base {
         return print_error('error');
     }
 
-    // Todo.
-    public function truncate_html($s, $l, $e = '&hellip;', $ishtml = true) {
+    /**
+     * Cut off the course description at a certain point
+     *
+     * @param string $s Initial String passed in
+     * @param int $l The length to cut it too
+     * @param string $e I am unsure
+     * @return string
+     */
+    public function truncate_html($s, $l, $e = '&hellip;') {
         $s = trim($s);
         $e = (strlen(strip_tags($s)) > $l) ? $e : '';
         $i = 0;
         $tags = array();
 
-        if ($ishtml) {
-            preg_match_all('/<[^>]+>([^<]*)/', $s, $m, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-            foreach ($m as $o) {
-                if ($o[0][1] - $i >= $l) {
-                    break;
-                }
-                $t = substr(strtok($o[0][0], " \t\n\r\0\x0B>"), 1);
-                if ($t[0] != '/') {
-                    $tags[] = $t;
-                } else if (end($tags) == substr($t, 1)) {
-                    array_pop($tags);
-                }
-                $i += $o[1][1] - $o[0][1];
+        preg_match_all('/<[^>]+>([^<]*)/', $s, $m, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+        foreach ($m as $o) {
+            if ($o[0][1] - $i >= $l) {
+                break;
             }
+            $t = substr(strtok($o[0][0], " \t\n\r\0\x0B>"), 1);
+            if ($t[0] != '/') {
+                $tags[] = $t;
+            } else if (end($tags) == substr($t, 1)) {
+                array_pop($tags);
+            }
+            $i += $o[1][1] - $o[0][1];
         }
+
         $output = substr($s, 0, $l = min(strlen($s), $l + $i)) . $e .  (count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '');
         return $output;
     }
