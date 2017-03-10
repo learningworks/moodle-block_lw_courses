@@ -14,6 +14,9 @@ matrix:
  allow_failures:
   - php: 7.0
 
+addons:
+  code_climate:
+    repo_token: code-climate
 env:
  matrix:
   - DB=mysqli MOODLE_BRANCH=MOODLE_31_STABLE
@@ -41,6 +44,8 @@ script:
   - moodle-plugin-ci shifter
   - moodle-plugin-ci phpunit
   - moodle-plugin-ci behat
+  - phpunit --coverage-clover build/logs/clover.xml
+  - CODECLIMATE_REPO_TOKEN=code-climate ./vendor/bin/test-reporter
 
 after_success:
   - vendor/bin/test-reporter

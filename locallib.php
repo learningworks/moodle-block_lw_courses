@@ -245,6 +245,12 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
 
 // Custom LearningWorks functions.
 
+/**
+ * Build the Image url
+ *
+ * @param string $fileorfilename Name of the image
+ * @return moodle_url|string
+ */
 function block_my_courses_get_course_image_url($fileorfilename) {
     // If the fileorfilename param is a file.
     if ($fileorfilename instanceof stored_file) {
@@ -267,6 +273,12 @@ function block_my_courses_get_course_image_url($fileorfilename) {
     return new moodle_url("/pluginfile.php/1/block_my_courses/courseimagedefault{$fileorfilename}");
 }
 
+/**
+ * The course progress builder
+ *
+ * @param object $course The course whose progress we want
+ * @return string
+ */
 function build_progress($course) {
     global $CFG, $USER;
 

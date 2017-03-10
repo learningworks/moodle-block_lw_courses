@@ -16,10 +16,10 @@
     margin:5px 0;
 }
 
-.block_my_courses .coursebox {
+.block_my_courses .my_courses_list .coursebox {
     background-clip:content-box;
     border:solid;
-    padding:15px!important;
+    padding:15px;
 }
 
 .block_my_courses .profilepicture {
@@ -38,14 +38,14 @@
     padding:10px;
 }
 
-.block_my_courses .content h2.title {
+.block_my_courses .content .title {
     float:left;
     margin:0 0 .5em;
     position:relative;
     width: 100%;
 }
 
-.block_my_courses .content h2.title a{
+.block_my_courses .content .title a{
     display: block;
     width: 100%;
 }
@@ -68,7 +68,7 @@
     padding:2px;
 }
 
-.block_my_courses .activity_overview img.iconlarge {
+.block_my_courses .activity_overview .iconlarge {
     margin-right:6px;
     vertical-align:text-bottom;
 }
@@ -84,8 +84,11 @@
 
 .block_my_courses .progress-bar {
     -o-transition:width .6s ease;
-    -webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);
-    -webkit-transition:width .6s ease;
+    -moz-transition: width .6s ease;
+    -webkit-transition: width .6s ease;
+    -o-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    -moz-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
     background-color:#337ab7;
     box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);
     color:#fff;
@@ -104,14 +107,17 @@
 }
 
 .block_my_courses .progress {
-    -webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+
+    -o-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
     background-color:#f5f5f5;
     border-radius:4px;
     box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
     overflow:hidden;
 }
 
-.block_my_courses #box-or-lines, [data-block='my_courses'] #box-or-lines {
+[dir="rtl"] .block_my_courses #box-or-lines, [dir="rtl"] [data-block='my_courses'] #box-or-lines {
     background:url([[pix:block_my_courses|block_lines]]) no-repeat left top;
     float:right;
     height:29px;
@@ -198,7 +204,7 @@
         width:calc(100% - 165px);
     }
 
-    .block_my_courses .coursebox h2 {
+    .block_my_courses .coursebox .title {
         font-size: 1.5rem;
     }
 
