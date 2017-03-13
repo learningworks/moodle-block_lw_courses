@@ -117,7 +117,7 @@
     overflow:hidden;
 }
 
-[dir="rtl"] .block_my_courses #box-or-lines, [dir="rtl"] [data-block='my_courses'] #box-or-lines {
+[dir="ltr"] .block_my_courses #box-or-lines, [dir="rtl"] [data-block='my_courses'] #box-or-lines {
     background:url([[pix:block_my_courses|block_lines]]) no-repeat left top;
     float:right;
     height:29px;
