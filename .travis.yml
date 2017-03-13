@@ -14,9 +14,7 @@ matrix:
  allow_failures:
   - php: 7.0
 
-addons:
-  code_climate:
-    repo_token: code-climate
+
 env:
  matrix:
   - DB=mysqli MOODLE_BRANCH=MOODLE_31_STABLE
@@ -30,7 +28,6 @@ before_install:
   - composer selfupdate
   - composer create-project -n --no-dev moodlerooms/moodle-plugin-ci ci ^1
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
-  - composer require codeclimate/php-test-reporter --dev
 
 install:
   - moodle-plugin-ci install
@@ -44,11 +41,6 @@ script:
   - moodle-plugin-ci shifter
   - moodle-plugin-ci phpunit
   - moodle-plugin-ci behat
-  - phpunit --coverage-clover build/logs/clover.xml
-  - CODECLIMATE_REPO_TOKEN=code-climate ./vendor/bin/test-reporter
-
-after_success:
-  - vendor/bin/test-reporter
 
 notifications:
   slack: learningworks-dev:tL8lF2CKqNGY6rdtxKhaXIiy

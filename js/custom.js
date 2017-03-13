@@ -51,4 +51,12 @@ require(['jquery'],function($) {
 
     });
 
+    function ignoreerror()
+    {
+        equalheight('.my_courses_list .coursebox .image_wrap');
+        equalheight('.my_courses_list .coursebox');
+        return true;
+    }
+    window.onerror=ignoreerror();
+
     });
