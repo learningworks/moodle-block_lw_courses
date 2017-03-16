@@ -1,3 +1,7 @@
+.block_my_courses .content {
+    display: inline-block;
+}
+
 .block_my_courses .coursechildren {
     font-style:italic;
     font-weight:400;
@@ -20,6 +24,10 @@
     background-clip:content-box;
     border:solid;
     padding:15px;
+}
+
+.block_my_courses .my_courses_list .coursebox.marginer, .block_my_courses .my_courses_list .coursebox.list {
+    margin-left: 0;
 }
 
 .block_my_courses .profilepicture {
@@ -117,14 +125,14 @@
     overflow:hidden;
 }
 
-[dir="ltr"] .block_my_courses #box-or-lines, [dir="rtl"] [data-block='my_courses'] #box-or-lines {
+[dir="ltr"] .block_my_courses #box-or-lines, [dir="ltl"] [data-block='my_courses'] #box-or-lines {
     background:url([[pix:block_my_courses|block_lines]]) no-repeat left top;
     float:right;
     height:29px;
     overflow:hidden;
     text-indent:-999em;
     transition:all .5s ease;
-    width:37px;
+    width:30px;
 }
 
 .block_my_courses #box-or-lines.grid, [data-block='my_courses'] #box-or-lines.grid {

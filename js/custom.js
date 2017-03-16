@@ -1,9 +1,39 @@
 require(['jquery'],function($) {
 
+    console.log($('#box-or-lines').attr('class'));
+    var $listview = 'col-md-12 span12 list';
+    var $currentvalue = $('#box-or-lines').attr('class');
+
+    var i = 0;
+    $('.my_courses_list').children().each(function(){
+        console.log($(this));
+        if (!$(this).hasClass('category')) {
+            i++;
+        }
+        if (i === 1) {
+            $(this).addClass('marginer');
+        }
+        if (i%5 === 0) {
+            $(this).addClass('marginer');
+
+        }
+    });
     $('#box-or-lines').click(function(e){
         e.preventDefault();
         $(this).toggleClass("grid");
-        $(".my_courses_list .coursebox").toggleClass('col-md-12 list');
+
+        if ($(this).hasClass("grid")) {
+            console.log('grid');
+            $(".my_courses_list .coursebox").removeClass($listview);
+            $(".my_courses_list .coursebox").removeClass('list');
+            $(".my_courses_list .coursebox").toggleClass($currentvalue);
+        } else {
+            console.log('list');
+            $(".my_courses_list .coursebox").removeClass($currentvalue);
+            $(".my_courses_list .coursebox").removeClass('grid');
+            $(".my_courses_list .coursebox").toggleClass($listview);
+        }
+
         equalheight('.my_courses_list .coursebox');
     });
     /* Thanks to CSS Tricks for pointing out this bit of jQuery
@@ -41,6 +71,11 @@ require(['jquery'],function($) {
     }
 
     $(document).ready(function(){
+        if ($('#box-or-lines').hasClass("grid")) {
+            $('.my_courses_list').children().each(function(){
+                $(this).addClass($currentvalue);
+            });
+        }
         equalheight('.my_courses_list .coursebox .image_wrap');
         equalheight('.my_courses_list .coursebox');
     });
