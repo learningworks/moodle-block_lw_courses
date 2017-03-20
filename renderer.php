@@ -97,6 +97,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
         $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "grid" : "list";
 
         $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "col-md-$gridsplit span$gridsplit"));
+        $html .= html_writer::div('', "hidden startgrid $courseclass");
         $html .= html_writer::div('', 'box flush');
 
         $html .= html_writer::start_div('my_courses_list');

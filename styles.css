@@ -1,5 +1,5 @@
 .block_my_courses .content {
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .block_my_courses .coursechildren {
@@ -140,7 +140,7 @@
     transition:all .5s ease;
 }
 
-.block_my_courses .my_courses_list, .block_my_courses .coursebox img {
+.block_my_courses .my_courses_list, .block_my_courses .coursebox .course_image {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -169,7 +169,7 @@
     display: block;
 }
 
-.block_my_courses div.flush, .block_my_courses .activity_info {
+.block_my_courses div.flush {
     clear:both;
 }
 
@@ -178,7 +178,11 @@
     margin-right: 15px;
 }
 
-.block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+.block_my_courses .coursebox.list .progress,
+.block_my_courses .coursebox.list .course_title,
+.block_my_courses .coursebox.list .categorypath,
+.block_my_courses .coursebox.list .course_description,
+.block_my_courses .coursebox.list .activity_info{
     float: left;
     width:calc(100% - 315px);
 }
@@ -194,7 +198,11 @@
     .block_my_courses .coursebox .course_image_embed {
         max-height: 200px;
     }
-    .block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+    .block_my_courses .coursebox.list .progress,
+    .block_my_courses .coursebox.list .course_title,
+    .block_my_courses .coursebox.list .categorypath,
+    .block_my_courses .coursebox.list .course_description,
+    .block_my_courses .coursebox.list .activity_info {
         float: left;
         width:calc(100% - 215px);
     }
@@ -207,7 +215,11 @@
     .block_my_courses .coursebox .course_image_embed {
         max-height: 150px;
     }
-    .block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+    .block_my_courses .coursebox.list .progress,
+    .block_my_courses .coursebox.list .course_title,
+    .block_my_courses .coursebox.list .categorypath,
+    .block_my_courses .coursebox.list .course_description,
+    .block_my_courses .coursebox.list .activity_info {
         float: left;
         width:calc(100% - 165px);
     }
@@ -228,7 +240,12 @@
     .block_my_courses .coursebox .course_image_embed {
         max-height: 100px;
     }
-    .block_my_courses .coursebox.list .progress, .block_my_courses .coursebox.list .no-progress, .block_my_courses .coursebox.list .course_title, .block_my_courses .coursebox.list .categorypath, .block_my_courses .coursebox.list .course_description {
+    .block_my_courses .coursebox.list .progress,
+    .block_my_courses .coursebox.list .no-progress,
+    .block_my_courses .coursebox.list .course_title,
+    .block_my_courses .coursebox.list .categorypath,
+    .block_my_courses .coursebox.list .course_description,
+    .block_my_courses .coursebox.list .activity_info {
         float: left;
         width:calc(100% - 115px);
     }
@@ -245,8 +262,12 @@
         margin: 0 auto;
     }
 
-    .block_my_courses .coursebox:not(.list) .progress, .block_my_courses .coursebox:not(.list) .no-progress, .block_my_courses .coursebox:not(.list) .course_title, .block_my_courses .coursebox:not(.list) .categorypath, .block_my_courses .coursebox:not(.list) .course_description {
-
+    .block_my_courses .coursebox:not(.list) .progress,
+    .block_my_courses .coursebox:not(.list) .no-progress,
+    .block_my_courses .coursebox:not(.list) .course_title,
+    .block_my_courses .coursebox:not(.list) .categorypath,
+    .block_my_courses .coursebox:not(.list) .course_description,
+    .block_my_courses .coursebox:not(.list) .activity_info {
         width:100%;
     }
 }

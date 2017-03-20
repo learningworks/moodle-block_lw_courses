@@ -1,21 +1,16 @@
 require(['jquery'],function($) {
 
-    console.log($('#box-or-lines').attr('class'));
     var $listview = 'col-md-12 span12 list';
     var $currentvalue = $('#box-or-lines').attr('class');
 
     var i = 0;
     $('.my_courses_list').children().each(function(){
-        console.log($(this));
-        if (!$(this).hasClass('category')) {
-            i++;
-        }
+        i++;
         if (i === 1) {
             $(this).addClass('marginer');
         }
         if (i%5 === 0) {
             $(this).addClass('marginer');
-
         }
     });
     $('#box-or-lines').click(function(e){
@@ -23,12 +18,10 @@ require(['jquery'],function($) {
         $(this).toggleClass("grid");
 
         if ($(this).hasClass("grid")) {
-            console.log('grid');
             $(".my_courses_list .coursebox").removeClass($listview);
             $(".my_courses_list .coursebox").removeClass('list');
             $(".my_courses_list .coursebox").toggleClass($currentvalue);
         } else {
-            console.log('list');
             $(".my_courses_list .coursebox").removeClass($currentvalue);
             $(".my_courses_list .coursebox").removeClass('grid');
             $(".my_courses_list .coursebox").toggleClass($listview);
@@ -71,10 +64,8 @@ require(['jquery'],function($) {
     }
 
     $(document).ready(function(){
-        if ($('#box-or-lines').hasClass("grid")) {
-            $('.my_courses_list').children().each(function(){
-                $(this).addClass($currentvalue);
-            });
+        if ($('.startgrid').hasClass("grid")) {
+            $(".my_courses_list .coursebox").addClass($currentvalue);
         }
         equalheight('.my_courses_list .coursebox .image_wrap');
         equalheight('.my_courses_list .coursebox');
