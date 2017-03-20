@@ -1,7 +1,8 @@
 require(['jquery'],function($) {
 
+    boxdiv = $('#box-or-lines');
     var $listview = 'col-md-12 span12 list';
-    var $currentvalue = $('#box-or-lines').attr('class');
+    var $currentvalue = boxdiv.attr('class');
 
     var i = 0;
     $('.my_courses_list').children().each(function(){
@@ -9,26 +10,30 @@ require(['jquery'],function($) {
         if (i === 1) {
             $(this).addClass('marginer');
         }
-        if (i%5 === 0) {
+        if (i % 5 === 0) {
             $(this).addClass('marginer');
         }
     });
-    $('#box-or-lines').click(function(e){
+    boxdiv.click(function(e){
         e.preventDefault();
         $(this).toggleClass("grid");
 
         if ($(this).hasClass("grid")) {
-            $(".my_courses_list .coursebox").removeClass($listview);
-            $(".my_courses_list .coursebox").removeClass('list');
-            $(".my_courses_list .coursebox").toggleClass($currentvalue);
+            classmanipulator($listview, 'list', $currentvalue);
         } else {
-            $(".my_courses_list .coursebox").removeClass($currentvalue);
-            $(".my_courses_list .coursebox").removeClass('grid');
-            $(".my_courses_list .coursebox").toggleClass($listview);
+            classmanipulator($currentvalue, 'grid', $listview);
         }
 
         equalheight('.my_courses_list .coursebox');
     });
+
+    classmanipulator = function (r1, r2, t1)
+    {
+        divselect = $(".my_courses_list .coursebox");
+        divselect.removeClass(r1);
+        divselect.removeClass(r2);
+        divselect.toggleClass(t1);
+    }
     /* Thanks to CSS Tricks for pointing out this bit of jQuery
      http://css-tricks.com/equal-height-blocks-in-rows/*/
 
@@ -42,7 +47,7 @@ require(['jquery'],function($) {
         $(container).each(function() {
 
             $el = $(this);
-            $($el).height('auto')
+            $($el).height('auto');
             topPostion = $el.position().top;
 
             if (currentRowStart !== topPostion) {
@@ -61,7 +66,7 @@ require(['jquery'],function($) {
                 rowDivs[currentDiv].height(currentTallest);
             }
         });
-    }
+    };
 
     $(document).ready(function(){
         if ($('.startgrid').hasClass("grid")) {
