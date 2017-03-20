@@ -26,6 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Function to save the image in the instance of the block
  *
+ *
  * @param object $course the course that aint used
  * @param string $birecord unsure
  * @param int $context what context to save the file in

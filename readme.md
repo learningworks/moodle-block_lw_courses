@@ -20,11 +20,16 @@ Moodle compatibility
 
 Features
 ====================
-* TODO
+* Unique dashboard for learners and teachers
+* Two layouts to choose from
+* Show's leraner's progress in a course from their home page
+
+![List styling](https://github.com/learningworks/moodle-block_my_courses/raw/master/pix/list.png "List styling")
+![Grid styling](https://github.com/learningworks/moodle-block_my_courses/raw/master/pix/grid.png "Grid styling")
 
 Change log
 =====================
-* TODO
+Please Look in CHANGELOG
 
 About Author
 =====================
@@ -33,6 +38,7 @@ Mathew May
 Developer
 
 https://github.com/Chocolate-lightning
+https://gitlab.com/Chocolate-lightning
 
 License
 =====================
