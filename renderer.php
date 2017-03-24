@@ -90,9 +90,9 @@ class block_my_courses_renderer extends plugin_renderer_base {
         $gridsplit = intval(12 / count($courses)); // Added intval to avoid any float
 
         // Set a minimum size for the course 'cards'.
-		$col_size = intval($config->coursegridwidth) > 0 ? intval($config->coursegridwidth) : BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
-        if ($gridsplit < $col_size) {
-            $gridsplit = $col_size;
+		$colsize = intval($config->coursegridwidth) > 0 ? intval($config->coursegridwidth) : BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
+        if ($gridsplit < $colsize) {
+            $gridsplit = $colsize;
         }
 
         $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "grid" : "list";
