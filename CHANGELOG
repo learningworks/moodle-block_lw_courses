@@ -51,3 +51,7 @@ Added JQuery to make all divs as tall as tallest item
 Embedded course image fix
 
 Responsiveness of both Grid and List layouts
+
+24/3/17
+Added new Styles
+Add new config setting for course col width on grid

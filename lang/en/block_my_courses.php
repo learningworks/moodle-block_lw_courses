@@ -66,6 +66,11 @@ $string['welcome'] = 'Welcome {$a}';
 $string['youhavemessages'] = 'You have {$a} unread ';
 $string['youhavenomessages'] = 'You have no unread ';
 
+$string['unset'] = "Unset";
+$string['coursegridwidth'] = "Grid size";
+$string['coursegridwidthdesc'] = "Select how wide will the course grid will be";
+
+
 // Custom LearningWorks Lang strings.
 
 $string['customsettings'] = 'Custom settings';

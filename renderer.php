@@ -87,27 +87,38 @@ class block_my_courses_renderer extends plugin_renderer_base {
         }
 
         // LearningWorks.
-        $gridsplit = 12 / count($courses);
+        $gridsplit = intval(12 / count($courses)); // Added intval to avoid any float
 
         // Set a minimum size for the course 'cards'.
-        if ($gridsplit < BLOCKS_MY_COURSES_DEFAULT_COL_SIZE) {
-            $gridsplit = BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
+		$col_size = intval($config->coursegridwidth) > 0 ? intval($config->coursegridwidth) : BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
+        if ($gridsplit < $col_size) {
+            $gridsplit = $col_size;
         }
 
         $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "grid" : "list";
 
-        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "col-md-$gridsplit span$gridsplit"));
+        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "$courseclass col-md-$gridsplit span$gridsplit"));
         $html .= html_writer::div('', "hidden startgrid $courseclass");
         $html .= html_writer::div('', 'box flush');
 
         $html .= html_writer::start_div('my_courses_list');
+		$counter = 0; 
         foreach ($courses as $key => $course) {
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
             }
-
-            $html .= $this->output->box_start("coursebox $courseclass", "course-{$course->id}");
+			
+			if( ($counter % ($gridsplit+1)) == 0 && $counter > 0){
+				//$html .= html_writer::end_tag('div');													 // END - my_courses_course_wraper 
+				//$html .= html_writer::start_tag('div', array('class' => "my_courses_course_wraper"));	 // START - my_courses_course_wraper 
+			}
+			if($counter == 0){
+				//$html .= html_writer::start_tag('div', array('class' => "my_courses_course_wraper"));	 // START - my_courses_course_wraper 	
+			}
+			$counter++;
+			
+            $html .= $this->output->box_start("coursebox $courseclass span$gridsplit col-md-$gridsplit col-xs-12", "course-{$course->id}");
             $html .= $this->course_image($course);
             $html .= build_progress($course);
 
@@ -121,7 +132,6 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $moveurl = new moodle_url($this->page->url, array('sesskey' => sesskey(), 'movecourse' => 1, 'courseid' => $course->id));
                 $moveurl = html_writer::link($moveurl, $moveicon);
                 $html .= html_writer::tag('div', $moveurl, array('class' => 'move'));
-
             }
 
             // No need to pass title through s() here as it will be done automatically by html_writer.
@@ -190,7 +200,11 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $moveurl = html_writer::link($moveurl, $movehereicon);
                 $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
             }
+			
+			
         }
+		//$html .= html_writer::end_tag('div');  // END - my_courses_course_wraper 
+		
         // Wrap course list in a div and return.
         $html .= html_writer::end_div();
         return $html;
