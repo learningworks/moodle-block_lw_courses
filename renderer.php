@@ -87,38 +87,33 @@ class block_my_courses_renderer extends plugin_renderer_base {
         }
 
         // LearningWorks.
-        $gridsplit = intval(12 / count($courses)); // Added intval to avoid any float
+        $gridsplit = intval(12 / count($courses)); // Added intval to avoid any float.
 
         // Set a minimum size for the course 'cards'.
-		$colsize = intval($config->coursegridwidth) > 0 ? intval($config->coursegridwidth) : BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
+        $colsize = intval($config->coursegridwidth) > 0 ? intval($config->coursegridwidth) : BLOCKS_MY_COURSES_DEFAULT_COL_SIZE;
         if ($gridsplit < $colsize) {
             $gridsplit = $colsize;
         }
 
         $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "grid" : "list";
+        $startvalue = $courseclass == "list" ? "12" : $gridsplit;
 
-        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines', 'styles' => '', 'class' => "$courseclass col-md-$gridsplit span$gridsplit"));
-        $html .= html_writer::div('', "hidden startgrid $courseclass");
+        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines',
+            'styles' => '', 'class' => "$courseclass col-md-$startvalue span$startvalue $courseclass"));
+        $html .= html_writer::tag('div', '', array("class" => "hidden startgrid $courseclass", "grid-size" => $gridsplit));
         $html .= html_writer::div('', 'box flush');
 
         $html .= html_writer::start_div('my_courses_list');
-		$counter = 0; 
+        $counter = 0;
         foreach ($courses as $key => $course) {
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
             }
-			
-			if( ($counter % ($gridsplit+1)) == 0 && $counter > 0){
-				//$html .= html_writer::end_tag('div');													 // END - my_courses_course_wraper 
-				//$html .= html_writer::start_tag('div', array('class' => "my_courses_course_wraper"));	 // START - my_courses_course_wraper 
-			}
-			if($counter == 0){
-				//$html .= html_writer::start_tag('div', array('class' => "my_courses_course_wraper"));	 // START - my_courses_course_wraper 	
-			}
-			$counter++;
-			
-            $html .= $this->output->box_start("coursebox $courseclass span$gridsplit col-md-$gridsplit col-xs-12", "course-{$course->id}");
+
+            $html .= $this->output->box_start(
+                "coursebox $courseclass span$startvalue col-md-$startvalue $courseclass col-xs-12",
+                "course-{$course->id}");
             $html .= $this->course_image($course);
             $html .= build_progress($course);
 
@@ -129,7 +124,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
                     array('src' => $this->pix_url('t/move')->out(false),
                         'alt' => get_string('movecourse', 'block_my_courses', $course->fullname),
                         'title' => get_string('move')));
-                $moveurl = new moodle_url($this->page->url, array('sesskey' => sesskey(), 'movecourse' => 1, 'courseid' => $course->id));
+                $moveurl = new moodle_url($this->page->url, array('sesskey' => sesskey(), 'movecourse' => 1,
+                    'courseid' => $course->id));
                 $moveurl = html_writer::link($moveurl, $moveicon);
                 $html .= html_writer::tag('div', $moveurl, array('class' => 'move'));
             }
@@ -146,8 +142,11 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $html .= $this->output->heading($link, 2, 'title');
             } else {
                 $html .= $this->output->heading(html_writer::link(
-                        new moodle_url('/auth/mnet/jump.php', array('hostid' => $course->hostid, 'wantsurl' => '/course/view.php?id='.$course->remoteid)),
-                        format_string($course->shortname, true), $attributes) . ' (' . format_string($course->hostname) . ')', 2, 'title');
+                       new moodle_url('/auth/mnet/jump.php', array(
+                       'hostid' => $course->hostid,
+                       'wantsurl' => '/course/view.php?id='.$course->remoteid)),
+                       format_string($course->shortname, true), $attributes) .
+                       ' (' . format_string($course->hostname) . ')', 2, 'title');
             }
             $html .= $this->output->box('', 'flush');
             $html .= html_writer::end_tag('div');
@@ -200,18 +199,16 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $moveurl = html_writer::link($moveurl, $movehereicon);
                 $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
             }
-			
-			
+
         }
-		//$html .= html_writer::end_tag('div');  // END - my_courses_course_wraper 
-		
+
         // Wrap course list in a div and return.
         $html .= html_writer::end_div();
         return $html;
     }
 
     /**
-     * Coustuct activities overview for a course
+     * Construct activities overview for a course
      *
      * @param int $cid course id
      * @param array $overview overview of activities in course
@@ -223,7 +220,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $output .= html_writer::start_tag('div', array('class' => 'activity_overview'));
             $url = new moodle_url("/mod/$module/index.php", array('id' => $cid));
             $modulename = get_string('modulename', $module);
-            $icontext = html_writer::link($url, $this->output->pix_icon('icon', $modulename, 'mod_'.$module, array('class' => 'iconlarge')));
+            $icontext = html_writer::link($url, $this->output->pix_icon(
+                'icon', $modulename, 'mod_'.$module, array('class' => 'iconlarge')));
             if (get_string_manager()->string_exists("activityoverview", $module)) {
                 $icontext .= get_string("activityoverview", $module);
             } else {
@@ -280,7 +278,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
         } else {
             $a = new stdClass();
             $a->coursecount = $total;
-            $a->showalllink = html_writer::link(new moodle_url('/my/index.php', array('mynumber' => block_my_courses::SHOW_ALL_COURSES)),
+            $a->showalllink = html_writer::link(new moodle_url('/my/index.php',
+                array('mynumber' => block_my_courses::SHOW_ALL_COURSES)),
                 get_string('showallcourses'));
             $output .= get_string('hiddencoursecountwithshowall'.$plural, 'block_my_courses', $a);
         }
@@ -416,9 +415,10 @@ class block_my_courses_renderer extends plugin_renderer_base {
                     $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
                 if ($isimage) {
                     $config = get_config('block_my_courses');
-                    if (is_null($config->my_courses_bgimage) || $config->my_courses_bgimage == BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE) {
+                    if (is_null($config->my_courses_bgimage) ||
+                         $config->my_courses_bgimage == BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE) {
                         // Embed the image url as a img tag sweet...
-                        $image = html_writer::empty_tag('img', array( 'src' => $url, 'class' => 'course_image' ));
+                        $image = html_writer::empty_tag('img', array('src' => $url, 'class' => 'course_image'));
                         return html_writer::div($image, 'image_wrap');
                     } else {
                         // We need a CSS soloution apparently lets give it to em.
@@ -525,7 +525,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $i += $o[1][1] - $o[0][1];
         }
 
-        $output = substr($s, 0, $l = min(strlen($s), $l + $i)) . $e .  (count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '');
+        $output = substr($s, 0, $l = min(strlen($s), $l + $i)) .
+            $e . (count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '');
         return $output;
     }
 }

@@ -70,6 +70,10 @@ $string['unset'] = "Unset";
 $string['coursegridwidth'] = "Grid size";
 $string['coursegridwidthdesc'] = "Select how wide will the course grid will be";
 
+$string['fullwidth'] = "Full Width";
+$string['splitwidth'] = "2 per row";
+$string['thirdwidth'] = "3 per row";
+$string['quarterwidth'] = "4 per row";
 
 // Custom LearningWorks Lang strings.
 
