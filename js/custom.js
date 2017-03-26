@@ -4,6 +4,9 @@ require(['jquery'],function($) {
     var listview = Array('col-md-12','span12','list');
     var gridview = Array('col-md-' + gridsize, 'span' + gridsize, 'grid');
 
+    $('.my_courses_list .coursebox').click(function(){
+        window.location = $(this).find('h2.title').find('a').attr('href');
+    });
     $('#box-or-lines').click(function(e){
         e.preventDefault();
         $(this).toggleClass("grid");
