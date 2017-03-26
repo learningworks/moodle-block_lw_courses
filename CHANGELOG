@@ -55,3 +55,7 @@ Responsiveness of both Grid and List layouts
 24/3/17
 Added new Styles
 Add new config setting for course col width on grid
+
+27/3/17
+Updated Styles and Cleaned code
+Added checks for progress completion to be an Int in PHP so NAN does not appear when JS process the value.

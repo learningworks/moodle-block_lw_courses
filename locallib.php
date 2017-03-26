@@ -301,12 +301,11 @@ function build_progress($course) {
             if ($gradeobject->item->grademax == 0) {
                 return html_writer::div(html_writer::tag('p', get_string('nocompletion', 'block_my_courses')), 'no-progress');
             }
-            $completionpercentage = $gradeobject->grade / $gradeobject->item->grademax * 100;
+            $completionpercentage = intval($gradeobject->grade / $gradeobject->item->grademax * 100);
 
             $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
                 'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
             $progress = html_writer::div($bar, 'progress');
-
             return $progress;
 
         case BLOCKS_MY_COURSES_PROGRESS_COMPLETION:
@@ -359,8 +358,7 @@ function build_progress($course) {
                 $completionstatus->max = count($activities);
             }
 
-            $completionpercentage = $completionstatus->min / $completionstatus->max * 100;
-
+            $completionpercentage = intval($completionstatus->min / $completionstatus->max * 100);
             $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
                 'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
             $progress = html_writer::div($bar, 'progress');
