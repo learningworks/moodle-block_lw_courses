@@ -42,6 +42,8 @@
 .block_my_courses .content .title a {
     display: block;
     width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .block_my_courses .course_title {
     position: relative;
