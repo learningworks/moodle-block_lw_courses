@@ -204,6 +204,7 @@ a#box-or-lines {
     max-height: 250px;
     overflow: hidden;
     position: relative;
+    cursor:pointer;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_image_embed {
     position: absolute;

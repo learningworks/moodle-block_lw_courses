@@ -61,3 +61,4 @@ Updated Styles and Cleaned code
 Added checks for progress completion to be an Int in PHP so NAN does not appear when JS process the value.
 
 Update h2.title overflow working.
+Added cursor style to grid blocks
