@@ -62,3 +62,6 @@ Added checks for progress completion to be an Int in PHP so NAN does not appear 
 
 Update h2.title overflow working.
 Added cursor style to grid blocks
+
+28/03/17
+Updated to support list view only when a student has only one course or if fun width is selected

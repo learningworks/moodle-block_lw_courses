@@ -98,8 +98,15 @@ class block_my_courses_renderer extends plugin_renderer_base {
         $courseclass = $config->startgrid == BLOCKS_MY_COURSES_STARTGRID_YES ? "grid" : "list";
         $startvalue = $courseclass == "list" ? "12" : $gridsplit;
 
-        $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines',
+        $listonly = false;
+        if ($gridsplit == 12) {
+            $listonly = true;
+            $startvalue = 12;
+            $courseclass = "list";
+        } else {
+            $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines',
             'styles' => '', 'class' => "$courseclass col-md-$startvalue span$startvalue $courseclass"));
+        }
         $html .= html_writer::tag('div', '', array("class" => "hidden startgrid $courseclass", "grid-size" => $gridsplit));
         $html .= html_writer::div('', 'box flush');
 
