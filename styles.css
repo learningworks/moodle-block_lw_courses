@@ -280,8 +280,9 @@
     position: absolute;
     left: 0;
     right: 0;
-    background: #9c3890;
-    background: url([[pix:block_my_courses|bg_grid]]) no-repeat top left rgba(152, 56, 144, 0.6);
+    background-color: transparent;
+    background-color: rgba(152, 56, 144, 0.6);
+    background: url([[pix:block_my_courses|bg_grid]]) no-repeat top left;
     background-size: cover;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title:before {
