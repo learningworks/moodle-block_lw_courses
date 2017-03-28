@@ -280,8 +280,6 @@
     position: absolute;
     left: 0;
     right: 0;
-    background-color: #ccc;
-    background-color: rgba(152, 56, 144, 0.6);
     background: url([[pix:block_my_courses|bg_grid]]) no-repeat top left;
     background-size: cover;
 }
