@@ -111,7 +111,6 @@ class block_my_courses_renderer extends plugin_renderer_base {
         $html .= html_writer::div('', 'box flush');
 
         $html .= html_writer::start_div('my_courses_list');
-        $counter = 0;
         foreach ($courses as $key => $course) {
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {

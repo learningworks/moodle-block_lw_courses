@@ -64,4 +64,5 @@ Update h2.title overflow working.
 Added cursor style to grid blocks
 
 28/03/17
-Updated to support list view only when a student has only one course or if fun width is selected
+Updated to support list view only when a student has only one course or if full width is selected
+Update JS and CSS and PHP for linter

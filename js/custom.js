@@ -1,20 +1,19 @@
-require(['jquery'],function($) {
-    var gridsize = parseInt($('.block_my_courses .startgrid').attr("grid-size"));
-    console.log(gridsize);
-    var listview = Array('col-md-12','span12','list');
-    var gridview = Array('col-md-' + gridsize, 'span' + gridsize, 'grid');
+require(["jquery"],function($) {
+    var gridsize = parseInt($(".block_my_courses .startgrid").attr("grid-size"), 10);
+    var listview = ["col-md-12", "span12", "list"];
+    var gridview = ["col-md-" + gridsize, "span" + gridsize, "grid"];
 
-    $('.my_courses_list .coursebox').click(function(){
-        window.location = $(this).find('h2.title').find('a').attr('href');
+    $(".my_courses_list .coursebox").click(function() {
+        window.location = $(this).find("h2.title").find("a").attr("href");
     });
-    $('#box-or-lines').click(function(e){
+    $("#box-or-lines").click(function(e) {
         e.preventDefault();
         $(this).toggleClass("grid");
-        $(listview).each(function(i,v){
-            $('.my_courses_list .coursebox').toggleClass(v);
+        $(listview).each(function(i, v) {
+            $(".my_courses_list .coursebox").toggleClass(v);
         });
-        $(gridview).each(function(i,v){
-            $('.my_courses_list .coursebox').toggleClass(v);
+        $(gridview).each(function(i, v) {
+            $(".my_courses_list .coursebox").toggleClass(v);
         });
     });
 });

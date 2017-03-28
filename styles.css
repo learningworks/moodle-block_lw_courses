@@ -109,6 +109,7 @@
     text-indent: -999em;
     transition: all .5s ease;
     width: 30px;
+    margin-top: -50px;
 }
 .block_my_courses #box-or-lines.grid, [data-block='my_courses'] #box-or-lines.grid {
     background-position: right top;
@@ -126,7 +127,6 @@
 }
 .block_my_courses .coursebox:not(.span12) .image_wrap {
     position:absolute;
-    height:auto !important;
     top:0;
     left:0;
     right:0;
@@ -174,15 +174,12 @@
     clear: both;
 }
 /* START STYLE UPDATES */
-a#box-or-lines {
-    margin-top: -39px;
-}
 .block_my_courses {
     position: relative;
     z-index: 0;
 }
 .block_my_courses .content {
-    margin: 0px;
+    margin: 0;
 }
 .block_my_courses .my_courses_list {
     padding-top: 0;
@@ -196,7 +193,7 @@ a#box-or-lines {
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) {
     margin-top: 0;
-    padding: 0px;
+    padding: 0;
     margin-bottom: 24px;
     border-radius: 3px;
     border: 3px solid #e2e2e2;
@@ -218,7 +215,7 @@ a#box-or-lines {
     max-height: 100%;
     min-height: 100%;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12) h2.title {
+.block_my_courses .my_courses_list .coursebox:not(.span12) h2 {
     font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
@@ -237,7 +234,7 @@ a#box-or-lines {
     transition: all 0.5s ease;
     text-transform: uppercase;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12) h2.title a {
+.block_my_courses .my_courses_list .coursebox:not(.span12) h2 a {
     color: #fff;
     font-size: 12px;
 }
@@ -276,6 +273,7 @@ a#box-or-lines {
     line-height: normal;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title {
+    background: #9c3890;
     background: rgba(152, 56, 144, 0.6);
     top: 100%;
     bottom: 0;
@@ -290,7 +288,7 @@ a#box-or-lines {
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title:before {
     content: '';
     position: absolute;
-    top: 0px;
+    top: 0;
     right: -50px;
     width: 50px;
     margin-top: -94px;
@@ -298,7 +296,7 @@ a#box-or-lines {
     background: #000;
     transform: skewX(-45deg);
     transition: all 0.5s ease;
-    box-shadow: -2px -2px 1px 0px rgba(255, 255, 255, 0.2);
+    box-shadow: -2px -2px 1px 0 rgba(255, 255, 255, 0.2);
     z-index: 99;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title .course_title {
@@ -314,19 +312,14 @@ a#box-or-lines {
     margin: 0;
     color: #fff;
     font-size: 16px;
-    font-weight: 900;
     padding-left: 10px;
     font-weight: 300;
     font-family: "Maven Pro", Helvetica, Arial, sans-serif;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12) .course_title .course_title h2 {
-    text-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.5);
-    margin-top: 4px;
-}
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title:after {
     content: '';
     position: absolute;
-    top: 0px;
+    top: 0;
     width: 120%;
     left: 20px;
     margin-top: -44px;
@@ -334,7 +327,7 @@ a#box-or-lines {
     background: #000;
     transform: skewX(-45deg);
     transition: all 0.5s ease;
-    box-shadow: 0px 0px 2px 1px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.2);
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title .course_link {
     display: block;
@@ -353,10 +346,10 @@ a#box-or-lines {
     cursor: pointer;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_image {
-    background-position: center center !important;
+    background-position: center center;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12):hover .course_title, .block_my_courses .my_courses_list .coursebox:not(.span12):focus .course_title {
-    top: 0px;
+    top: 0;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12):hover .course_title .move, .block_my_courses .my_courses_list .coursebox:not(.span12):focus .course_title .move {
     position: absolute;
@@ -378,13 +371,13 @@ a#box-or-lines {
     transition: all 0.5s ease;
     color: #fff;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12):hover h2.title, .block_my_courses .my_courses_list .coursebox:not(.span12):focus h2.title {
+.block_my_courses .my_courses_list .coursebox:not(.span12):hover h2, .block_my_courses .my_courses_list .coursebox:not(.span12):focus h2 {
     margin-top: 0;
     left: 0;
     transition: all 0.5s ease;
 }
 .block_my_courses .my_courses_list .coursebox.span12 {
-    padding: 0px;
+    padding: 0;
     border: none;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     margin-bottom: 9px;
@@ -397,7 +390,6 @@ a#box-or-lines {
     padding: 0;
     width: auto;
     display: block;
-    background: none;
     text-shadow: none;
     border: none;
     box-shadow: none;
@@ -413,7 +405,7 @@ a#box-or-lines {
     transition: all 0.5s ease;
 }
 .block_my_courses .my_courses_list .coursebox.span12 .course_content a.btn:hover {
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3) inset;
     transition: all 0.5s ease;
     background: #eaeaea;
 }
@@ -443,14 +435,13 @@ a#box-or-lines {
     padding: 10px;
 }
 .block_my_courses .my_courses_list .coursebox a {
-    text-decoration: none !important;
+    text-decoration: none;
 }
 .my_courses_list .progress-bar {
     text-align: left;
 }
 .my_courses_list .progress-bar:before {
     content: 'Progress: ';
-    float: left;
     margin-right: 5px;
     display: inline-block;
     margin-left: 5px;
@@ -467,6 +458,7 @@ a#box-or-lines {
 .my_courses_list .coursebox:not(.span12) .categorypath {
     position: absolute;
     color: #fff;
+    background: #333;
     background: rgba(0, 0, 0, 0.5);
     left: 0;
     top: auto;
@@ -487,8 +479,9 @@ a#box-or-lines {
     text-align: left;
     opacity: 0.8;
     bottom: 0;
-    top: 0px;
+    top: 0;
     z-index: 999;
+    background:#ccc;
     background: rgba(0, 0, 0, 0.2);
     transition: all 0.5s ease;
 }
@@ -508,9 +501,9 @@ a#box-or-lines {
     margin: 0;
     color: #fff;
 }
-.editing a#box-or-lines {
-    margin-top: 0px;
-    margin-right: 0px;
+.editing #box-or-lines {
+    margin-top: 0;
+    margin-right: 0;
 }
 .editing .block_my_courses .coursebox .cursor {
     filter: grayscale(100%) sepia(100%) hue-rotate(55deg) brightness(0.9) saturate(1.5);
@@ -521,7 +514,7 @@ a#box-or-lines {
     right: 5px;
 }
 .block_my_courses.block_docked .coursebox:not(.span12) {
-    margin-lefT: 0;
+    margin-left: 0;
     max-width: 100%;
 }
 .my_courses_list .coursebox.span6:nth-child(2n+1) {
@@ -533,11 +526,6 @@ a#box-or-lines {
 .my_courses_list .coursebox.span3:nth-child(4n+1) {
     margin-left: 0;
 }
-
-/* END STYLE UPDATES */
-
-
-
 
 @media screen and (max-width: 1400px) {
 .block_my_courses .coursebox.list .image_wrap, .block_my_courses .coursebox .course_image_embed {
