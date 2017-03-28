@@ -51,3 +51,21 @@ Added JQuery to make all divs as tall as tallest item
 Embedded course image fix
 
 Responsiveness of both Grid and List layouts
+
+24/3/17
+Added new Styles
+Add new config setting for course col width on grid
+
+27/3/17
+Updated Styles and Cleaned code
+Added checks for progress completion to be an Int in PHP so NAN does not appear when JS process the value.
+
+Update h2.title overflow working.
+Added cursor style to grid blocks
+
+28/03/17
+Updated to support list view only when a student has only one course or if full width is selected
+Update JS and CSS and PHP for linter
+
+29/03/17
+Updated CSS for Linter

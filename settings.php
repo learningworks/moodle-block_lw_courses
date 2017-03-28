@@ -105,4 +105,15 @@ if ($ADMIN->fulltree) {
     $description = new lang_string('startgrid_desc', 'block_my_courses');
     $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_MY_COURSES_STARTGRID_NO);
     $settings->add($setting);
+    $name = 'block_my_courses/coursegridwidth';
+    $title = new lang_string('coursegridwidth', 'block_my_courses');
+    $description = new lang_string('coursegridwidthdesc', 'block_my_courses');
+    $setting = new admin_setting_configselect($name, $title, $description, 4, array(
+        '12' => new lang_string('fullwidth', 'block_my_courses'),
+        '6' => new lang_string('splitwidth', 'block_my_courses'),
+        '4' => new lang_string('thirdwidth', 'block_my_courses'),
+        '3' => new lang_string('quarterwidth', 'block_my_courses')
+    ));
+
+    $settings->add($setting);
 }
