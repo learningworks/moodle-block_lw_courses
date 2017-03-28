@@ -215,7 +215,7 @@
     max-height: 100%;
     min-height: 100%;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12) h2 {
+.block_my_courses .my_courses_list .coursebox:not(.span12) .title {
     font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
@@ -234,7 +234,7 @@
     transition: all 0.5s ease;
     text-transform: uppercase;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12) h2 a {
+.block_my_courses .my_courses_list .coursebox:not(.span12) .title a {
     color: #fff;
     font-size: 12px;
 }
@@ -273,8 +273,6 @@
     line-height: normal;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title {
-    background: #9c3890;
-    background: rgba(152, 56, 144, 0.6);
     top: 100%;
     bottom: 0;
     overflow: visible;
@@ -282,7 +280,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    background: url([[pix:block_my_courses|bg_grid]]) no-repeat top left;
+    background: #9c3890;
+    background: url([[pix:block_my_courses|bg_grid]]) no-repeat top left rgba(152, 56, 144, 0.6);
     background-size: cover;
 }
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title:before {
@@ -371,7 +370,7 @@
     transition: all 0.5s ease;
     color: #fff;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12):hover h2, .block_my_courses .my_courses_list .coursebox:not(.span12):focus h2 {
+.block_my_courses .my_courses_list .coursebox:not(.span12):hover .title, .block_my_courses .my_courses_list .coursebox:not(.span12):focus .title {
     margin-top: 0;
     left: 0;
     transition: all 0.5s ease;
@@ -387,12 +386,10 @@
     padding-left:10px;
 }
 .block_my_courses .my_courses_list .coursebox.span12 .course_content a.btn {
-    padding: 0;
     width: auto;
     display: block;
     text-shadow: none;
     border: none;
-    box-shadow: none;
     text-transform: uppercase;
     font: 14px "Maven Pro";
     font-weight: 900;
@@ -495,10 +492,9 @@
     transition: all 0.5s ease;
     opacity: 0;
 }
-.my_courses_list .coursebox:not(.span12):hover .course_content .summary a.autolink {
+.my_courses_list .coursebox:not(.span12):hover .course_content .summary .autolink {
     display: inline;
     padding: 0;
-    margin: 0;
     color: #fff;
 }
 .editing #box-or-lines {
