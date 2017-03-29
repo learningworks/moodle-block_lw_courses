@@ -35,7 +35,6 @@ script:
   - moodle-plugin-ci codechecker
   - moodle-plugin-ci validate
   - moodle-plugin-ci phpunit
-  - moodle-plugin-ci behat
 
 notifications:
   slack: learningworks-dev:tL8lF2CKqNGY6rdtxKhaXIiy
