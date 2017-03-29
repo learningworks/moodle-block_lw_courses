@@ -52,6 +52,7 @@ Feature: View the quiz being due
     And quiz "Quiz 2A Future deadline" contains the following questions:
       | question       | page |
       | First question | 1    |
+    And I wait "5" seconds
 
 
   Scenario: View my quizzes that are due

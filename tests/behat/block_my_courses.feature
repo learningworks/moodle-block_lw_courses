@@ -19,6 +19,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
       | Course 2 | C2        | CAT1     |
       | Course 3 | C3        | CAT2     |
     And I log in as "admin"
+    And I wait "5" seconds
 
   Scenario: View the block by a user without any enrolments
     Given I log out
