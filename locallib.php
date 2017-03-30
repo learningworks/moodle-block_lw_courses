@@ -317,7 +317,15 @@ function build_progress($course) {
 
             // Don't display if completion isn't enabled!
             if (!$coursecompletiondata->is_enabled()) {
-                return html_writer::tag('p', get_string('noprogress', 'block_my_courses'));
+                // Check if user should get a limited/full description of issue - based on viewhiddencourses capabilities.
+                $context = context_course::instance($course->id, IGNORE_MISSING);
+                // Limited view.
+                if (!has_capability('moodle/course:viewhiddencourses', $context)) {
+                    return html_writer::tag('p', get_string('progressunavail', 'block_my_courses'));
+                } else { // Full view.
+                    //progressunavail
+                    return html_writer::tag('p', get_string('progressunavail','block_my_courses') . get_string('noprogress', 'block_my_courses'));
+                }
             }
 
             // INSPIRED BY completionstatus BLOCK.

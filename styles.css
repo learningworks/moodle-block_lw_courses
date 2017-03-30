@@ -155,6 +155,9 @@
     flex-direction: column;
     overflow: auto;
 }
+.block_my_courses .coursebox.grid .activity_info {
+    display: none;
+}
 .block_my_courses .coursebox.list {
     display: block;
 }
@@ -487,7 +490,6 @@
     z-index: 999;
     background:#ccc;
     background: rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease;
 }
 .my_courses_list .coursebox:not(.span12) .progress .progress-bar[aria-valuenow="0"] {
     display: none;
