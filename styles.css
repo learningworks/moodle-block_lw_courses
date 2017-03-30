@@ -17,6 +17,14 @@
     border: solid;
     padding: 15px;
 }
+/*Progress text to be rendered on top of background image*/
+.block_my_courses .my_courses_list .coursebox > p {
+    position: relative;
+}
+/*Only if JS is enabled.*/
+body.jsenabled .block_my_courses .my_courses_list .coursebox.list {
+    cursor: pointer;
+}
 .block_my_courses .my_courses_list .coursebox.list {
     margin-left: 0;
 }
