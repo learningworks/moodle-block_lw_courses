@@ -321,10 +321,14 @@ function build_progress($course) {
                 $context = context_course::instance($course->id, IGNORE_MISSING);
                 // Limited view.
                 if (!has_capability('moodle/course:viewhiddencourses', $context)) {
-                    return html_writer::tag('p', get_string('progressunavail', 'block_my_courses'));
+                    return html_writer::tag('p',
+                                            get_string('progressunavail', 'block_my_courses'),
+                                            array('class' => 'progressunavail'));
                 } else { // Full view.
-                    //progressunavail
-                    return html_writer::tag('p', get_string('progressunavail','block_my_courses') . get_string('noprogress', 'block_my_courses'));
+                    return html_writer::tag('p',
+                                            get_string('progressunavail', 'block_my_courses') .
+                                                get_string('noprogress', 'block_my_courses'),
+                                            array('class' => 'progressunavail'));
                 }
             }
 
