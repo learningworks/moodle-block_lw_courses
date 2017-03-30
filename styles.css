@@ -22,7 +22,7 @@
     position: relative;
 }
 /*Only if JS is enabled.*/
-body.jsenabled .block_my_courses .my_courses_list .coursebox.list {
+.jsenabled .block_my_courses .my_courses_list .coursebox.list {
     cursor: pointer;
 }
 .block_my_courses .my_courses_list .coursebox.list {
