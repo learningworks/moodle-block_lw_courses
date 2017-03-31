@@ -81,22 +81,23 @@ $string['customsettings'] = 'Custom settings';
 $string['customsettings_desc'] = 'The following are settings for additions to the course overview block';
 
 $string['courseimagedefault'] = 'Default course image';
-$string['courseimagedefaultdesc'] = 'This image will be shown if a course lacks a course summary image file.';
+$string['courseimagedefault_desc'] = 'This image will be shown if a course lacks a course summary image file.';
 
 $string['my_courses_bgimage']   = "Embed images into background";
-$string['my_courses_bgimagedesc']   = "This will embed images into background as a CSS property";
+$string['my_courses_bgimage_desc']   = "This will embed images into background as a CSS property";
 
+$string['summary_limit'] = 'Summary character limit';
 $string['summary_limit_desc'] = 'Limit the output of text to display as course summaries on the users home page';
-$string['summary_limit'] = 'Summary String Letter Limit';
 
-$string['progress'] = 'Progress Type';
+$string['progress'] = 'Progress type';
 $string['progress_desc'] = 'This will determine what type of course grades the block will try to render';
 
-$string['progressenabled'] = 'Coure progress bar';
+$string['progressenabled'] = 'Course progress bar';
 $string['progressenabled_desc'] = 'This will determine if the course progress bar will be shown to learners';
 
 $string['startgrid'] = "Start as grid";
 $string['startgrid_desc'] = "This will render the courses in a grid straight away";
 
-$string['noprogress'] = "Progressbar enabled, but completion tracking not enabled for course!";
+$string['noprogress'] = ": enable course completion tracking!";
+$string['progressunavail'] = "Progress unavailable";
 $string['nocompletion'] = "Completion not enabled";

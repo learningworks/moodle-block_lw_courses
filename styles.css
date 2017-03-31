@@ -17,6 +17,17 @@
     border: solid;
     padding: 15px;
 }
+/*Progress text to be rendered on top of background image*/
+.block_my_courses .my_courses_list .coursebox > p {
+    position: relative;
+}
+.block_my_courses .my_courses_list .coursebox.p-y-1 > p {
+    margin-top: -1rem;
+}
+/*Only if JS is enabled.*/
+.jsenabled .block_my_courses .my_courses_list .coursebox.list {
+    cursor: pointer;
+}
 .block_my_courses .my_courses_list .coursebox.list {
     margin-left: 0;
 }
@@ -146,6 +157,9 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+}
+.block_my_courses .coursebox.grid .activity_info {
+    display: none;
 }
 .block_my_courses .coursebox.list {
     display: block;
@@ -479,7 +493,6 @@
     z-index: 999;
     background:#ccc;
     background: rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease;
 }
 .my_courses_list .coursebox:not(.span12) .progress .progress-bar[aria-valuenow="0"] {
     display: none;
