@@ -411,9 +411,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
         require_once($CFG->libdir.'/coursecatlib.php');
         $course = new course_in_list($course);
-
         // Check to see if a file has been set on the course level.
-        if ($course->get_course_overviewfiles()) {
+        if ($course->id > 0 && $course->get_course_overviewfiles()) {
             foreach ($course->get_course_overviewfiles() as $file) {
                 $isimage = $file->is_valid_image();
                 $url = file_encode_url("$CFG->wwwroot/pluginfile.php",
@@ -482,7 +481,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
      * @return string|void
      */
     public function course_description($course) {
-
+        global $CFG;
+        require_once($CFG->libdir.'/coursecatlib.php');
         $course = new course_in_list($course); // Todo : why does this fix so many issues?.
         if ($course->has_summary()) {
             $context = context_course::instance($course->id);
