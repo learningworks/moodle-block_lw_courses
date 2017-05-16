@@ -36,10 +36,9 @@ class block_my_courses_renderer extends plugin_renderer_base {
      * Construct contents of my_courses block
      *
      * @param array $courses list of courses in sorted order
-     * @param array $overviews list of my coursess
      * @return string html to be displayed in my_courses block
      */
-    public function my_courses($courses, $overviews) {
+    public function my_courses($courses) {
         global $CFG, $PAGE;
         $html = '';
         // LearningWorks.
@@ -162,11 +161,6 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 if ($children = block_my_courses_get_child_shortnames($course->id)) {
                     $html .= html_writer::tag('span', $children, array('class' => 'coursechildren'));
                 }
-            }
-
-            // If user is moving courses, then down't show overview.
-            if (isset($overviews[$course->id]) && !$ismovingcourse) {
-                $html .= $this->activity_display($course->id, $overviews[$course->id]);
             }
 
             $html .= $this->course_description($course);
