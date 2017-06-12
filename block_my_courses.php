@@ -70,8 +70,7 @@ class block_my_courses extends block_base {
         profile_load_custom_fields($USER);
 
         $showallcourses = ($updatemynumber === self::SHOW_ALL_COURSES);
-        list($sortedcourses, $sitecourses, $totalcourses) = block_my_courses_get_sorted_courses($showallcourses);
-        $overviews = block_my_courses_get_overviews($sitecourses);
+        list($sortedcourses, $totalcourses) = block_my_courses_get_sorted_courses($showallcourses);
 
         $renderer = $this->page->get_renderer('block_my_courses');
         if (!empty($config->showwelcomearea)) {
@@ -89,7 +88,7 @@ class block_my_courses extends block_base {
             $this->content->text .= get_string('nocourses', 'my');
         } else {
             // For each course, build category cache.
-            $this->content->text .= $renderer->my_courses($sortedcourses, $overviews);
+            $this->content->text .= $renderer->my_courses($sortedcourses);
             $this->content->text .= $renderer->hidden_courses($totalcourses - count($sortedcourses));
         }
 

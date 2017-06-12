@@ -36,10 +36,9 @@ class block_my_courses_renderer extends plugin_renderer_base {
      * Construct contents of my_courses block
      *
      * @param array $courses list of courses in sorted order
-     * @param array $overviews list of my coursess
      * @return string html to be displayed in my_courses block
      */
-    public function my_courses($courses, $overviews) {
+    public function my_courses($courses) {
         global $CFG, $PAGE;
         $html = '';
         // LearningWorks.
@@ -162,11 +161,6 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 if ($children = block_my_courses_get_child_shortnames($course->id)) {
                     $html .= html_writer::tag('span', $children, array('class' => 'coursechildren'));
                 }
-            }
-
-            // If user is moving courses, then down't show overview.
-            if (isset($overviews[$course->id]) && !$ismovingcourse) {
-                $html .= $this->activity_display($course->id, $overviews[$course->id]);
             }
 
             $html .= $this->course_description($course);
@@ -411,9 +405,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
         require_once($CFG->libdir.'/coursecatlib.php');
         $course = new course_in_list($course);
-
         // Check to see if a file has been set on the course level.
-        if ($course->get_course_overviewfiles()) {
+        if ($course->id > 0 && $course->get_course_overviewfiles()) {
             foreach ($course->get_course_overviewfiles() as $file) {
                 $isimage = $file->is_valid_image();
                 $url = file_encode_url("$CFG->wwwroot/pluginfile.php",
@@ -482,7 +475,8 @@ class block_my_courses_renderer extends plugin_renderer_base {
      * @return string|void
      */
     public function course_description($course) {
-
+        global $CFG;
+        require_once($CFG->libdir.'/coursecatlib.php');
         $course = new course_in_list($course); // Todo : why does this fix so many issues?.
         if ($course->has_summary()) {
             $context = context_course::instance($course->id);
