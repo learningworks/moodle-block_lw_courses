@@ -232,15 +232,7 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
             $counter++;
         }
     }
-
-    // From list extract site courses for overview.
-    $sitecourses = array();
-    foreach ($sortedcourses as $key => $course) {
-        if ($course->id > 0) {
-            $sitecourses[$key] = $course;
-        }
-    }
-    return array($sortedcourses, $sitecourses, count($courses));
+    return array($sortedcourses, count($courses));
 }
 
 // Custom LearningWorks functions.
