@@ -356,13 +356,15 @@ function build_progress($course) {
                 }
             }
 
+            $completionpercentage = 0;
             // Aggregate activities.
             if (!empty($activities)) {
                 $completionstatus->min = $activitiescompleted;
                 $completionstatus->max = count($activities);
+                $completionpercentage = intval($completionstatus->min / $completionstatus->max * 100);
             }
 
-            $completionpercentage = intval($completionstatus->min / $completionstatus->max * 100);
+
             $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
                 'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
             $progress = html_writer::div($bar, 'progress');

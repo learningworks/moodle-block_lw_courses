@@ -78,7 +78,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 array('sesskey' => sesskey(), 'moveto' => 0, 'courseid' => $movingcourseid));
             // Create move icon, so it can be used.
             $movetofirsticon = html_writer::empty_tag('img',
-                array('src' => $this->output->pix_url('movehere'),
+                array('src' => $this->output->image_url('movehere'),
                     'alt' => get_string('movetofirst', 'block_my_courses', $courses[$movingcourseid]->fullname),
                     'title' => get_string('movehere')));
             $moveurl = html_writer::link($moveurl, $movetofirsticon);
@@ -126,7 +126,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
             // If user is editing, then add move icons.
             if ($userediting && !$ismovingcourse) {
                 $moveicon = html_writer::empty_tag('img',
-                    array('src' => $this->pix_url('t/move')->out(false),
+                    array('src' => $this->image_url('t/move')->out(false),
                         'alt' => get_string('movecourse', 'block_my_courses', $course->fullname),
                         'title' => get_string('move')));
                 $moveurl = new moodle_url($this->page->url, array('sesskey' => sesskey(), 'movecourse' => 1,
@@ -193,7 +193,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $a->movingcoursename = $courses[$movingcourseid]->fullname;
                 $a->currentcoursename = $course->fullname;
                 $movehereicon = html_writer::empty_tag('img',
-                    array('src' => $this->output->pix_url('movehere'),
+                    array('src' => $this->output->image_url('movehere'),
                         'alt' => get_string('moveafterhere', 'block_my_courses', $a),
                         'title' => get_string('movehere')));
                 $moveurl = html_writer::link($moveurl, $movehereicon);
@@ -451,7 +451,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $imageurl = block_my_courses_get_course_image_url($courseimagedefault);
         } else {
             // We check for a default image in the my_courses pix folder named default aka our final hope.
-            $imageurl = $OUTPUT->pix_url('default', 'block_my_courses');
+            $imageurl = $OUTPUT->image_url('default', 'block_my_courses');
         }
 
         // Do we need a CSS soloution or is a img good enough?.
