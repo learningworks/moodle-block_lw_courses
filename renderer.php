@@ -76,9 +76,16 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
             $moveurl = new moodle_url('/blocks/my_courses/move.php',
                 array('sesskey' => sesskey(), 'moveto' => 0, 'courseid' => $movingcourseid));
+            if (method_exists($this->output, 'image_url')) {
+                // Use the new method.
+                $moveicon = $this->output->image_url('movehere');
+            } else {
+                // Still a pre Moodle 3.3 release. Use pix_url because image_url doesn't exist yet.
+                $moveicon = $this->output->pix_url('movehere');
+            }
             // Create move icon, so it can be used.
             $movetofirsticon = html_writer::empty_tag('img',
-                array('src' => $this->output->image_url('movehere'),
+                array('src' => $moveicon,
                     'alt' => get_string('movetofirst', 'block_my_courses', $courses[$movingcourseid]->fullname),
                     'title' => get_string('movehere')));
             $moveurl = html_writer::link($moveurl, $movetofirsticon);
@@ -120,13 +127,20 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 "coursebox $courseclass span$startvalue col-md-$startvalue $courseclass col-xs-12",
                 "course-{$course->id}");
             $html .= $this->course_image($course);
-            $html .= build_progress($course);
+            $html .= block_my_courses_build_progress($course);
 
+            if (method_exists($this->output, 'image_url')) {
+                // Use the new method.
+                $moveicon = $this->image_url('t/move');
+            } else {
+                // Still a pre Moodle 3.3 release. Use pix_url because image_url doesn't exist yet.
+                $moveicon = $this->pix_url('t/move');
+            }
             $html .= html_writer::start_tag('div', array('class' => 'course_title'));
             // If user is editing, then add move icons.
             if ($userediting && !$ismovingcourse) {
                 $moveicon = html_writer::empty_tag('img',
-                    array('src' => $this->image_url('t/move')->out(false),
+                    array('src' => $moveicon->out(false),
                         'alt' => get_string('movecourse', 'block_my_courses', $course->fullname),
                         'title' => get_string('move')));
                 $moveurl = new moodle_url($this->page->url, array('sesskey' => sesskey(), 'movecourse' => 1,
@@ -186,6 +200,13 @@ class block_my_courses_renderer extends plugin_renderer_base {
             $html .= $this->output->box('', 'flush');
             $html .= $this->output->box_end();
             $courseordernumber++;
+            if (method_exists($this->output, 'image_url')) {
+                // Use the new method.
+                $movehere = $this->output->image_url('movehere');
+            } else {
+                // Still a pre Moodle 3.3 release. Use pix_url because image_url doesn't exist yet.
+                $movehere = $this->output->pix_url('movehere');
+            }
             if ($ismovingcourse) {
                 $moveurl = new moodle_url('/blocks/my_courses/move.php',
                     array('sesskey' => sesskey(), 'moveto' => $courseordernumber, 'courseid' => $movingcourseid));
@@ -193,7 +214,7 @@ class block_my_courses_renderer extends plugin_renderer_base {
                 $a->movingcoursename = $courses[$movingcourseid]->fullname;
                 $a->currentcoursename = $course->fullname;
                 $movehereicon = html_writer::empty_tag('img',
-                    array('src' => $this->output->image_url('movehere'),
+                    array('src' => $movehere,
                         'alt' => get_string('moveafterhere', 'block_my_courses', $a),
                         'title' => get_string('movehere')));
                 $moveurl = html_writer::link($moveurl, $movehereicon);
