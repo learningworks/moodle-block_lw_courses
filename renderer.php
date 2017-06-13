@@ -467,12 +467,19 @@ class block_my_courses_renderer extends plugin_renderer_base {
 
         $config = get_config('block_my_courses');
 
+        if (method_exists($this->output, 'image_url')) {
+            // Use the new method.
+            $default = $OUTPUT->image_url('default', 'block_my_courses');
+        } else {
+            // Still a pre Moodle 3.3 release. Use pix_url because image_url doesn't exist yet.
+            $default = $OUTPUT->pix_url('default', 'block_my_courses');
+        }
         if ($courseimagedefault = get_config('block_my_courses', 'courseimagedefault')) {
             // Return an img element with the image in the block settings to use for the course.
             $imageurl = block_my_courses_get_course_image_url($courseimagedefault);
         } else {
             // We check for a default image in the my_courses pix folder named default aka our final hope.
-            $imageurl = $OUTPUT->image_url('default', 'block_my_courses');
+            $imageurl = $default;
         }
 
         // Do we need a CSS soloution or is a img good enough?.
