@@ -271,7 +271,7 @@ function block_my_courses_get_course_image_url($fileorfilename) {
  * @param object $course The course whose progress we want
  * @return string
  */
-function build_progress($course) {
+function block_my_courses_build_progress($course) {
     global $CFG, $USER;
 
     require_once($CFG->dirroot.'/grade/querylib.php');
@@ -356,13 +356,14 @@ function build_progress($course) {
                 }
             }
 
+            $completionpercentage = 0;
             // Aggregate activities.
             if (!empty($activities)) {
                 $completionstatus->min = $activitiescompleted;
                 $completionstatus->max = count($activities);
+                $completionpercentage = intval($completionstatus->min / $completionstatus->max * 100);
             }
 
-            $completionpercentage = intval($completionstatus->min / $completionstatus->max * 100);
             $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
                 'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
             $progress = html_writer::div($bar, 'progress');
