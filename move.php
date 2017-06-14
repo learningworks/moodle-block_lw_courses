@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Move/order course functionality for my_courses block.
+ * Move/order course functionality for lw_courses block.
  *
- * @package    block_my_courses
+ * @package    block_lw_courses
  * @copyright  2012 Adam Olley <adam.olley@netspot.com.au>
  * @copyright  2017 Mathew May <mathewm@hotmail.co.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -31,7 +31,7 @@ require_login();
 $coursetomove = required_param('courseid', PARAM_INT);
 $moveto = required_param('moveto', PARAM_INT);
 
-list($courses, $sitecourses, $coursecount) = block_my_courses_get_sorted_courses();
+list($courses, $sitecourses, $coursecount) = block_lw_courses_get_sorted_courses();
 $sortedcourses = array_keys($courses);
 
 $currentcourseindex = array_search($coursetomove, $sortedcourses);
@@ -57,5 +57,5 @@ $remaningcourses = array_slice($sortedcourses, $moveto);
 foreach ($remaningcourses as $courseid) {
     $neworder[] = $courseid;
 }
-block_my_courses_update_myorder(array_values($neworder));
+block_lw_courses_update_myorder(array_values($neworder));
 redirect(new moodle_url('/my/index.php'));

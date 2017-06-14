@@ -1,7 +1,7 @@
-M.block_my_courses = {}
+M.block_lw_courses = {}
 
-M.block_my_courses.add_handles = function(Y) {
-    M.block_my_courses.Y = Y;
+M.block_lw_courses.add_handles = function(Y) {
+    M.block_lw_courses.Y = Y;
     var MOVEICON = {
         pix: "i/move_2d",
         component: 'moodle'
@@ -11,7 +11,7 @@ M.block_my_courses.add_handles = function(Y) {
         // Static Vars.
         var goingUp = false, lastY = 0;
 
-        var list = Y.Node.all('.my_courses_list .coursebox');
+        var list = Y.Node.all('.lw_courses_list .coursebox');
         list.each(function(v, k) {
             // Replace move link and image with move_2d image.
             var imagenode = v.one('.course_title .move a img');
@@ -27,7 +27,7 @@ M.block_my_courses.add_handles = function(Y) {
             }).plug(Y.Plugin.DDProxy, {
                 moveOnEnd: false
             }).plug(Y.Plugin.DDConstrained, {
-                constrain2node: '.my_courses_list'
+                constrain2node: '.lw_courses_list'
             });
             dd.addHandle('.course_title .move');
         });
@@ -37,7 +37,7 @@ M.block_my_courses.add_handles = function(Y) {
             var drag = e.target;
             // Set some styles here.
             drag.get('node').setStyle('opacity', '.25');
-            drag.get('dragNode').addClass('block_my_courses');
+            drag.get('dragNode').addClass('block_lw_courses');
             drag.get('dragNode').set('innerHTML', drag.get('node').get('innerHTML'));
             drag.get('dragNode').setStyles({
                 opacity: '.5',
@@ -53,7 +53,7 @@ M.block_my_courses.add_handles = function(Y) {
                 visibility: '',
                 opacity: '1'
             });
-            M.block_my_courses.save(Y);
+            M.block_lw_courses.save(Y);
         });
 
         Y.DD.DDM.on('drag:drag', function(e) {
@@ -103,9 +103,9 @@ M.block_my_courses.add_handles = function(Y) {
     });
 }
 
-M.block_my_courses.save = function() {
-    var Y = M.block_my_courses.Y;
-    var sortorder = Y.one('.my_courses_list').get('children').getAttribute('id');
+M.block_lw_courses.save = function() {
+    var Y = M.block_lw_courses.Y;
+    var sortorder = Y.one('.lw_courses_list').get('children').getAttribute('id');
     for (var i = 0; i < sortorder.length; i++) {
         sortorder[i] = sortorder[i].substring(7);
     }
@@ -113,7 +113,7 @@ M.block_my_courses.save = function() {
         sesskey : M.cfg.sesskey,
         sortorder : sortorder
     };
-    Y.io(M.cfg.wwwroot + '/blocks/my_courses/save.php', {
+    Y.io(M.cfg.wwwroot + '/blocks/lw_courses/save.php', {
         method: 'POST',
         data: build_querystring(params),
         context: this
@@ -127,12 +127,12 @@ M.block_my_courses.save = function() {
  * @param {String} userpref the user preference that records the state of this box. false if none.
  * @param {String} strtooltip
  */
-M.block_my_courses.collapsible = function(Y, id, userpref, strtooltip) {
+M.block_lw_courses.collapsible = function(Y, id, userpref, strtooltip) {
     if (userpref) {
-        M.block_my_courses.userpref = true;
+        M.block_lw_courses.userpref = true;
     }
     Y.use('anim', function(Y) {
-        new M.block_my_courses.CollapsibleRegion(Y, id, userpref, strtooltip);
+        new M.block_lw_courses.CollapsibleRegion(Y, id, userpref, strtooltip);
     });
 };
 
@@ -146,7 +146,7 @@ M.block_my_courses.collapsible = function(Y, id, userpref, strtooltip) {
  * @param {String} userpref The user preference that records the state of this box. false if none.
  * @param {String} strtooltip
  */
-M.block_my_courses.CollapsibleRegion = function(Y, id, userpref, strtooltip) {
+M.block_lw_courses.CollapsibleRegion = function(Y, id, userpref, strtooltip) {
     // Record the pref name.
     this.userpref = userpref;
 
@@ -205,25 +205,25 @@ M.block_my_courses.CollapsibleRegion = function(Y, id, userpref, strtooltip) {
     }, this, animation);
 };
 
-M.block_my_courses.userpref = false;
+M.block_lw_courses.userpref = false;
 
 /**
  * The user preference that stores the state of this box.
  * @property userpref
  * @type String
  */
-M.block_my_courses.CollapsibleRegion.prototype.userpref = null;
+M.block_lw_courses.CollapsibleRegion.prototype.userpref = null;
 
 /**
  * The key divs that make up this
  * @property div
  * @type Y.Node
  */
-M.block_my_courses.CollapsibleRegion.prototype.div = null;
+M.block_lw_courses.CollapsibleRegion.prototype.div = null;
 
 /**
  * The key divs that make up this
  * @property icon
  * @type Y.Node
  */
-M.block_my_courses.CollapsibleRegion.prototype.icon = null;
+M.block_lw_courses.CollapsibleRegion.prototype.icon = null;

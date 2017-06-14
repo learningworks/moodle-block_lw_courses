@@ -17,7 +17,7 @@
 /**
  * Plugin file lib for default images.
  *
- * @package    block_my_courses
+ * @package    block_lw_courses
  * @copyright  2017 Mathew May <mathewm@hotmail.co.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,13 +35,13 @@ defined('MOODLE_INTERNAL') || die();
  * @param boolean $forcedownload flag
  * @param array $options different options
  */
-function block_my_courses_pluginfile($course, $birecord, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function block_lw_courses_pluginfile($course, $birecord, $context, $filearea, $args, $forcedownload, array $options = array()) {
     $fs = get_file_storage();
 
     $filename = array_pop($args);
     $filepath = $args ? '/'.implode('/', $args).'/' : '/';
 
-    if (!$file = $fs->get_file($context->id, 'block_my_courses', 'courseimagedefault', 0, $filepath, $filename)) {
+    if (!$file = $fs->get_file($context->id, 'block_lw_courses', 'courseimagedefault', 0, $filepath, $filename)) {
         send_file_not_found();
     }
 

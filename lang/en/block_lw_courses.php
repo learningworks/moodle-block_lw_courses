@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Lang strings for my_courses block
+ * Lang strings for lw_courses block
  *
- * @package    block_my_courses
+ * @package    block_lw_courses
  * @copyright  2012 Adam Olley <adam.olley@netspot.com.au>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,8 +27,8 @@ $string['alwaysshowall'] = 'Always show all';
 $string['collapseall'] = 'Collapse all course lists';
 $string['configotherexpanded'] = 'If enabled, other courses will be expanded by default unless overridden by user preferences.';
 $string['configpreservestates'] = 'If enabled, the collapsed/expanded states set by the user are stored and used on each load.';
-$string['my_courses:addinstance'] = 'Add a new my courses block';
-$string['my_courses:myaddinstance'] = 'Add a new my courses block to Dashboard';
+$string['lw_courses:addinstance'] = 'Add a new my courses block';
+$string['lw_courses:myaddinstance'] = 'Add a new my courses block to Dashboard';
 $string['defaultmaxcourses'] = 'Default maximum courses';
 $string['defaultmaxcoursesdesc'] = 'Maximum courses which should be displayed on my courses block, 0 will show all courses';
 $string['expandall'] = 'Expand all course lists';
@@ -83,8 +83,8 @@ $string['customsettings_desc'] = 'The following are settings for additions to th
 $string['courseimagedefault'] = 'Default course image';
 $string['courseimagedefault_desc'] = 'This image will be shown if a course lacks a course summary image file.';
 
-$string['my_courses_bgimage']   = "Embed images into background";
-$string['my_courses_bgimage_desc']   = "This will embed images into background as a CSS property";
+$string['lw_courses_bgimage']   = "Embed images into background";
+$string['lw_courses_bgimage_desc']   = "This will embed images into background as a CSS property";
 
 $string['summary_limit'] = 'Summary character limit';
 $string['summary_limit_desc'] = 'Limit the output of text to display as course summaries on the users home page';

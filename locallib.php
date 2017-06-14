@@ -15,34 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Helper functions for my_courses block
+ * Helper functions for lw_courses block
  *
- * @package    block_my_courses
+ * @package    block_lw_courses
  * @copyright  2012 Adam Olley <adam.olley@netspot.com.au>
  * @copyright  2017 Mathew May <mathewm@hotmail.co.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
-define('BLOCKS_MY_COURSES_SHOWCATEGORIES_NONE', '0');
-define('BLOCKS_MY_COURSES_SHOWCATEGORIES_ONLY_PARENT_NAME', '1');
-define('BLOCKS_MY_COURSES_SHOWCATEGORIES_FULL_PATH', '2');
-define('BLOCKS_MY_COURSES_IMAGEASBACKGROUND_FALSE', '0');
-define('BLOCKS_MY_COURSES_PROGRESS_UNSET', '0');
-define('BLOCKS_MY_COURSES_PROGRESS_COMPLETION', '1');
-define('BLOCKS_MY_COURSES_PROGRESS_GRADES', '2');
-define('BLOCKS_MY_COURSES_SHOWGRADES_NO', '0');
-define('BLOCKS_MY_COURSES_SHOWGRADES_YES', '1');
-define('BLOCKS_MY_COURSES_STARTGRID_NO', '0');
-define('BLOCKS_MY_COURSES_STARTGRID_YES', '1');
-define('BLOCKS_MY_COURSES_DEFAULT_COURSES_ROW', '4');
-define('BLOCKS_MY_COURSES_DEFAULT_COL_SIZE', '3');
+define('BLOCKS_LW_COURSES_SHOWCATEGORIES_NONE', '0');
+define('BLOCKS_LW_COURSES_SHOWCATEGORIES_ONLY_PARENT_NAME', '1');
+define('BLOCKS_LW_COURSES_SHOWCATEGORIES_FULL_PATH', '2');
+define('BLOCKS_LW_COURSES_IMAGEASBACKGROUND_FALSE', '0');
+define('BLOCKS_LW_COURSES_PROGRESS_UNSET', '0');
+define('BLOCKS_LW_COURSES_PROGRESS_COMPLETION', '1');
+define('BLOCKS_LW_COURSES_PROGRESS_GRADES', '2');
+define('BLOCKS_LW_COURSES_SHOWGRADES_NO', '0');
+define('BLOCKS_LW_COURSES_SHOWGRADES_YES', '1');
+define('BLOCKS_LW_COURSES_STARTGRID_NO', '0');
+define('BLOCKS_LW_COURSES_STARTGRID_YES', '1');
+define('BLOCKS_LW_COURSES_DEFAULT_COURSES_ROW', '4');
+define('BLOCKS_LW_COURSES_DEFAULT_COL_SIZE', '3');
 /**
  * Display overview for courses
  *
  * @param array $courses courses for which overview needs to be shown
  * @return array html overview
  */
-function block_my_courses_get_overviews($courses) {
+function block_lw_courses_get_overviews($courses) {
     $htmlarray = array();
     if ($modules = get_plugin_list_with_function('mod', 'print_overview')) {
         // Split courses list into batches with no more than MAX_MODINFO_CACHE_SIZE courses in one batch.
@@ -62,44 +62,44 @@ function block_my_courses_get_overviews($courses) {
 }
 
 /**
- * Sets user preference for maximum courses to be displayed in my_courses block
+ * Sets user preference for maximum courses to be displayed in lw_courses block
  *
  * @param int $number maximum courses which should be visible
  */
-function block_my_courses_update_mynumber($number) {
-    set_user_preference('my_courses_number_of_courses', $number);
+function block_lw_courses_update_mynumber($number) {
+    set_user_preference('lw_courses_number_of_courses', $number);
 }
 
 /**
- * Sets user course sorting preference in my_courses block
+ * Sets user course sorting preference in lw_courses block
  *
  * @param array $sortorder list of course ids
  */
-function block_my_courses_update_myorder($sortorder) {
+function block_lw_courses_update_myorder($sortorder) {
     $value = implode(',', $sortorder);
     if (core_text::strlen($value) > 1333) {
         // The value won't fit into the user preference. Remove courses in the end of the list
         // (mostly likely user won't even notice).
         $value = preg_replace('/,[\d]*$/', '', core_text::substr($value, 0, 1334));
     }
-    set_user_preference('my_courses_course_sortorder', $value);
+    set_user_preference('lw_courses_course_sortorder', $value);
 }
 
 /**
- * Gets user course sorting preference in my_courses block
+ * Gets user course sorting preference in lw_courses block
  *
  * @return array list of course ids
  */
-function block_my_courses_get_myorder() {
-    if ($value = get_user_preferences('my_courses_course_sortorder')) {
+function block_lw_courses_get_myorder() {
+    if ($value = get_user_preferences('lw_courses_course_sortorder')) {
         return explode(',', $value);
     }
     // If preference was not found, look in the old location and convert if found.
     $order = array();
-    if ($value = get_user_preferences('my_courses_course_order')) {
+    if ($value = get_user_preferences('lw_courses_course_order')) {
         $order = unserialize_array($value);
-        block_my_courses_update_myorder($order);
-        unset_user_preference('my_courses_course_order');
+        block_lw_courses_update_myorder($order);
+        unset_user_preference('lw_courses_course_order');
     }
     return $order;
 }
@@ -110,7 +110,7 @@ function block_my_courses_get_myorder() {
  * @param int $courseid id of course for which activity shortname is needed
  * @return string|bool list of child shortname
  */
-function block_my_courses_get_child_shortnames($courseid) {
+function block_lw_courses_get_child_shortnames($courseid) {
     global $DB;
     $ctxselect = context_helper::get_preload_record_columns_sql('ctx');
     $sql = "SELECT c.id, c.shortname, $ctxselect
@@ -134,12 +134,12 @@ function block_my_courses_get_child_shortnames($courseid) {
             $shortnames = array_slice($shortnames, 0, 10);
             $diff = $total - count($shortnames);
             if ($diff > 1) {
-                $suffix = get_string('shortnamesufixprural', 'block_my_courses', $diff);
+                $suffix = get_string('shortnamesufixprural', 'block_lw_courses', $diff);
             } else {
-                $suffix = get_string('shortnamesufixsingular', 'block_my_courses', $diff);
+                $suffix = get_string('shortnamesufixsingular', 'block_lw_courses', $diff);
             }
         }
-        $shortnames = get_string('shortnameprefix', 'block_my_courses', implode('; ', $shortnames));
+        $shortnames = get_string('shortnameprefix', 'block_lw_courses', implode('; ', $shortnames));
         $shortnames .= $suffix;
     }
 
@@ -147,14 +147,14 @@ function block_my_courses_get_child_shortnames($courseid) {
 }
 
 /**
- * Returns maximum number of courses which will be displayed in my_courses block
+ * Returns maximum number of courses which will be displayed in lw_courses block
  *
  * @param bool $showallcourses if set true all courses will be visible.
  * @return int maximum number of courses
  */
-function block_my_courses_get_max_user_courses($showallcourses = false) {
+function block_lw_courses_get_max_user_courses($showallcourses = false) {
     // Get block configuration.
-    $config = get_config('block_my_courses');
+    $config = get_config('block_lw_courses');
     $limit = $config->defaultmaxcourses;
 
     // If max course is not set then try get user preference.
@@ -162,7 +162,7 @@ function block_my_courses_get_max_user_courses($showallcourses = false) {
         if ($showallcourses) {
             $limit = 0;
         } else {
-            $limit = get_user_preferences('my_courses_number_of_courses', $limit);
+            $limit = get_user_preferences('lw_courses_number_of_courses', $limit);
         }
     }
     return $limit;
@@ -174,10 +174,10 @@ function block_my_courses_get_max_user_courses($showallcourses = false) {
  * @param bool $showallcourses if set true all courses will be visible.
  * @return array list of sorted courses and count of courses.
  */
-function block_my_courses_get_sorted_courses($showallcourses = false) {
+function block_lw_courses_get_sorted_courses($showallcourses = false) {
     global $USER;
 
-    $limit = block_my_courses_get_max_user_courses($showallcourses);
+    $limit = block_lw_courses_get_max_user_courses($showallcourses);
 
     $courses = enrol_get_my_courses();
     $site = get_site();
@@ -206,7 +206,7 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
         $courses[$remoteid] = $val;
     }
 
-    $order = block_my_courses_get_myorder();
+    $order = block_lw_courses_get_myorder();
 
     $sortedcourses = array();
     $counter = 0;
@@ -243,7 +243,7 @@ function block_my_courses_get_sorted_courses($showallcourses = false) {
  * @param string $fileorfilename Name of the image
  * @return moodle_url|string
  */
-function block_my_courses_get_course_image_url($fileorfilename) {
+function block_lw_courses_get_course_image_url($fileorfilename) {
     // If the fileorfilename param is a file.
     if ($fileorfilename instanceof stored_file) {
         // Separate each component of the url.
@@ -262,7 +262,7 @@ function block_my_courses_get_course_image_url($fileorfilename) {
 
     // The fileorfilename param is not a stored_file object, assume this is the name of the file in the blocks file area.
     // Generate a moodle url to the file in the blocks file area.
-    return new moodle_url("/pluginfile.php/1/block_my_courses/courseimagedefault{$fileorfilename}");
+    return new moodle_url("/pluginfile.php/1/block_lw_courses/courseimagedefault{$fileorfilename}");
 }
 
 /**
@@ -271,27 +271,28 @@ function block_my_courses_get_course_image_url($fileorfilename) {
  * @param object $course The course whose progress we want
  * @return string
  */
-function block_my_courses_build_progress($course) {
+
+function block_lw_courses_build_progress($course) {
     global $CFG, $USER;
 
     require_once($CFG->dirroot.'/grade/querylib.php');
     require_once($CFG->dirroot.'/grade/lib.php');
-    $config = get_config('block_my_courses');
+    $config = get_config('block_lw_courses');
 
-    if ($config->progressenabled == BLOCKS_MY_COURSES_SHOWGRADES_NO) {
+    if ($config->progressenabled == BLOCKS_LW_COURSES_SHOWGRADES_NO) {
         return '';
     }
 
     switch ($config->progress) {
-        case BLOCKS_MY_COURSES_PROGRESS_UNSET:
+        case BLOCKS_LW_COURSES_PROGRESS_UNSET:
             return 'unset';
 
-        case BLOCKS_MY_COURSES_PROGRESS_GRADES:
+        case BLOCKS_LW_COURSES_PROGRESS_GRADES:
             $gradeobject = grade_get_course_grade($USER->id, $course->id);
 
             // The max grade has not been set within the course.
             if ($gradeobject->item->grademax == 0) {
-                return html_writer::div(html_writer::tag('p', get_string('nocompletion', 'block_my_courses')), 'no-progress');
+                return html_writer::div(html_writer::tag('p', get_string('nocompletion', 'block_lw_courses')), 'no-progress');
             }
             $completionpercentage = intval($gradeobject->grade / $gradeobject->item->grademax * 100);
 
@@ -300,7 +301,7 @@ function block_my_courses_build_progress($course) {
             $progress = html_writer::div($bar, 'progress');
             return $progress;
 
-        case BLOCKS_MY_COURSES_PROGRESS_COMPLETION:
+        case BLOCKS_LW_COURSES_PROGRESS_COMPLETION:
             $course = get_course($course->id);
             $completionstatus = new stdClass();
 
@@ -314,12 +315,12 @@ function block_my_courses_build_progress($course) {
                 // Limited view.
                 if (!has_capability('moodle/course:viewhiddencourses', $context)) {
                     return html_writer::tag('p',
-                                            get_string('progressunavail', 'block_my_courses'),
+                                            get_string('progressunavail', 'block_lw_courses'),
                                             array('class' => 'progressunavail'));
                 } else { // Full view.
                     return html_writer::tag('p',
-                                            get_string('progressunavail', 'block_my_courses') .
-                                                get_string('noprogress', 'block_my_courses'),
+                                            get_string('progressunavail', 'block_lw_courses') .
+                                                get_string('noprogress', 'block_lw_courses'),
                                             array('class' => 'progressunavail'));
                 }
             }
