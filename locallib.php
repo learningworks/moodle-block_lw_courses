@@ -271,7 +271,7 @@ function block_my_courses_get_course_image_url($fileorfilename) {
  * @param object $course The course whose progress we want
  * @return string
  */
-function build_progress($course) {
+function block_my_courses_build_progress($course) {
     global $CFG, $USER;
 
     require_once($CFG->dirroot.'/grade/querylib.php');

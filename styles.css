@@ -120,7 +120,6 @@
     text-indent: -999em;
     transition: all .5s ease;
     width: 30px;
-    /*margin-top: -50px;*/
 }
 .block_my_courses #box-or-lines.grid, [data-block='my_courses'] #box-or-lines.grid {
     background-position: right top;
@@ -297,20 +296,6 @@
     background: url([[pix:block_my_courses|bg_grid]]) no-repeat top left;
     background-size: cover;
 }
-.block_my_courses .my_courses_list .coursebox:not(.span12) .course_title:before {
-    /*content: '';*/
-    position: absolute;
-    top: 0;
-    right: -50px;
-    width: 50px;
-    margin-top: -94px;
-    height: 50px;
-    background: #000;
-    transform: skewX(-45deg);
-    transition: all 0.5s ease;
-    box-shadow: -2px -2px 1px 0 rgba(255, 255, 255, 0.2);
-    z-index: 99;
-}
 .block_my_courses .my_courses_list .coursebox:not(.span12) .course_title .course_title {
     padding: 10px;
     margin-top: -55px;
@@ -333,11 +318,9 @@
     position: absolute;
     top: 0;
     width: 100%;
-    /*left: 20px;*/
     margin-top: -44px;
     height: 55px;
     background: #000;
-    /*transform: skewX(-45deg);*/
     transition: all 0.5s ease;
     box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.2);
 }
