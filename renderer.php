@@ -86,7 +86,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             // Create move icon, so it can be used.
             $movetofirsticon = html_writer::empty_tag('img',
                 array('src' => $moveicon,
-                    'alt' => get_string('movetofirst', 'block_my_courses', $courses[$movingcourseid]->fullname),
+                    'alt' => get_string('movetofirst', 'block_lw_courses', $courses[$movingcourseid]->fullname),
                     'title' => get_string('movehere')));
             $moveurl = html_writer::link($moveurl, $movetofirsticon);
             $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
@@ -142,7 +142,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             if ($userediting && !$ismovingcourse) {
                 $moveicon = html_writer::empty_tag('img',
                     array('src' => $moveicon->out(false),
-                        'alt' => get_string('movecourse', 'block_my_courses', $course->fullname),
+                        'alt' => get_string('movecourse', 'block_lw_courses', $course->fullname),
                         'title' => get_string('move')));
                 $moveurl = new moodle_url($this->page->url, array('sesskey' => sesskey(), 'movecourse' => 1,
                     'courseid' => $course->id));
@@ -216,7 +216,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                 $a->currentcoursename = $course->fullname;
                 $movehereicon = html_writer::empty_tag('img',
                     array('src' => $movehere,
-                        'alt' => get_string('moveafterhere', 'block_my_courses', $a),
+                        'alt' => get_string('moveafterhere', 'block_lw_courses', $a),
                         'title' => get_string('movehere')));
                 $moveurl = html_writer::link($moveurl, $movehereicon);
                 $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
@@ -470,17 +470,17 @@ class block_lw_courses_renderer extends plugin_renderer_base {
 
         if (method_exists($this->output, 'image_url')) {
             // Use the new method.
-            $default = $this->output->image_url('default', 'block_my_courses');
+            $default = $this->output->image_url('default', 'block_lw_courses');
         } else {
             // Still a pre Moodle 3.3 release. Use pix_url because image_url doesn't exist yet.
-            $default = $this->output->pix_url('default', 'block_my_courses');
+            $default = $this->output->pix_url('default', 'block_lw_courses');
         }
-        if ($courseimagedefault = get_config('block_my_courses', 'courseimagedefault')) {
+        if ($courseimagedefault = get_config('block_lw_courses', 'courseimagedefault')) {
 
             // Return an img element with the image in the block settings to use for the course.
             $imageurl = block_lw_courses_get_course_image_url($courseimagedefault);
         } else {
-            // We check for a default image in the my_courses pix folder named default aka our final hope.
+            // We check for a default image in the lw_courses pix folder named default aka our final hope.
             $imageurl = $default;
         }
 
