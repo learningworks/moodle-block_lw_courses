@@ -1,4 +1,4 @@
-@block @block_my_courses @mod_quiz
+@block @block_lw_courses @mod_quiz
 Feature: View the quiz being due
   In order to know what quizzes are due
   As a student

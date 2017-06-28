@@ -1,4 +1,4 @@
-@block @block_my_courses
+@block @block_lw_courses
 Feature: View the My Courses block on the dashboard and test it's functionality
   In order to view the My Courses block on the dashboard
   As an admin
@@ -63,7 +63,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
 
   Scenario: View the block by a user with several enrolments and an admin set default max courses.
     Given the following config values are set as admin:
-      | defaultmaxcourses | 2 | block_my_courses |
+      | defaultmaxcourses | 2 | block_lw_courses |
     And the following "course enrolments" exist:
       | user | course | role |
       | student1 | C1 | student |
@@ -82,8 +82,8 @@ Feature: View the My Courses block on the dashboard and test it's functionality
 
   Scenario: View the block by a user with several enrolments and an admin enforced maximum displayed courses.
     Given the following config values are set as admin:
-      | defaultmaxcourses      | 2 | block_my_courses |
-      | forcedefaultmaxcourses | 1 | block_my_courses |
+      | defaultmaxcourses      | 2 | block_lw_courses |
+      | forcedefaultmaxcourses | 1 | block_lw_courses |
     And the following "course enrolments" exist:
       | user | course | role |
       | student1 | C1 | student |
@@ -100,7 +100,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
 
   Scenario: View the block by a user with the welcome area enabled and messaging disabled.
     Given the following config values are set as admin:
-      | showwelcomearea | 1 | block_my_courses |
+      | showwelcomearea | 1 | block_lw_courses |
       | messaging       | 0 |                       |
     And I log out
     When I log in as "student1"
@@ -111,7 +111,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
 
   Scenario: View the block by a user with both the welcome area and messaging enabled.
     Given the following config values are set as admin:
-      | showwelcomearea | 1 | block_my_courses |
+      | showwelcomearea | 1 | block_lw_courses |
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
@@ -124,7 +124,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
   @javascript
   Scenario: View the block by a user with the welcome area and the user having messages.
     Given the following config values are set as admin:
-      | showwelcomearea | 1 | block_my_courses |
+      | showwelcomearea | 1 | block_lw_courses |
     And I log out
     And I log in as "student1"
     And I press "Customise this page"
@@ -143,7 +143,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
 
   Scenario: View the block by a user with the parent categories displayed.
     Given the following config values are set as admin:
-      | showcategories | Parent category only | block_my_courses |
+      | showcategories | Parent category only | block_lw_courses |
     And the following "course enrolments" exist:
       | user | course | role |
       | student1 | C1 | student |
@@ -160,7 +160,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
 
   Scenario: View the block by a user with the full categories displayed.
     Given the following config values are set as admin:
-      | showcategories | 2 | block_my_courses |
+      | showcategories | 2 | block_lw_courses |
     And the following "course enrolments" exist:
       | user | course | role |
       | student1 | C1 | student |
@@ -176,7 +176,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
   @javascript
   Scenario: View the block by a user with the show children option enabled.
     Given the following config values are set as admin:
-      | showchildren | 1 | block_my_courses |
+      | showchildren | 1 | block_lw_courses |
     And the following "course enrolments" exist:
       | user | course | role |
       | student1 | C1 | student |

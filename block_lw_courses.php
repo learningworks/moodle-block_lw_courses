@@ -17,12 +17,12 @@
 /**
  * Course overview block
  *
- * @package    block_my_courses
+ * @package    block_lw_courses
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
-require_once($CFG->dirroot.'/blocks/my_courses/locallib.php');
+require_once($CFG->dirroot.'/blocks/lw_courses/locallib.php');
 
 /**
  * Course overview block
@@ -30,7 +30,7 @@ require_once($CFG->dirroot.'/blocks/my_courses/locallib.php');
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_my_courses extends block_base {
+class block_lw_courses extends block_base {
     /**
      * If this is passed as mynumber then showallcourses, irrespective of limit by user.
      */
@@ -40,11 +40,11 @@ class block_my_courses extends block_base {
      * Block initialization
      */
     public function init() {
-        $this->title   = get_string('pluginname', 'block_my_courses');
+        $this->title   = get_string('pluginname', 'block_lw_courses');
     }
 
     /**
-     * Return contents of my_courses block
+     * Return contents of lw_courses block
      *
      * @return stdClass contents of block
      */
@@ -56,7 +56,7 @@ class block_my_courses extends block_base {
             return $this->content;
         }
 
-        $config = get_config('block_my_courses');
+        $config = get_config('block_lw_courses');
 
         $this->content = new stdClass();
         $this->content->text = '';
@@ -64,15 +64,15 @@ class block_my_courses extends block_base {
 
         $updatemynumber = optional_param('mynumber', -1, PARAM_INT);
         if ($updatemynumber >= 0) {
-            block_my_courses_update_mynumber($updatemynumber);
+            block_lw_courses_update_mynumber($updatemynumber);
         }
 
         profile_load_custom_fields($USER);
 
         $showallcourses = ($updatemynumber === self::SHOW_ALL_COURSES);
-        list($sortedcourses, $totalcourses) = block_my_courses_get_sorted_courses($showallcourses);
+        list($sortedcourses, $totalcourses) = block_lw_courses_get_sorted_courses($showallcourses);
 
-        $renderer = $this->page->get_renderer('block_my_courses');
+        $renderer = $this->page->get_renderer('block_lw_courses');
         if (!empty($config->showwelcomearea)) {
             require_once($CFG->dirroot.'/message/lib.php');
             $msgcount = message_count_unread_messages();
@@ -88,7 +88,7 @@ class block_my_courses extends block_base {
             $this->content->text .= get_string('nocourses', 'my');
         } else {
             // For each course, build category cache.
-            $this->content->text .= $renderer->my_courses($sortedcourses);
+            $this->content->text .= $renderer->lw_courses($sortedcourses);
             $this->content->text .= $renderer->hidden_courses($totalcourses - count($sortedcourses));
         }
 
@@ -120,7 +120,7 @@ class block_my_courses extends block_base {
      */
     public function hide_header() {
         // Hide header if welcome area is show.
-        $config = get_config('block_my_courses');
+        $config = get_config('block_lw_courses');
         return !empty($config->showwelcomearea);
     }
 }
