@@ -216,7 +216,7 @@ function block_lw_courses_get_sorted_courses($showallcourses = false) {
             break;
         }
 
-        // Make sure user is still enroled.
+        // Make sure user is still enrolled.
         if (isset($courses[$cid])) {
             $sortedcourses[$cid] = $courses[$cid];
             $counter++;
