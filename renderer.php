@@ -490,7 +490,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             $image = html_writer::empty_tag('img', array( 'src' => $imageurl, 'class' => 'course_image' ));
             return html_writer::div($image, 'image_wrap');
         } else {
-            // We need a CSS soloution apparently lets give it to em.
+            // We need a CSS solution apparently lets give it to 'em.
             return html_writer::div('', 'course_image_embed',
                     array("style" => 'background-image:url('.$imageurl.'); background-size:cover'));
         }
