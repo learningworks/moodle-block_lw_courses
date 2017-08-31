@@ -24,7 +24,7 @@
 .block_lw_courses .lw_courses_list .coursebox.p-y-1 > p {
     margin-top: -1rem;
 }
-p.progressunavail {
+.progressunavail {
     display: none;
 }
 /*Only if JS is enabled.*/
