@@ -16,7 +16,7 @@ Installation Instruction
 
 Moodle compatibility
 =====================
-* Tested with Moodle 3.0, 3.1 and 3.2
+* Tested with Moodle 3.0, 3.1, 3.2 and 3.3
 
 Features
 ====================
