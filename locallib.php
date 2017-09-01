@@ -271,7 +271,6 @@ function block_lw_courses_get_course_image_url($fileorfilename) {
  * @param object $course The course whose progress we want
  * @return string
  */
-
 function block_lw_courses_build_progress($course) {
     global $CFG, $USER;
 
