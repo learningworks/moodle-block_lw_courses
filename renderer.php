@@ -39,7 +39,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * @return string html to be displayed in lw_courses block
      */
     public function lw_courses($courses) {
-        global $CFG, $PAGE;
+        global $CFG, $PAGE, $DB;
         $html = '';
         // LearningWorks.
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/lw_courses/js/custom.js'));
@@ -48,6 +48,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             global $CFG;
             require_once($CFG->libdir.'/coursecatlib.php');
         }
+        $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
         $ismovingcourse = false;
         $courseordernumber = 0;
         $userediting = false;
@@ -118,6 +119,9 @@ class block_lw_courses_renderer extends plugin_renderer_base {
 
         $html .= html_writer::start_div('lw_courses_list');
         foreach ($courses as $key => $course) {
+            $context = context_course::instance($course->id);
+            $teachers = get_role_users($role->id, $context);
+            print_object($teachers);
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
@@ -464,7 +468,6 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * @return string|void
      */
     public function course_image_defaults() {
-        global $OUTPUT;
 
         $config = get_config('block_lw_courses');
 
