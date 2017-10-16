@@ -143,10 +143,12 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             $teachers = get_role_users($role->id, $context, false, $fields);
             $teacherimages = html_writer::start_div('teacher_image_wrap');
             $teachernames = '';
-            foreach ($teachers as $key => $teacher) {
-                $teachername = get_string('defaultcourseteacher'). ': ' . fullname($teacher);
-                $teachernames .= html_writer::tag('p', $teachername, array('class' => 'teacher_name'));
-                $teacherimages .= html_writer::div($OUTPUT->user_picture($teacher, array('size' => 50, 'class' => '')), 'teacher_image');
+            if ($config->showteachers != BLOCKS_LW_COURSES_SHOWTEACHERS_NO) {
+                foreach ($teachers as $key => $teacher) {
+                    $teachername = get_string('defaultcourseteacher') . ': ' . fullname($teacher);
+                    $teachernames .= html_writer::tag('p', $teachername, array('class' => 'teacher_name'));
+                    $teacherimages .= html_writer::div($OUTPUT->user_picture($teacher, array('size' => 50, 'class' => '')), 'teacher_image');
+                }
             }
             $teacherimages .= html_writer::end_div();
             $html .= $teacherimages;

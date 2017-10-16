@@ -416,7 +416,7 @@
 
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):hover .teacher_names,
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):focus .teacher_names {
-    top: 200px;
+    top: 195px;
     transition: all 0.5s ease;
     color: #fff;
 }

@@ -50,7 +50,8 @@ $string['none'] = 'None';
 $string['numtodisplay'] = 'Number of courses to display: ';
 $string['onlyparentname'] = 'Parent category only';
 $string['otherexpanded'] = 'Other courses expanded';
-$string['pluginname'] = 'My Courses';
+$string['pluginname'] = 'My Courses (lw_courses)';
+$string['displayname'] = 'My Courses';
 $string['preservestates'] = 'Preserve expanded states';
 $string['shortnameprefix'] = 'Includes {$a}';
 $string['shortnamesufixsingular'] = ' (and {$a} other)';
@@ -88,6 +89,10 @@ $string['lw_courses_bgimage_desc']   = "This will embed images into background a
 
 $string['summary_limit'] = 'Summary character limit';
 $string['summary_limit_desc'] = 'Limit the output of text to display as course summaries on the users home page';
+
+$string['showteachers'] = 'Show teachers';
+$string['showteachers_desc'] = 'This will allow teachers images and names to be rendered against a course';
+
 
 $string['progress'] = 'Progress type';
 $string['progress_desc'] = 'This will determine what type of course grades the block will try to render';

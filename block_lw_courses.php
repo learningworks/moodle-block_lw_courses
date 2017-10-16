@@ -123,4 +123,8 @@ class block_lw_courses extends block_base {
         $config = get_config('block_lw_courses');
         return !empty($config->showwelcomearea);
     }
+
+    public function specialization() {
+        $this->title = get_string('displayname', 'block_lw_courses');
+    }
 }
