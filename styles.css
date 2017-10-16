@@ -184,6 +184,7 @@
 .block_lw_courses .coursebox.list .course_title,
 .block_lw_courses .coursebox.list .categorypath,
 .block_lw_courses .coursebox.list .course_description,
+.block_lw_courses .coursebox.list .teacher_names,
 .block_lw_courses .coursebox.list .activity_info {
     float: left;
     width: calc(100% - 315px);
@@ -270,29 +271,47 @@
     transition: all 0.5s ease;
     width: auto;
 }
+
+.block_lw_courses .lw_courses_list .coursebox:not(.span12) .teacher_names {
+    top: 100%;
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    overflow: hidden;
+    color: #fff;
+    transition: all 0.5s ease;
+    width: auto;
+}
+
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_description p {
     color: #fff;
     font-size: 12px;
     line-height: normal;
 }
+
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_description p a {
     color: inherit;
 }
+
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_description ul {
     color: #fff;
     font-size: 12px;
     line-height: normal;
 }
+
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_description li {
     color: #fff;
     font-size: 12px;
     line-height: normal;
 }
+
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_description span {
     color: #fff;
     font-size: 12px;
     line-height: normal;
 }
+
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_title {
     top: 100%;
     bottom: 0;
@@ -383,6 +402,15 @@
     transition: all 0.5s ease;
     color: #fff;
 }
+
+
+.block_lw_courses .lw_courses_list .coursebox:not(.span12):hover .teacher_names,
+.block_lw_courses .lw_courses_list .coursebox:not(.span12):focus .teacher_names {
+    top: 200px;
+    transition: all 0.5s ease;
+    color: #fff;
+}
+
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):hover .title,
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):focus .title {
     margin-top: 2px;
@@ -536,6 +564,38 @@
     margin-left: 0;
 }
 
+.lw_courses_list .coursebox:not(.span12) .teacher_image_wrap {
+    height: 55px;
+    position: absolute;
+    bottom: 30px;
+    width: calc(100% - 20px);
+    left: 10px;
+    transition: all 0.5s ease;
+    opacity: 1;
+    overflow: hidden;
+    z-index: 1;
+}
+.lw_courses_list .coursebox:not(.span12):hover .teacher_image_wrap {
+    height: 0;
+    bottom: 250px;
+    transition: all 0.5s ease;
+    opacity: 0;
+    bottom: 250px;
+    transition: all 0.5s ease;
+}
+
+.teacher_image {
+    width: 45px;
+    float: left;
+    margin-right: 5px;
+}
+
+.teacher_image img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
 @media screen and (max-width: 1400px) {
     .block_lw_courses .coursebox.list .image_wrap,
     .block_lw_courses .coursebox .course_image_embed {
@@ -548,6 +608,7 @@
     .block_lw_courses .coursebox.list .course_title,
     .block_lw_courses .coursebox.list .categorypath,
     .block_lw_courses .coursebox.list .course_description,
+    .block_lw_courses .coursebox.list .teacher_names,
     .block_lw_courses .coursebox.list .activity_info {
         float: left;
         width: calc(100% - 215px);
@@ -566,6 +627,7 @@
     .block_lw_courses .coursebox.list .course_title,
     .block_lw_courses .coursebox.list .categorypath,
     .block_lw_courses .coursebox.list .course_description,
+    .block_lw_courses .coursebox.list .teacher_names,
     .block_lw_courses .coursebox.list .activity_info {
         float: left;
         width: calc(100% - 165px);
@@ -591,6 +653,7 @@
     .block_lw_courses .coursebox.list .course_title,
     .block_lw_courses .coursebox.list .categorypath,
     .block_lw_courses .coursebox.list .course_description,
+    .block_lw_courses .coursebox.list .teacher_names,
     .block_lw_courses .coursebox.list .activity_info {
         float: left;
         width: calc(100% - 115px);
@@ -612,6 +675,7 @@
     .block_lw_courses .coursebox:not(.list) .course_title,
     .block_lw_courses .coursebox:not(.list) .categorypath,
     .block_lw_courses .coursebox:not(.list) .course_description,
+    .block_lw_courses .coursebox.list .teacher_names,
     .block_lw_courses .coursebox:not(.list) .activity_info {
         width: 100%;
     }
