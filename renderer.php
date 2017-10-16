@@ -145,7 +145,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             $teachernames = '';
             foreach ($teachers as $key => $teacher) {
                 $teachername = get_string('defaultcourseteacher'). ': ' . fullname($teacher);
-                $teachernames .= html_writer::tag('p',$teachername, array('class' => 'teacher_name'));
+                $teachernames .= html_writer::tag('p', $teachername, array('class' => 'teacher_name'));
                 $teacherimages .= html_writer::div($OUTPUT->user_picture($teacher, array('size' => 50, 'class' => '')), 'teacher_image');
             }
             $teacherimages .= html_writer::end_div();
