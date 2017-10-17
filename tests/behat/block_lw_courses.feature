@@ -138,8 +138,8 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log in as "teacher1"
     And I press "Customise this page"
     And I add the "My Courses (lw_courses)" block
-    Then I should see "Welcome Teacher" in the "My Courses" "block"
-    And I should see "You have 2 unread messages" in the "My Courses" "block"
+    Then I should see "Welcome Teacher" in the "My Courses (lw_courses)" "block"
+    And I should see "You have 2 unread messages" in the "My Courses (lw_courses)" "block"
 
   Scenario: View the block by a user with the parent categories displayed.
     Given the following config values are set as admin:
