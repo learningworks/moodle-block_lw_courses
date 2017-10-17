@@ -93,7 +93,6 @@ $string['summary_limit_desc'] = 'Limit the output of text to display as course s
 $string['showteachers'] = 'Show teachers';
 $string['showteachers_desc'] = 'This will allow teachers images and names to be rendered against a course';
 
-
 $string['progress'] = 'Progress type';
 $string['progress_desc'] = 'This will determine what type of course grades the block will try to render';
 
