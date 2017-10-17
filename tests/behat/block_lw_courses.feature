@@ -107,7 +107,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I press "Customise this page"
     And I add the "My Courses (lw_courses)" block
     Then I should see "Welcome Student" in the "My Courses (lw_courses)" "block"
-    And I should not see "messages" in the "My Courses" "block"
+    And I should not see "messages" in the "My Courses (lw_courses)" "block"
 
   Scenario: View the block by a user with both the welcome area and messaging enabled.
     Given the following config values are set as admin:
@@ -117,7 +117,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I press "Customise this page"
     And I add the "My Courses (lw_courses)" block
     Then I should see "Welcome Student" in the "My Courses (lw_courses)" "block"
-    And I should see "You have no unread messages" in the "My Courses" "block"
+    And I should see "You have no unread messages" in the "My Courses (lw_courses)" "block"
     And I follow "messages"
     And I should see "No messages"
 
@@ -130,7 +130,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I press "Customise this page"
     And I add the "My Courses (lw_courses)" block
     And I should see "Welcome Student" in the "My Courses (lw_courses)" "block"
-    And I should see "You have no unread messages" in the "My Courses" "block"
+    And I should see "You have no unread messages" in the "My Courses (lw_courses)" "block"
     And I follow "messages"
     And I send "This is message 1" message to "Teacher 1" user
     And I send "This is message 2" message to "Teacher 1" user
