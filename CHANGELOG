@@ -72,3 +72,10 @@ Updated CSS for Linter
 
 01/09/17
 Tidy up CSS lint issues from Moodle plugins bot
+
+17/10/17
+Tidy up more prechecker issues.
+Moved to v2 of the MoodleRooms travis file.
+Behat tests are now run again in the travis file
+New feature: Show teachers (editing-teacher) of a course to a user.
+New feature: Added a display name to help users when adding the block

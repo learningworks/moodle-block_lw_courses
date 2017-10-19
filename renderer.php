@@ -39,7 +39,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * @return string html to be displayed in lw_courses block
      */
     public function lw_courses($courses) {
-        global $CFG, $PAGE;
+        global $CFG, $PAGE, $DB, $OUTPUT;
         $html = '';
         // LearningWorks.
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/lw_courses/js/custom.js'));
@@ -48,6 +48,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             global $CFG;
             require_once($CFG->libdir.'/coursecatlib.php');
         }
+        $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
         $ismovingcourse = false;
         $courseordernumber = 0;
         $userediting = false;
@@ -116,8 +117,16 @@ class block_lw_courses_renderer extends plugin_renderer_base {
         $html .= html_writer::tag('div', '', array("class" => "hidden startgrid $courseclass", "grid-size" => $gridsplit));
         $html .= html_writer::div('', 'box flush');
 
+        $allnames = get_all_user_name_fields(true, 'u');
+        $fields = 'u.id, u.confirmed, u.username, '. $allnames . ', ' .
+            'u.maildisplay, u.mailformat, u.maildigest, u.email, u.emailstop, u.city, '.
+            'u.country, u.picture, u.idnumber, u.department, u.institution, '.
+            'u.lang, u.timezone, u.lastaccess, u.mnethostid, u.imagealt, r.name AS rolename, r.sortorder, '.
+            'r.shortname AS roleshortname, rn.name AS rolecoursealias';
+
         $html .= html_writer::start_div('lw_courses_list');
         foreach ($courses as $key => $course) {
+
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
@@ -129,6 +138,20 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             $html .= $this->course_image($course);
 
             $html .= block_lw_courses_build_progress($course);
+
+            $context = context_course::instance($course->id);
+            $teachers = get_role_users($role->id, $context, false, $fields);
+            $teacherimages = html_writer::start_div('teacher_image_wrap');
+            $teachernames = '';
+            if ($config->showteachers != BLOCKS_LW_COURSES_SHOWTEACHERS_NO) {
+                foreach ($teachers as $key => $teacher) {
+                    $teachername = get_string('defaultcourseteacher') . ': ' . fullname($teacher);
+                    $teachernames .= html_writer::tag('p', $teachername, array('class' => 'teacher_name'));
+                    $teacherimages .= html_writer::div($OUTPUT->user_picture($teacher, array('size' => 50, 'class' => '')), 'teacher_image');
+                }
+            }
+            $teacherimages .= html_writer::end_div();
+            $html .= $teacherimages;
 
             if (method_exists($this->output, 'image_url')) {
                 // Use the new method.
@@ -179,6 +202,8 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             }
 
             $html .= $this->course_description($course);
+
+            $html .= html_writer::div($teachernames, 'teacher_names');
 
             if ($config->showcategories != BLOCKS_LW_COURSES_SHOWCATEGORIES_NONE) {
                 // List category parent or categories path here.
@@ -464,7 +489,6 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * @return string|void
      */
     public function course_image_defaults() {
-        global $OUTPUT;
 
         $config = get_config('block_lw_courses');
 

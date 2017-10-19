@@ -26,7 +26,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log in as "student1"
     And I am on homepage
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     Then I should see "No course information to show" in the "My Courses" "block"
 
   Scenario: View the block by a user with several enrolments
@@ -37,7 +37,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     Then I should see "Course 1" in the "My Courses" "block"
     And I should see "Course 2" in the "My Courses" "block"
 
@@ -50,7 +50,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     And I select "1" from the "Number of courses to display:" singleselect
     Then I should see "Course 1" in the "My Courses" "block"
     And I should see "You have 2 hidden courses"
@@ -72,7 +72,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     Then I should see "Course 1" in the "My Courses" "block"
     And I should see "Course 2" in the "My Courses" "block"
     And I should see "You have 1 hidden course"
@@ -92,7 +92,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     Then I should see "Course 1" in the "My Courses" "block"
     And I should see "Course 2" in the "My Courses" "block"
     And I should see "You have 1 hidden course"
@@ -105,9 +105,9 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
-    Then I should see "Welcome Student" in the "My Courses" "block"
-    And I should not see "messages" in the "My Courses" "block"
+    And I add the "My Courses (lw_courses)" block
+    Then I should see "Welcome Student" in the "My Courses (lw_courses)" "block"
+    And I should not see "messages" in the "My Courses (lw_courses)" "block"
 
   Scenario: View the block by a user with both the welcome area and messaging enabled.
     Given the following config values are set as admin:
@@ -115,9 +115,9 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
-    Then I should see "Welcome Student" in the "My Courses" "block"
-    And I should see "You have no unread messages" in the "My Courses" "block"
+    And I add the "My Courses (lw_courses)" block
+    Then I should see "Welcome Student" in the "My Courses (lw_courses)" "block"
+    And I should see "You have no unread messages" in the "My Courses (lw_courses)" "block"
     And I follow "messages"
     And I should see "No messages"
 
@@ -128,18 +128,18 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     And I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
-    And I should see "Welcome Student" in the "My Courses" "block"
-    And I should see "You have no unread messages" in the "My Courses" "block"
+    And I add the "My Courses (lw_courses)" block
+    And I should see "Welcome Student" in the "My Courses (lw_courses)" "block"
+    And I should see "You have no unread messages" in the "My Courses (lw_courses)" "block"
     And I follow "messages"
     And I send "This is message 1" message to "Teacher 1" user
     And I send "This is message 2" message to "Teacher 1" user
     When I log out
     And I log in as "teacher1"
     And I press "Customise this page"
-    And I add the "My Courses" block
-    Then I should see "Welcome Teacher" in the "My Courses" "block"
-    And I should see "You have 2 unread messages" in the "My Courses" "block"
+    And I add the "My Courses (lw_courses)" block
+    Then I should see "Welcome Teacher" in the "My Courses (lw_courses)" "block"
+    And I should see "You have 2 unread messages" in the "My Courses (lw_courses)" "block"
 
   Scenario: View the block by a user with the parent categories displayed.
     Given the following config values are set as admin:
@@ -152,7 +152,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     Then I should see "Miscellaneous" in the "My Courses" "block"
     And I should see "Category 1" in the "My Courses" "block"
     And I should see "Category 2" in the "My Courses" "block"
@@ -169,7 +169,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     Then I should see "Miscellaneous" in the "My Courses" "block"
     And I should see "Category 1 / Category 2" in the "My Courses" "block"
 
@@ -191,7 +191,7 @@ Feature: View the My Courses block on the dashboard and test it's functionality
     And I log out
     When I log in as "student1"
     And I press "Customise this page"
-    And I add the "My Courses" block
+    And I add the "My Courses (lw_courses)" block
     Then I should see "Course 1" in the "My Courses" "block"
     And I should see "Course 2" in the "My Courses" "block"
     And I should see "Includes C1" in the "My Courses" "block"

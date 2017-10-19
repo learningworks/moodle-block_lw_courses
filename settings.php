@@ -84,6 +84,12 @@ if ($ADMIN->fulltree) {
         get_string('summary_limit', 'block_lw_courses'),
         get_string('summary_limit_desc', 'block_lw_courses'), 150, PARAM_INT));
 
+    $name = 'block_lw_courses/showteachers';
+    $title = new lang_string('showteachers', 'block_lw_courses');
+    $description = new lang_string('showteachers_desc', 'block_lw_courses');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_LW_COURSES_SHOWTEACHERS_NO);
+    $settings->add($setting);
+
     $name = 'block_lw_courses/progressenabled';
     $title = new lang_string('progressenabled', 'block_lw_courses');
     $description = new lang_string('progressenabled_desc', 'block_lw_courses');
