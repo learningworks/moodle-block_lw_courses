@@ -39,7 +39,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * @return string html to be displayed in lw_courses block
      */
     public function lw_courses($courses) {
-        global $CFG, $PAGE, $DB, $OUTPUT, $USER;
+        global $CFG, $PAGE, $DB, $OUTPUT;
         $html = '';
         // LearningWorks.
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/lw_courses/js/custom.js'));
