@@ -1,5 +1,5 @@
 ---
-engines:
+plugins:
   csslint:
     enabled: true
   duplication:
@@ -18,7 +18,7 @@ engines:
   fixme:
     enabled: true
   phpmd:
-    enabled: true.
+    enabled: true
     checks:
       Controversial/CamelCaseClassName:
               enabled: false
@@ -36,15 +36,6 @@ engines:
               enabled: false
       Design/LongMethod:
               enabled: false
-ratings:
-  paths:
-  - "**.css"
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-  - "**.rb"
-exclude_paths:
+
+exclude_pattern:
 - db/
