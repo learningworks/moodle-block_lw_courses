@@ -1,54 +1,77 @@
-.block_lw_courses .coursebox {
+.block_lw_courses #box-or-lines, [data-block='lw_courses'] #box-or-lines {
+    background: url([[pix:block_lw_courses|block_lines]]) no-repeat left top;
+    float: right;
+    height: 29px;
+    overflow: hidden;
+    text-indent: -999em;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    width: 30px;
+}
+.block_lw_courses #box-or-lines.grid, [data-block='lw_courses'] #box-or-lines.grid {
+    background-position: right top;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+.block_lw_courses .coursebox, [data-block='lw_courses'] .coursebox {
+    border: 2px solid red;
     display: grid;
-    height: 300px;
     grid-gap: 10px;
-    grid-template-columns: 400px auto auto auto;
+    grid-template-columns: 350px auto;
+    grid-template-rows: 55px 30px 195px;
     background-color: #fff;
     color: #444;
+    padding: 0px !important;
 }
-
-.block_lw_courses .coursebox div {
+.block_lw_courses .coursebox div, [data-block='lw_courses'] .coursebox div {
     background-color: #fff;
     color: #444;
     border: solid 2px;
     padding: 10px;
-
 }
-
-.block_lw_courses .image_wrap {
+.block_lw_courses .image_wrap, [data-block='lw_courses'] .image_wrap {
     grid-column: 1;
-    grid-row: 1 / 4;
+    grid-row: 1 / 3;
     color: #fff;
-    height: 120px;
+    height: 300px;
     position: relative;
 }
-.block_lw_courses .course_title,
-.block_lw_courses .teacher_names,
-.block_lw_courses .description {
-    grid-column: 2 / 4;
-
+.block_lw_courses .course_title, .block_lw_courses .teacher_names, .block_lw_courses .course_description, [data-block='lw_courses'] .course_title, [data-block='lw_courses'] .teacher_names, [data-block='lw_courses'] .course_description {
+    grid-column: 2;
 }
-.block_lw_courses .course_title {
+.block_lw_courses .course_title, [data-block='lw_courses'] .course_title {
     grid-row: 1;
 }
-.block_lw_courses .teacher_names {
+.block_lw_courses .course_title h2, [data-block='lw_courses'] .course_title h2 {
+    border-bottom: solid 2px;
+}
+.block_lw_courses .course_title h2 a, [data-block='lw_courses'] .course_title h2 a {
+    color: inherit;
+    display: inline-block;
+    width: 100%;
+}
+.block_lw_courses .teacher_names, [data-block='lw_courses'] .teacher_names {
     grid-row: 2;
-    height: 5px;
     font-size: .5em;
 }
-.block_lw_courses .description {
+.block_lw_courses .teacher_names p, [data-block='lw_courses'] .teacher_names p {
+    float: left;
+    margin-right: 5px;
+}
+.block_lw_courses .course_description, [data-block='lw_courses'] .course_description {
     grid-row: 3;
 }
-
-.block_lw_courses .progress {
-    position: absolute;
-    bottom: 0px;
+.block_lw_courses .progress, [data-block='lw_courses'] .progress {
     background: green;
     width: 100%;
     left: 0;
+    grid-column: 1;
+    grid-row: 3;
 }
-
-.block_lw_courses .course_image {
+.block_lw_courses .course_image, [data-block='lw_courses'] .course_image {
     width: 100%;
     height: 100%;
+}
+.block_lw_courses .box.flush.p-y-1, .block_lw_courses .coursebox.span12 .teacher_image_wrap, [data-block='lw_courses'] .box.flush.p-y-1, [data-block='lw_courses'] .coursebox.span12 .teacher_image_wrap {
+    display: none;
 }
