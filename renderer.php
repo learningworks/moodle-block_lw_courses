@@ -41,9 +41,10 @@ class block_lw_courses_renderer extends plugin_renderer_base {
     public function lw_courses($courses) {
         global $CFG, $PAGE, $DB, $OUTPUT;
         $html = '';
-        // LearningWorks.
+
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/lw_courses/js/custom.js'));
         $config = get_config('block_lw_courses');
+
         if ($config->showcategories != BLOCKS_LW_COURSES_SHOWCATEGORIES_NONE) {
             global $CFG;
             require_once($CFG->libdir.'/coursecatlib.php');
@@ -52,6 +53,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
         $ismovingcourse = false;
         $courseordernumber = 0;
         $userediting = false;
+
         // Intialise string/icon etc if user is editing and courses > 1.
         if ($this->page->user_is_editing() && (count($courses) > 1)) {
             $userediting = true;

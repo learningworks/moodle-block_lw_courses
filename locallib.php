@@ -286,7 +286,7 @@ function block_lw_courses_build_progress($course) {
 
     switch ($config->progress) {
         case BLOCKS_LW_COURSES_PROGRESS_UNSET:
-            return 'unset';
+            return '';
 
         case BLOCKS_LW_COURSES_PROGRESS_GRADES:
             $gradeobject = grade_get_course_grade($USER->id, $course->id);
