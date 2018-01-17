@@ -1,0 +1,54 @@
+.block_lw_courses .coursebox {
+    display: grid;
+    height: 300px;
+    grid-gap: 10px;
+    grid-template-columns: 400px auto auto auto;
+    background-color: #fff;
+    color: #444;
+}
+
+.block_lw_courses .coursebox div {
+    background-color: #fff;
+    color: #444;
+    border: solid 2px;
+    padding: 10px;
+
+}
+
+.block_lw_courses .image_wrap {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    color: #fff;
+    height: 120px;
+    position: relative;
+}
+.block_lw_courses .course_title,
+.block_lw_courses .teacher_names,
+.block_lw_courses .description {
+    grid-column: 2 / 4;
+
+}
+.block_lw_courses .course_title {
+    grid-row: 1;
+}
+.block_lw_courses .teacher_names {
+    grid-row: 2;
+    height: 5px;
+    font-size: .5em;
+}
+.block_lw_courses .description {
+    grid-row: 3;
+}
+
+.block_lw_courses .progress {
+    position: absolute;
+    bottom: 0px;
+    background: green;
+    width: 100%;
+    left: 0;
+}
+
+.block_lw_courses .course_image {
+    width: 100%;
+    height: 100%;
+}
