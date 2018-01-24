@@ -22,51 +22,70 @@
     padding: 0px !important;
 }
 .block_lw_courses .coursebox.span12, [data-block='lw_courses'] .coursebox.span12 {
+    /* Row layout */
     grid-template-columns: 350px auto;
     grid-template-rows: 55px 30px 195px;
 }
 .block_lw_courses .coursebox.span12 .image_wrap, .block_lw_courses .coursebox.span12 .course_title, .block_lw_courses .coursebox.span12 .teacher_names, .block_lw_courses .coursebox.span12 .course_description, [data-block='lw_courses'] .coursebox.span12 .image_wrap, [data-block='lw_courses'] .coursebox.span12 .course_title, [data-block='lw_courses'] .coursebox.span12 .teacher_names, [data-block='lw_courses'] .coursebox.span12 .course_description {
+    /* Row layout */
     background-color: #fff;
     color: #444;
     border: solid 2px black;
     padding: 10px;
 }
 .block_lw_courses .coursebox.span12 .image_wrap, [data-block='lw_courses'] .coursebox.span12 .image_wrap {
+    /* Row layout */
     grid-column: 1;
     grid-row: 1 / 3;
     color: #fff;
     height: 300px;
     position: relative;
 }
-.block_lw_courses .coursebox.span12 .course_title, .block_lw_courses .coursebox.span12 .teacher_names, .block_lw_courses .coursebox.span12 .course_description, [data-block='lw_courses'] .coursebox.span12 .course_title, [data-block='lw_courses'] .coursebox.span12 .teacher_names, [data-block='lw_courses'] .coursebox.span12 .course_description {
+.block_lw_courses .coursebox.span12 .course_image, [data-block='lw_courses'] .coursebox.span12 .course_image {
+    /* Row layout */
+    width: 100%;
+    height: 100%;
+}
+.block_lw_courses .coursebox.span12 .course_title, .block_lw_courses .coursebox.span12 .teacher_names, .block_lw_courses .coursebox.span12 .course_description, .block_lw_courses .coursebox.span12 .categorypath, [data-block='lw_courses'] .coursebox.span12 .course_title, [data-block='lw_courses'] .coursebox.span12 .teacher_names, [data-block='lw_courses'] .coursebox.span12 .course_description, [data-block='lw_courses'] .coursebox.span12 .categorypath {
+    /* Row layout */
     grid-column: 2;
 }
 .block_lw_courses .coursebox.span12 .course_title, [data-block='lw_courses'] .coursebox.span12 .course_title {
+    /* Row layout */
     grid-row: 1;
 }
 .block_lw_courses .coursebox.span12 .course_title h2, [data-block='lw_courses'] .coursebox.span12 .course_title h2 {
+    /* Row layout */
     border-bottom: solid 2px;
 }
 .block_lw_courses .coursebox.span12 .course_title h2 a, [data-block='lw_courses'] .coursebox.span12 .course_title h2 a {
+    /* Row layout */
     color: inherit;
     display: inline-block;
     width: 100%;
 }
 .block_lw_courses .coursebox.span12 .teacher_names, [data-block='lw_courses'] .coursebox.span12 .teacher_names {
+    /* Row layout */
     grid-row: 2;
+}
+.block_lw_courses .coursebox.span12 .teacher_names, [data-block='lw_courses'] .coursebox.span12 .teacher_names {
+    /* Row layout */
+    grid-row: 3;
     font-size: .5em;
 }
 .block_lw_courses .coursebox.span12 .teacher_names p, [data-block='lw_courses'] .coursebox.span12 .teacher_names p {
+    /* Row layout */
     float: left;
     margin-right: 5px;
 }
 .block_lw_courses .coursebox.span12 .course_description, [data-block='lw_courses'] .coursebox.span12 .course_description {
-    grid-row: 3;
+    /* Row layout */
+    grid-row: 4;
 }
 .block_lw_courses .coursebox.span12 .progress, [data-block='lw_courses'] .coursebox.span12 .progress {
+    /* Row layout */
     background: green;
     height: 25px;
-    left: 0;
     grid-column: 1;
     grid-row: 3;
     position: relative;
@@ -76,15 +95,39 @@
     z-index: 1;
 }
 .block_lw_courses .coursebox.span12 .progress .progress-bar, [data-block='lw_courses'] .coursebox.span12 .progress .progress-bar {
+    /* Row layout */
     height: 25px;
 }
-.block_lw_courses .coursebox.span12 .course_image, [data-block='lw_courses'] .coursebox.span12 .course_image {
-    width: 100%;
-    height: 100%;
-}
 .block_lw_courses .coursebox.span12 .teacher_image_wrap, [data-block='lw_courses'] .coursebox.span12 .teacher_image_wrap {
+    /* Row layout */
     display: none;
 }
 .block_lw_courses .coursebox.span12 .box.flush.p-y-1, .block_lw_courses .coursebox.span12 .coursebox.span12 .teacher_image_wrap, [data-block='lw_courses'] .coursebox.span12 .box.flush.p-y-1, [data-block='lw_courses'] .coursebox.span12 .coursebox.span12 .teacher_image_wrap {
+    /* Row layout */
     display: none;
+}
+.block_lw_courses .coursebox:not(.span12), [data-block='lw_courses'] .coursebox:not(.span12) {
+    /* Grid layout */
+    grid-template-columns: 100%;
+    grid-template-rows: 350px;
+}
+.block_lw_courses .coursebox:not(.span12) .image_wrap, .block_lw_courses .coursebox:not(.span12) .course_title, .block_lw_courses .coursebox:not(.span12) .teacher_names, .block_lw_courses .coursebox:not(.span12) .course_description, [data-block='lw_courses'] .coursebox:not(.span12) .image_wrap, [data-block='lw_courses'] .coursebox:not(.span12) .course_title, [data-block='lw_courses'] .coursebox:not(.span12) .teacher_names, [data-block='lw_courses'] .coursebox:not(.span12) .course_description {
+    /* Grid layout */
+    background-color: #fff;
+    color: #444;
+    border: solid 2px black;
+    padding: 10px;
+}
+.block_lw_courses .coursebox:not(.span12) .image_wrap, [data-block='lw_courses'] .coursebox:not(.span12) .image_wrap {
+    /* Grid layout */
+    grid-column: 1;
+    grid-row: 1;
+    color: #fff;
+    height: 100%;
+    position: relative;
+}
+.block_lw_courses .coursebox:not(.span12) .course_image, [data-block='lw_courses'] .coursebox:not(.span12) .course_image {
+    /* Grid layout */
+    width: 100%;
+    height: 100%;
 }

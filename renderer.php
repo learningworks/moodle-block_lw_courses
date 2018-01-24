@@ -41,6 +41,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
     public function lw_courses($courses) {
         global $CFG, $PAGE, $DB, $OUTPUT;
         $html = '';
+        
 
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/lw_courses/js/custom.js'));
         $config = get_config('block_lw_courses');
