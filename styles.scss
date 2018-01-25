@@ -8,6 +8,7 @@
     text-indent: -999em;
     transition: all .5s ease;
     width: 30px;
+    margin-top: -35px;
   }
   #box-or-lines.grid {
     background-position: right top;
@@ -22,9 +23,11 @@
     padding: 0px !important;
 
     &.span12 {
+      /* Row layout */
       grid-template-columns: 350px auto;
       grid-template-rows: 55px 30px 195px;
       .image_wrap, .course_title, .teacher_names, .course_description {
+        /* Row layout */
         background-color: #fff;
         color: #444;
         border: solid 2px black;
@@ -32,20 +35,30 @@
       }
 
       .image_wrap {
+        /* Row layout */
         grid-column: 1;
         grid-row: 1 / 3;
         color: #fff;
         height: 300px;
         position: relative;
       }
+      .course_image {
+        /* Row layout */
+        width: 100%;
+        height: 100%;
+      }
       .course_title, .teacher_names, .course_description, .categorypath {
+        /* Row layout */
         grid-column: 2;
       }
       .course_title {
+        /* Row layout */
         grid-row: 1;
         h2 {
+          /* Row layout */
           border-bottom: solid 2px;
           a {
+            /* Row layout */
             color: inherit;
             display: inline-block;
             width: 100%;
@@ -53,20 +66,25 @@
         }
       }
       .teacher_names {
+        /* Row layout */
         grid-row: 2;
       }
       .teacher_names {
+        /* Row layout */
         grid-row: 3;
         font-size: .5em;
         p {
+          /* Row layout */
           float: left;
           margin-right: 5px;
         }
       }
       .course_description {
+        /* Row layout */
         grid-row: 4;
       }
       .progress {
+        /* Row layout */
         background: green;
         height: 25px;
         grid-column: 1;
@@ -77,20 +95,65 @@
         bottom: -160px;
         z-index: 1;
         .progress-bar {
+          /* Row layout */
           height: 25px;
         }
       }
-      .course_image {
-        width: 100%;
-        height: 100%;
-      }
+
       .teacher_image_wrap {
+        /* Row layout */
         display: none;
       }
       .box.flush.p-y-1, .coursebox.span12 .teacher_image_wrap {
+        /* Row layout */
         display: none;
       }
     }
-  }
 
+    &:not(.span12) {
+      /* Grid layout */
+      grid-template-columns: 100%;
+      grid-template-rows: 350px;
+
+      .image_wrap, .course_title, .teacher_names, .course_description, .categorypath {
+        /* Grid layout */
+        background-color: #fff;
+        color: #444;
+        border: solid 2px black;
+        padding: 10px;
+      }
+
+      .image_wrap {
+        /* Grid layout */
+        grid-column: 1;
+        grid-row: 1 ;
+        color: #fff;
+        height: 100%;
+        position: relative;
+      }
+      .course_image {
+        /* Grid layout */
+        width: 100%;
+        height: 100%;
+      }
+
+      .progress {
+        /* Grid layout */
+        background: green;
+        height: 25px;
+        grid-column: 1;
+        grid-row: 1;
+        position: relative;
+        width: calc(100% - 20px);
+        left: 10px;
+        // bottom: -90%;
+        margin-top: 10px;
+        z-index: 1;
+        .progress-bar {
+          /* Grid layout */
+          height: 25px;
+        }
+      }
+    }
+  }
 }
