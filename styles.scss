@@ -26,7 +26,7 @@
       /* Row layout */
       grid-template-columns: 350px auto;
       grid-template-rows: 55px 30px 195px;
-      .image_wrap, .course_title, .teacher_names, .course_description {
+      .image_wrap, .course_title, .teacher_names, .course_description, .categorypath {
         /* Row layout */
         background-color: #fff;
         color: #444;
@@ -114,6 +114,18 @@
       /* Grid layout */
       grid-template-columns: 100%;
       grid-template-rows: 350px;
+      height: 400px;
+
+      &:hover {
+        .course_title {
+          height:100%;
+        }
+        .course_description {
+          position: absolute;
+          top: 20%;
+          z-index: 2;
+        }
+      }
 
       .image_wrap, .course_title, .teacher_names, .course_description, .categorypath {
         /* Grid layout */
@@ -155,11 +167,22 @@
         }
       }
 
+      .course_description {
+        transition: all 0.5s ease;
+        position: absolute;
+        bottom: 0%;
+        z-index: 0;
+      }
       .course_title {
         /* Grid layout */
         grid-column: 1;
         grid-row: 1;
+        height: 20%;
         z-index: 1;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        transition: all 0.5s ease;
         h2 {
           /* Row layout */
           border-bottom: solid 2px;
