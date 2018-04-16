@@ -110,8 +110,7 @@ class block_lw_courses extends block_base {
      * @return array
      */
     public function applicable_formats() {
-        // 'all' => true
-        return array('my' => true, 'site' => true);
+        return array('all' => true);
     }
 
     /**

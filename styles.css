@@ -105,7 +105,6 @@
 .no-progress,
 .block_lw_courses .progress {
     height: 20px;
-    margin-bottom: 20px;
 }
 .block_lw_courses .progress {
     -o-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
@@ -178,7 +177,7 @@
     float: left;
     margin-right: 15px;
     width: 300px;
-    min-height: 200px;
+    min-height: 185px;
 }
 .block_lw_courses .coursebox.list .progress,
 .block_lw_courses .coursebox.list .course_title,
@@ -190,13 +189,10 @@
     width: calc(100% - 315px);
 }
 
-.block_lw_courses .coursebox.list .teacher_names {
-    margin-top: 5px;
-}
-
 .block_lw_courses .coursebox .teacher_name {
     float: left;
     margin-right: 5px;
+    margin-bottom: 0;
 }
 
 .block_lw_courses .coursebox.list .box.flush {
@@ -426,16 +422,13 @@
     margin-top: 2px;
 }
 .block_lw_courses .lw_courses_list .coursebox.span12 {
-    padding: 0;
     border: none;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     margin-bottom: 9px;
     background: #fff;
-    padding-right: 10px;
+    padding: 15px;
     min-height: 150px;
-    padding-left: 10px;
     height: 215px;
-    overflow: hidden;
 }
 .block_lw_courses .lw_courses_list .coursebox.span12 .course_content a.btn {
     width: auto;
@@ -498,7 +491,7 @@
     text-transform: uppercase;
 }
 .lw_courses_list .coursebox.span12 .progress {
-    margin-top: 5px;
+    margin: 10px 0;
     border-radius: 0;
 }
 .lw_courses_list .coursebox.span12 .progress .progress-bar[aria-valuenow="0"] {

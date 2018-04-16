@@ -1,7 +1,6 @@
 # My Courses Block
 [![Build Status](https://travis-ci.org/learningworks/moodle-block_lw_courses.svg?branch=master)](https://travis-ci.org/learningworks/moodle-block_lw_courses)
 [![Code Climate](https://codeclimate.com/github/learningworks/moodle-block_lw_courses/badges/gpa.svg)](https://codeclimate.com/github/learningworks/moodle-block_lw_courses/)
-[![Issue Count](https://lima.codeclimate.com/github/learningworks/moodle-block_lw_courses/badges/issue_count.svg)](https://lima.codeclimate.com/github/learningworks/moodle-block_lw_courses)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](readme.md)
 
 Installation Instructions
@@ -17,7 +16,7 @@ Installation Instructions
 
 Moodle compatibility
 =====================
-* Tested with Moodle 3.1, 3.2 and 3.3
+* Tested with Moodle 3.1, 3.2, 3.3 and 3.4
 
 
 Features

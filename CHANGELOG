@@ -79,3 +79,8 @@ Moved to v2 of the MoodleRooms travis file.
 Behat tests are now run again in the travis file
 New feature: Show teachers (editing-teacher) of a course to a user.
 New feature: Added a display name to help users when adding the block
+
+17/04/18
+Remove limitation on where block can be placed.
+Tested with 3.4 fully.
+Moved Progress bar on list view.
