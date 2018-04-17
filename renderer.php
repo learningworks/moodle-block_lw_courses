@@ -137,8 +137,6 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                 "course-{$course->id}");
             $html .= $this->course_image($course);
 
-            $html .= block_lw_courses_build_progress($course);
-
             $context = context_course::instance($course->id);
             $teachers = get_role_users($role->id, $context, false, $fields);
             $teacherimages = html_writer::start_div('teacher_image_wrap');
@@ -202,6 +200,8 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             }
 
             $html .= $this->course_description($course);
+
+            $html .= block_lw_courses_build_progress($course);
 
             $html .= html_writer::div($teachernames, 'teacher_names');
 
