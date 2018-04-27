@@ -162,6 +162,7 @@
 .block_lw_courses .coursebox {
     display: flex;
     flex-direction: column;
+    float: left;
     overflow: auto;
 }
 .block_lw_courses .coursebox.grid .activity_info {
