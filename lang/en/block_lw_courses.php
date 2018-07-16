@@ -105,3 +105,5 @@ $string['startgrid_desc'] = "This will render the courses in a grid straight awa
 $string['noprogress'] = ": enable course completion tracking!";
 $string['progressunavail'] = "Progress unavailable";
 $string['nocompletion'] = "Completion not enabled";
+
+$string['privacy:metadata'] = 'The My Courses (lw_courses) block only shows information about courses and does not store data itself.';
