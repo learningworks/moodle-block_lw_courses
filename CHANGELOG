@@ -84,3 +84,6 @@ New feature: Added a display name to help users when adding the block
 Remove limitation on where block can be placed.
 Tested with 3.4 fully.
 Moved Progress bar on list view.
+
+16/07/18
+Added Privacy API
