@@ -293,7 +293,7 @@ function block_lw_courses_build_progress($course) {
 
             // The max grade has not been set within the course.
             if ($gradeobject->item->grademax == 0) {
-                return html_writer::div(html_writer::tag('p', get_string('nocompletion', 'block_lw_courses')), 'no-progress');
+                return html_writer::div(html_writer::tag('p', get_string('progressunavail', 'block_lw_courses')), 'no-progress');
             }
             $completionpercentage = intval($gradeobject->grade / $gradeobject->item->grademax * 100);
 
@@ -316,11 +316,11 @@ function block_lw_courses_build_progress($course) {
                 // Limited view.
                 if (!has_capability('moodle/course:viewhiddencourses', $context)) {
                     return html_writer::tag('p',
-                                            get_string('progressunavail', 'block_lw_courses'),
+                                            get_string('nocompletion', 'block_lw_courses'),
                                             array('class' => 'progressunavail'));
                 } else { // Full view.
                     return html_writer::tag('p',
-                                            get_string('progressunavail', 'block_lw_courses') .
+                                            get_string('nocompletion', 'block_lw_courses') .
                                                 get_string('noprogress', 'block_lw_courses'),
                                             array('class' => 'progressunavail'));
                 }
