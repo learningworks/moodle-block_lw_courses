@@ -100,9 +100,9 @@ if ($ADMIN->fulltree) {
     $title = new lang_string('progress', 'block_lw_courses');
     $description = new lang_string('progress_desc', 'block_lw_courses');
     $setting = new admin_setting_configselect($name, $title, $description, 0, array(
-        BLOCKS_LW_COURSES_PROGRESS_UNSET => 'Unset',
-        BLOCKS_LW_COURSES_PROGRESS_COMPLETION => 'Completion',
-        BLOCKS_LW_COURSES_PROGRESS_GRADES => 'Grades')
+        BLOCKS_LW_COURSES_PROGRESS_UNSET => new lang_string('unset', 'block_lw_courses'),
+        BLOCKS_LW_COURSES_PROGRESS_COMPLETION => new lang_string('completion', 'core_completion'),
+        BLOCKS_LW_COURSES_PROGRESS_GRADES => new lang_string('grades'))
     );
     $settings->add($setting);
 
