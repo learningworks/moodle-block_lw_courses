@@ -87,3 +87,6 @@ Moved Progress bar on list view.
 
 16/07/18
 Added Privacy API
+
+23/08/18
+Moved to completion lib for getting course progress which requires alot less work from our end.

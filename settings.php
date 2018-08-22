@@ -96,16 +96,6 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configcheckbox($name, $title, $description, BLOCKS_LW_COURSES_SHOWGRADES_NO);
     $settings->add($setting);
 
-    $name = 'block_lw_courses/progress';
-    $title = new lang_string('progress', 'block_lw_courses');
-    $description = new lang_string('progress_desc', 'block_lw_courses');
-    $setting = new admin_setting_configselect($name, $title, $description, 0, array(
-        BLOCKS_LW_COURSES_PROGRESS_UNSET => 'Unset',
-        BLOCKS_LW_COURSES_PROGRESS_COMPLETION => 'Completion',
-        BLOCKS_LW_COURSES_PROGRESS_GRADES => 'Grades')
-    );
-    $settings->add($setting);
-
     $name = 'block_lw_courses/startgrid';
     $title = new lang_string('startgrid', 'block_lw_courses');
     $description = new lang_string('startgrid_desc', 'block_lw_courses');
