@@ -84,37 +84,7 @@
 .block_lw_courses .content .lw_courses_list .movehere {
     margin-bottom: 15px;
 }
-.block_lw_courses .progress-bar {
-    -o-transition: width .6s ease;
-    -moz-transition: width .6s ease;
-    -webkit-transition: width .6s ease;
-    -o-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-    -moz-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-    background-color: #337ab7;
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-    color: #fff;
-    float: left;
-    font-size: 12px;
-    height: 100%;
-    line-height: 20px;
-    text-align: center;
-    transition: width .6s ease;
-    width: 0;
-}
-.no-progress,
-.block_lw_courses .progress {
-    height: 20px;
-}
-.block_lw_courses .progress {
-    -o-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-    overflow: hidden;
-}
+
 [dir="ltr"] .block_lw_courses #box-or-lines,
 [dir="ltl"] [data-block='lw_courses'] #box-or-lines {
     background: url([[pix:block_lw_courses|block_lines]]) no-repeat left top;
@@ -260,7 +230,7 @@
     right: 5px;
     top: 0;
     width: auto;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     text-transform: uppercase;
 }
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .title a {
@@ -275,7 +245,7 @@
     bottom: 10px;
     overflow: hidden;
     color: #fff;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     width: auto;
 }
 
@@ -287,7 +257,7 @@
     bottom: 10px;
     overflow: hidden;
     color: #fff;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     width: auto;
 }
 
@@ -323,7 +293,7 @@
     top: 100%;
     bottom: 0;
     overflow: visible;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     position: absolute;
     left: 0;
     right: 0;
@@ -337,11 +307,8 @@
     z-index: 1;
     position: absolute;
     padding-left: 35px;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     transition-delay: 0.5s;
-}
-.block_lw_courses .lw_courses_list .coursebox:not(.span12) .title {
-    padding: 0 10px;
 }
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_title .course_title a {
     margin: 0;
@@ -359,7 +326,7 @@
     margin-top: -44px;
     height: 55px;
     background: #000;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.2);
 }
 .block_lw_courses .lw_courses_list .coursebox:not(.span12) .course_title .course_link {
@@ -396,17 +363,17 @@
     transform: skewX(0deg);
     margin-top: -15px;
     left: 0;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
 }
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):hover .course_title:before,
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):focus .course_title:before {
     margin-top: -65px;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
 }
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):hover .course_description,
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):focus .course_description {
     top: 55px;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     color: #fff;
 }
 
@@ -414,7 +381,7 @@
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):hover .teacher_names,
 .block_lw_courses .lw_courses_list .coursebox:not(.span12):focus .teacher_names {
     top: 195px;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     color: #fff;
 }
 
@@ -445,11 +412,11 @@
     border-radius: 0;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     margin: 5px;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
 }
 .block_lw_courses .lw_courses_list .coursebox.span12 .course_content a.btn:hover {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3) inset;
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     background: #eaeaea;
 }
 .block_lw_courses .lw_courses_list .coursebox.span12 .course_content .course_link {
@@ -480,24 +447,8 @@
 .block_lw_courses .lw_courses_list .coursebox a {
     text-decoration: none;
 }
-.lw_courses_list .progress-bar {
-    text-align: left;
-}
-.lw_courses_list .progress-bar:before {
-    content: 'Progress: ';
-    margin-right: 5px;
-    display: inline-block;
-    margin-left: 5px;
-    font-size: 11px;
-    text-transform: uppercase;
-}
-.lw_courses_list .coursebox.span12 .progress {
-    margin: 10px 0;
-    border-radius: 0;
-}
-.lw_courses_list .coursebox.span12 .progress .progress-bar[aria-valuenow="0"] {
-    color: #000;
-}
+
+
 .lw_courses_list .coursebox:not(.span12) .categorypath {
     position: absolute;
     color: #fff;
@@ -511,32 +462,14 @@
     text-transform: uppercase;
     font-size: 12px;
     box-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease;
+    transition: top 0.5s ease;
     opacity: 0;
 }
-.lw_courses_list .coursebox:not(.span12) .progress {
-    position: absolute;
-    left: 0;
-    right: 0;
-    border-radius: 0;
-    text-align: left;
-    opacity: 0.8;
-    bottom: 0;
-    top: 0;
-    z-index: 999;
-    background: #ccc;
-    background: rgba(0, 0, 0, 0.2);
-}
-.lw_courses_list .coursebox:not(.span12) .progress .progress-bar[aria-valuenow="0"] {
-    display: none;
-}
+
 .lw_courses_list .coursebox:not(.span12):hover .categorypath {
     opacity: 1;
 }
-.lw_courses_list .coursebox:not(.span12):hover .progress {
-    transition: all 0.5s ease;
-    opacity: 0;
-}
+
 .lw_courses_list .coursebox:not(.span12):hover .course_content .summary .autolink {
     display: inline;
     padding: 0;
@@ -574,7 +507,7 @@
     bottom: 30px;
     width: calc(100% - 20px);
     left: 10px;
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease;
     opacity: 1;
     overflow: hidden;
     z-index: 1;
@@ -582,7 +515,7 @@
 .lw_courses_list .coursebox:not(.span12):hover .teacher_image_wrap {
     height: 0;
     bottom: 250px;
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease;
     opacity: 0;
 }
 
@@ -686,4 +619,49 @@
     .block_lw_courses .coursebox:not(.list) .activity_info {
         width: 100%;
     }
+}
+.lw_courses_list .coursebox:not(.span12):hover .progress {
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+
+.lw_courses_list .lw_courses_list .progress {
+    height: 1.5em;
+    width: 100%;
+    background-color: #c9c9c9;
+    position: relative;
+}
+.lw_courses_list .progress:before {
+    color: #ffffff;
+    content: attr(data-label);
+    position: absolute;
+    text-align: left;
+    text-indent: 10px;
+    top: 5px;
+    left: 0;
+    right: 0;
+}
+.lw_courses_list .progress .value {
+    background-color: #337AB7;
+    display: inline-block;
+    height: 100%;
+}
+
+.lw_courses_list .coursebox:not(.span12) .progress {
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    text-align: left;
+    opacity: 0.8;
+    bottom: 0;
+    top: -15px;
+    z-index: 999;
+    background: #ccc;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.lw_courses_list .coursebox .progress {
+    height: 25px;
+    border-radius: 0;
+    position: relative;
 }

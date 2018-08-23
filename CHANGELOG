@@ -90,3 +90,4 @@ Added Privacy API
 
 23/08/18
 Moved to completion lib for getting course progress which requires alot less work from our end.
+Move progress from :before content to a rendered item

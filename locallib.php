@@ -286,10 +286,13 @@ function block_lw_courses_build_progress($course) {
     $percentage = progress::get_course_progress_percentage($course);
     if (!is_null($percentage)) {
         $percentage = floor($percentage);
+    } else {
+        $percentage = 0;
     }
 
-    $bar = html_writer::div("$percentage%", 'progress-bar', array('aria-valuenow' => "$percentage",
+    $bar = html_writer::div('', 'value', array('aria-valuenow' => "$percentage",
             'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$percentage%"));
-    $progress = html_writer::div($bar, 'progress');
+    $progress = html_writer::div($bar,'progress', array('data-label' => "$percentage% Complete"));
+
     return $progress;
 }
