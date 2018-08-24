@@ -27,9 +27,6 @@ define('BLOCKS_LW_COURSES_SHOWCATEGORIES_NONE', '0');
 define('BLOCKS_LW_COURSES_SHOWCATEGORIES_ONLY_PARENT_NAME', '1');
 define('BLOCKS_LW_COURSES_SHOWCATEGORIES_FULL_PATH', '2');
 define('BLOCKS_LW_COURSES_IMAGEASBACKGROUND_FALSE', '0');
-define('BLOCKS_LW_COURSES_PROGRESS_UNSET', '0');
-define('BLOCKS_LW_COURSES_PROGRESS_COMPLETION', '1');
-define('BLOCKS_LW_COURSES_PROGRESS_GRADES', '2');
 define('BLOCKS_LW_COURSES_SHOWGRADES_NO', '0');
 define('BLOCKS_LW_COURSES_SHOWGRADES_YES', '1');
 define('BLOCKS_LW_COURSES_STARTGRID_NO', '0');
@@ -38,6 +35,8 @@ define('BLOCKS_LW_COURSES_DEFAULT_COURSES_ROW', '4');
 define('BLOCKS_LW_COURSES_DEFAULT_COL_SIZE', '3');
 define('BLOCKS_LW_COURSES_SHOWTEACHERS_NO', '0');
 define('BLOCKS_LW_COURSES_SHOWTEACHERS_YES', '1');
+require_once($CFG->libdir . '/completionlib.php');
+use core_completion\progress;
 /**
  * Display overview for courses
  *
@@ -200,12 +199,12 @@ function block_lw_courses_get_sorted_courses($showallcourses = false) {
     $remotecourses = array();
     if (is_enabled_auth('mnet')) {
         $remotecourses = get_my_remotecourses();
-    }
-    // Remote courses will have -ve remoteid as key, so it can be differentiated from normal courses.
-    foreach ($remotecourses as $id => $val) {
-        $remoteid = $val->remoteid * -1;
-        $val->id = $remoteid;
-        $courses[$remoteid] = $val;
+        // Remote courses will have -ve remoteid as key, so it can be differentiated from normal courses.
+        foreach ($remotecourses as $id => $val) {
+            $remoteid = $val->remoteid * -1;
+            $val->id = $remoteid;
+            $courses[$remoteid] = $val;
+        }
     }
 
     $order = block_lw_courses_get_myorder();
@@ -274,102 +273,27 @@ function block_lw_courses_get_course_image_url($fileorfilename) {
  * @return string
  */
 function block_lw_courses_build_progress($course) {
-    global $CFG, $USER;
+    global $CFG;
 
     require_once($CFG->dirroot.'/grade/querylib.php');
     require_once($CFG->dirroot.'/grade/lib.php');
     $config = get_config('block_lw_courses');
+    $completestring = get_string('complete');
 
     if ($config->progressenabled == BLOCKS_LW_COURSES_SHOWGRADES_NO) {
         return '';
     }
 
-    switch ($config->progress) {
-        case BLOCKS_LW_COURSES_PROGRESS_UNSET:
-            return 'unset';
-
-        case BLOCKS_LW_COURSES_PROGRESS_GRADES:
-            $gradeobject = grade_get_course_grade($USER->id, $course->id);
-
-            // The max grade has not been set within the course.
-            if ($gradeobject->item->grademax == 0) {
-                return html_writer::div(html_writer::tag('p', get_string('nocompletion', 'block_lw_courses')), 'no-progress');
-            }
-            $completionpercentage = intval($gradeobject->grade / $gradeobject->item->grademax * 100);
-
-            $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
-                'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
-            $progress = html_writer::div($bar, 'progress');
-            return $progress;
-
-        case BLOCKS_LW_COURSES_PROGRESS_COMPLETION:
-            $course = get_course($course->id);
-            $completionstatus = new stdClass();
-
-            // Get course completion data.
-            $coursecompletiondata = new completion_info($course);
-
-            // Don't display if completion isn't enabled!
-            if (!$coursecompletiondata->is_enabled()) {
-                // Check if user should get a limited/full description of issue - based on viewhiddencourses capabilities.
-                $context = context_course::instance($course->id, IGNORE_MISSING);
-                // Limited view.
-                if (!has_capability('moodle/course:viewhiddencourses', $context)) {
-                    return html_writer::tag('p',
-                                            get_string('progressunavail', 'block_lw_courses'),
-                                            array('class' => 'progressunavail'));
-                } else { // Full view.
-                    return html_writer::tag('p',
-                                            get_string('progressunavail', 'block_lw_courses') .
-                                                get_string('noprogress', 'block_lw_courses'),
-                                            array('class' => 'progressunavail'));
-                }
-            }
-
-            // INSPIRED BY completionstatus BLOCK.
-
-            // Load criteria to display.
-            $completions = $coursecompletiondata->get_completions($USER->id);
-
-            // For aggregating activity completion.
-            $activities = array();
-            $activitiescompleted = 0;
-
-            // Flag to set if current completion data is inconsistent with what is stored in the database.
-            $pendingupdate = false;
-
-            // Loop through course criteria.
-            foreach ($completions as $completion) {
-                $criteria = $completion->get_criteria();
-                $iscomplete = $completion->is_complete();
-
-                if (!$pendingupdate && $criteria->is_pending($completion)) {
-                    $pendingupdate = true;
-                }
-
-                // Activities are a special case, so cache them and leave them till last.
-                if ($criteria->criteriatype == COMPLETION_CRITERIA_TYPE_ACTIVITY) {
-                    $activities[$criteria->moduleinstance] = $iscomplete;
-
-                    if ($iscomplete) {
-                        $activitiescompleted++;
-                    }
-                    continue;
-                }
-            }
-
-            $completionpercentage = 0;
-            // Aggregate activities.
-            if (!empty($activities)) {
-                $completionstatus->min = $activitiescompleted;
-                $completionstatus->max = count($activities);
-                $completionpercentage = intval($completionstatus->min / $completionstatus->max * 100);
-            }
-
-            $bar = html_writer::div("$completionpercentage%", 'progress-bar', array('aria-valuenow' => "$completionpercentage",
-                'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$completionpercentage%"));
-            $progress = html_writer::div($bar, 'progress');
-
-            return $progress;
+    $percentage = progress::get_course_progress_percentage($course);
+    if (!is_null($percentage)) {
+        $percentage = floor($percentage);
+    } else {
+        $percentage = 0;
     }
+
+    $bar = html_writer::div('', 'value', array('aria-valuenow' => "$percentage",
+            'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$percentage%"));
+    $progress = html_writer::div($bar, 'progress', array('data-label' => "$percentage% $completestring"));
+
+    return $progress;
 }

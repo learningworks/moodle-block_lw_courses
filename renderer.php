@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
-
+require_once($CFG->libdir . '/externallib.php');
 /**
  * lw_courses block rendrer
  *
@@ -526,29 +526,15 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * Get the Course description for a given course
      *
      * @param object $course The course whose description we want
-     * @return string|void
+     * @return string
      */
     public function course_description($course) {
-        global $CFG;
-        require_once($CFG->libdir.'/coursecatlib.php');
-        $course = new course_in_list($course); // Todo : why does this fix so many issues?.
-        if ($course->has_summary()) {
-            $context = context_course::instance($course->id);
-            if (intval(get_config('block_lw_courses', 'summary_limit')) > 0) {
-                $summaryexcerpt = $this->truncate_html($course->summary,
-                    intval(get_config('block_lw_courses', 'summary_limit')));
-            } else {
-                $summaryexcerpt = $course->summary;
-            }
+        $course = new course_in_list($course);
 
-            $summary = file_rewrite_pluginfile_urls($summaryexcerpt, 'pluginfile.php', $context->id, 'course', 'summary', null);
-
-            return html_writer::div($summary, 'course_description');
-        } else {
-            return ' ';
-        }
-
-        return print_error('error');
+        $context = \context_course::instance($course->id);
+        $summary = external_format_string($course->summary, $context,
+                1, array());
+        return html_writer::div($summary, 'course_description');
     }
 
     /**
