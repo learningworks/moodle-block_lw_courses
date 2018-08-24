@@ -199,12 +199,12 @@ function block_lw_courses_get_sorted_courses($showallcourses = false) {
     $remotecourses = array();
     if (is_enabled_auth('mnet')) {
         $remotecourses = get_my_remotecourses();
-    }
-    // Remote courses will have -ve remoteid as key, so it can be differentiated from normal courses.
-    foreach ($remotecourses as $id => $val) {
-        $remoteid = $val->remoteid * -1;
-        $val->id = $remoteid;
-        $courses[$remoteid] = $val;
+        // Remote courses will have -ve remoteid as key, so it can be differentiated from normal courses.
+        foreach ($remotecourses as $id => $val) {
+            $remoteid = $val->remoteid * -1;
+            $val->id = $remoteid;
+            $courses[$remoteid] = $val;
+        }
     }
 
     $order = block_lw_courses_get_myorder();
@@ -278,6 +278,7 @@ function block_lw_courses_build_progress($course) {
     require_once($CFG->dirroot.'/grade/querylib.php');
     require_once($CFG->dirroot.'/grade/lib.php');
     $config = get_config('block_lw_courses');
+    $completestring = get_string('complete');
 
     if ($config->progressenabled == BLOCKS_LW_COURSES_SHOWGRADES_NO) {
         return '';
@@ -292,7 +293,7 @@ function block_lw_courses_build_progress($course) {
 
     $bar = html_writer::div('', 'value', array('aria-valuenow' => "$percentage",
             'aria-valuemin' => "0", 'aria-valuemax' => "100", 'style' => "width:$percentage%"));
-    $progress = html_writer::div($bar,'progress', array('data-label' => "$percentage% Complete"));
+    $progress = html_writer::div($bar, 'progress', array('data-label' => "$percentage% $completestring"));
 
     return $progress;
 }
