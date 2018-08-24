@@ -273,7 +273,7 @@ function block_lw_courses_get_course_image_url($fileorfilename) {
  * @return string
  */
 function block_lw_courses_build_progress($course) {
-    global $CFG, $USER;
+    global $CFG;
 
     require_once($CFG->dirroot.'/grade/querylib.php');
     require_once($CFG->dirroot.'/grade/lib.php');
