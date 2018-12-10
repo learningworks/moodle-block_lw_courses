@@ -39,7 +39,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * @return string html to be displayed in lw_courses block
      */
     public function lw_courses($courses) {
-        global $CFG, $PAGE, $DB, $OUTPUT;
+        global $CFG, $PAGE, $DB, $OUTPUT, $USER;
         $html = '';
         // LearningWorks.
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/lw_courses/js/custom.js'));
@@ -113,6 +113,11 @@ class block_lw_courses_renderer extends plugin_renderer_base {
         } else {
             $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines',
             'styles' => '', 'class' => "$courseclass col-md-$startvalue span$startvalue $courseclass"));
+            $html .= html_writer::tag('a', 'View hidden courses', array('href' => "#", 'id' => 'showhidden',
+                'styles' => '', 'class' => "btn btn-primary"));
+            $html .= html_writer::tag('a', 'Show stared courses', array('href' => "#", 'id' => 'showstarred',
+                'styles' => '', 'class' => "btn btn-primary"));
+
         }
         $html .= html_writer::tag('div', '', array("class" => "hidden startgrid $courseclass", "grid-size" => $gridsplit));
         $html .= html_writer::div('', 'box flush');
@@ -125,6 +130,36 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             'r.shortname AS roleshortname, rn.name AS rolecoursealias';
 
         $html .= html_writer::start_div('lw_courses_list');
+
+
+        // Sort Starred courses first.
+        usort($courses, function($a, $b){
+            $apref = get_user_preferences("star_course_instance_". $a->id);
+            $bpref = get_user_preferences("star_course_instance_". $b->id);
+            if($apref == $bpref)
+                return 0;
+            if($apref > $bpref){
+                return -1;
+            }
+            return 1;
+        });
+
+        // Sort Hidden courses last.
+        usort($courses, function($a, $b){
+            $apref = intval(get_user_preferences("hide_course_instance_". $a->id));
+            $bpref = intval(get_user_preferences("hide_course_instance_". $b->id));
+
+            $apref = $apref == 0 ? 1 : 0;
+            $bpref = $bpref == 0 ? 1 : 0;
+
+            if($apref == $bpref)
+                return 0;
+            if($apref > $bpref){
+                return -1;
+            }
+            return 1;
+        });
+
         foreach ($courses as $key => $course) {
 
             // If moving course, then don't show course which needs to be moved.
@@ -132,8 +167,16 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                 continue;
             }
 
+            // Get user preferences.
+            $USER->ajax_updatable_user_prefs["star_course_instance_". $course->id] = true;
+            $USER->ajax_updatable_user_prefs["hide_course_instance_". $course->id] = true;
+
+            $star = get_user_preferences("star_course_instance_". $course->id);
+            $ishidden = get_user_preferences("hide_course_instance_". $course->id);
+
             $html .= $this->output->box_start(
-                "coursebox $courseclass span$startvalue col-md-$startvalue $courseclass col-xs-12",
+                "coursebox $courseclass span$startvalue col-md-$startvalue $courseclass col-xs-12" .
+                ($ishidden? 'hidden' : '') . ($star ? ' isstar' : ''),
                 "course-{$course->id}");
             $html .= $this->course_image($course);
 
@@ -180,14 +223,17 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                 $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
                 $coursefullname = format_string(get_course_display_name_for_list($course), true, $course->id);
                 $link = html_writer::link($courseurl, $coursefullname, $attributes);
-                $html .= $this->output->heading($link, 2, 'title');
+                $link .= '<i class="icon fa fa-star fa-fw " aria-hidden="true" aria-label=""></i>';
+                $link .= '<i class="icon fa fa-eye fa-fw " aria-hidden="true" aria-label=""></i>';
+                $html .= $this->output->heading($link, 2, 'title' . ($star ? ' star' : '') . ($ishidden ? ' hide' : ''));
             } else {
                 $html .= $this->output->heading(html_writer::link(
                        new moodle_url('/auth/mnet/jump.php', array(
                        'hostid' => $course->hostid,
                        'wantsurl' => '/course/view.php?id='.$course->remoteid)),
                        format_string($course->shortname, true), $attributes) .
-                       ' (' . format_string($course->hostname) . ')', 2, 'title');
+                       ' (' . format_string($course->hostname) . ')', 2, 'title' . ($star ? ' star' : '') .
+                       ($ishidden ? ' hide' : ''));
             }
             $html .= $this->output->box('', 'flush');
             $html .= html_writer::end_tag('div');

@@ -665,3 +665,56 @@
     border-radius: 0;
     position: relative;
 }
+
+.block_lw_courses h2.title .icon{
+    float: right;
+    margin-top: -16px;
+    text-align: right;
+    color:#fff;
+    margin-right: -7px;
+}
+
+.block_lw_courses h2.title .fa-eye{
+    margin-right:16px;
+}
+
+.block_lw_courses .hidden h2.title .fa-eye:before{
+    content:'\f070';
+}
+
+.block_lw_courses h2.title .fa-star:before{
+    content: '\f006';
+    color:#fff;
+}
+
+.block_lw_courses h2.title .fa-eye:before{
+    color:#fff;
+}
+
+.block_lw_courses .list h2.title .fa-eye:before,
+.block_lw_courses .list h2.title .fa-star:before{
+    color:#000;
+}
+
+.block_lw_courses h2.title.star .fa-star:before{
+    content: '\f005';
+}
+
+.lw_courses_list .hidden,
+.lw_courses_list .coursebox.list.hidden{
+    display:none;
+}
+
+.lw_courses_list.showhidden .hidden,
+.lw_courses_list.showhidden .coursebox.list.hidden{
+    display:block;
+}
+
+.lw_courses_list.showstarred .coursebox:not(.isstar),
+.lw_courses_list.showstarred .coursebox.list:not(.isstar){
+    display:none;
+}
+
+#showhidden{
+    margin-right:20px;
+}
