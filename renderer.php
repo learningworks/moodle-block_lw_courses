@@ -180,11 +180,11 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                 "course-{$course->id}");
             $html .= $this->course_image($course);
 
-            $context = context_course::instance($course->id);
-            $teachers = get_role_users($role->id, $context, false, $fields);
             $teacherimages = html_writer::start_div('teacher_image_wrap');
             $teachernames = '';
-            if ($config->showteachers != BLOCKS_LW_COURSES_SHOWTEACHERS_NO) {
+            if ($course->id > 0 && !empty($role) && $config->showteachers != BLOCKS_LW_COURSES_SHOWTEACHERS_NO) {
+                $context = context_course::instance($course->id);
+                $teachers = get_role_users($role->id, $context, false, $fields);
                 foreach ($teachers as $key => $teacher) {
                     $teachername = get_string('defaultcourseteacher') . ': ' . fullname($teacher);
                     $teachernames .= html_writer::tag('p', $teachername, array('class' => 'teacher_name'));
@@ -227,13 +227,14 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                 $link .= '<i class="icon fa fa-eye fa-fw " aria-hidden="true" aria-label=""></i>';
                 $html .= $this->output->heading($link, 2, 'title' . ($star ? ' star' : '') . ($ishidden ? ' hide' : ''));
             } else {
-                $html .= $this->output->heading(html_writer::link(
-                       new moodle_url('/auth/mnet/jump.php', array(
-                       'hostid' => $course->hostid,
-                       'wantsurl' => '/course/view.php?id='.$course->remoteid)),
-                       format_string($course->shortname, true), $attributes) .
-                       ' (' . format_string($course->hostname) . ')', 2, 'title' . ($star ? ' star' : '') .
-                       ($ishidden ? ' hide' : ''));
+                $courseurl = new moodle_url('/auth/mnet/jump.php', array(
+                    'hostid' => $course->hostid,
+                    'wantsurl' => '/course/view.php?id='.$course->remoteid));
+                $coursefullname = format_string($course->shortname, true);
+                $link = html_writer::link($courseurl, $coursefullname, $attributes);
+                $link .= '<i class="icon fa fa-star fa-fw " aria-hidden="true" aria-label=""></i>';
+                $link .= '<i class="icon fa fa-eye fa-fw " aria-hidden="true" aria-label=""></i>';
+                $html .= $this->output->heading($link, 2, 'title' . ($star ? ' star' : '') . ($ishidden ? ' hide' : ''));
             }
             $html .= $this->output->box('', 'flush');
             $html .= html_writer::end_tag('div');
@@ -245,11 +246,13 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                 }
             }
 
-            $html .= $this->course_description($course);
+            if ($course->id > 0) {
+                $html .= $this->course_description($course);
 
-            $html .= block_lw_courses_build_progress($course);
+                $html .= block_lw_courses_build_progress($course);
 
-            $html .= html_writer::div($teachernames, 'teacher_names');
+                $html .= html_writer::div($teachernames, 'teacher_names');
+            }
 
             if ($config->showcategories != BLOCKS_LW_COURSES_SHOWCATEGORIES_NONE) {
                 // List category parent or categories path here.
