@@ -18,6 +18,9 @@ Feature: View the My Courses block on the dashboard and test it's functionality
       | Course 1 | C1        | 0        |
       | Course 2 | C2        | CAT1     |
       | Course 3 | C3        | CAT2     |
+    And the following config values are set as admin:
+      | messaging | 1 |
+      | messagingallusers | 1 |
     And I log in as "admin"
     And I wait "5" seconds
 
@@ -182,14 +185,15 @@ Feature: View the My Courses block on the dashboard and test it's functionality
       | student1 | C1 | student |
     And I log out
     And I log in as "admin"
-    And I navigate to "Manage enrol plugins" node in "Site administration > Plugins > Enrolments"
+    And I navigate to "Plugins > Enrolments > Manage enrol plugins" in site administration
     And I click on "Enable" "link" in the "Course meta link" "table_row"
     And I am on site homepage
     And I follow "Course 2"
     And I add "Course meta link" enrolment method with:
       | Link course | C1 |
     And I log out
-    When I log in as "student1"
+    And I log out
+    And I log in as "student1"
     And I press "Customise this page"
     And I add the "My Courses (lw_courses)" block
     Then I should see "Course 1" in the "My Courses" "block"
