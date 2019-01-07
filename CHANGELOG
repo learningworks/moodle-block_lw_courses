@@ -94,3 +94,6 @@ Move progress from :before content to a rendered item
 
 24/08/18
 Added multilang filter support
+
+07/01/19
+Tested with 3.6 and Remote course check via issue #35

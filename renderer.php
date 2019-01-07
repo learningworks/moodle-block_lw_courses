@@ -44,10 +44,6 @@ class block_lw_courses_renderer extends plugin_renderer_base {
         // LearningWorks.
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/blocks/lw_courses/js/custom.js'));
         $config = get_config('block_lw_courses');
-        if ($config->showcategories != BLOCKS_LW_COURSES_SHOWCATEGORIES_NONE) {
-            global $CFG;
-            require_once($CFG->libdir.'/coursecatlib.php');
-        }
         $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
         $ismovingcourse = false;
         $courseordernumber = 0;
@@ -209,12 +205,12 @@ class block_lw_courses_renderer extends plugin_renderer_base {
 
             if ($config->showcategories != BLOCKS_LW_COURSES_SHOWCATEGORIES_NONE) {
                 // List category parent or categories path here.
-                $currentcategory = coursecat::get($course->category, IGNORE_MISSING);
+                $currentcategory = core_course_category::get($course->category, IGNORE_MISSING);
                 if ($currentcategory !== null) {
                     $html .= html_writer::start_tag('div', array('class' => 'categorypath'));
                     if ($config->showcategories == BLOCKS_LW_COURSES_SHOWCATEGORIES_FULL_PATH) {
                         foreach ($currentcategory->get_parents() as $categoryid) {
-                            $category = coursecat::get($categoryid, IGNORE_MISSING);
+                            $category = core_course_category::get($categoryid, IGNORE_MISSING);
                             if ($category !== null) {
                                 $html .= $category->get_formatted_name().' / ';
                             }
@@ -452,8 +448,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
     public function course_image($course) {
         global $CFG;
 
-        require_once($CFG->libdir.'/coursecatlib.php');
-        $course = new course_in_list($course);
+        $course = new core_course_list_element($course);
         // Check to see if a file has been set on the course level.
         if ($course->id > 0 && $course->get_course_overviewfiles()) {
             foreach ($course->get_course_overviewfiles() as $file) {
@@ -531,7 +526,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
      * @return string
      */
     public function course_description($course) {
-        $course = new course_in_list($course);
+        $course = new core_course_list_element($course);
 
         $context = \context_course::instance($course->id);
         $summary = external_format_string($course->summary, $context,
