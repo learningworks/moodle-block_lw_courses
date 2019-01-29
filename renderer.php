@@ -113,9 +113,9 @@ class block_lw_courses_renderer extends plugin_renderer_base {
         } else {
             $html .= html_writer::tag('a', 'Change View', array('href' => '#', 'id' => 'box-or-lines',
             'styles' => '', 'class' => "$courseclass col-md-$startvalue span$startvalue $courseclass"));
-            $html .= html_writer::tag('a', 'View hidden courses', array('href' => "#", 'id' => 'showhidden',
-                'styles' => '', 'class' => "btn btn-primary"));
-            $html .= html_writer::tag('a', 'Show stared courses', array('href' => "#", 'id' => 'showstarred',
+            $html .= html_writer::tag('a', 'All My Courses', array('href' => "#", 'id' => 'showhidden',
+                'styles' => '', 'class' => "btn btn-primary currentview"));
+            $html .= html_writer::tag('a', 'Stared courses', array('href' => "#", 'id' => 'showstarred',
                 'styles' => '', 'class' => "btn btn-primary"));
 
         }
@@ -129,9 +129,9 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             'u.lang, u.timezone, u.lastaccess, u.mnethostid, u.imagealt, r.name AS rolename, r.sortorder, '.
             'r.shortname AS roleshortname, rn.name AS rolecoursealias';
 
-        $html .= html_writer::start_div('lw_courses_list');
+        $html .= html_writer::start_div('lw_courses_list showhidden');
 
-
+        /*
         // Sort Starred courses first.
         usort($courses, function($a, $b){
             $apref = get_user_preferences("star_course_instance_". $a->id);
@@ -159,6 +159,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
             }
             return 1;
         });
+        */
 
         foreach ($courses as $key => $course) {
 
@@ -216,6 +217,7 @@ class block_lw_courses_renderer extends plugin_renderer_base {
 
             // No need to pass title through s() here as it will be done automatically by html_writer.
             $attributes = array('title' => $course->fullname);
+            $courseurl = '';
             if ($course->id > 0) {
                 if (empty($course->visible)) {
                     $attributes['class'] = 'dimmed';
@@ -271,6 +273,8 @@ class block_lw_courses_renderer extends plugin_renderer_base {
                     $html .= html_writer::end_tag('div');
                 }
             }
+
+            $html .= "<a class='toplinker' href='".$courseurl."' style='position:absolute; top:0; left:0;right:0;bottom:0; display:block;z-index:9;background:transparent'></a>";
 
             $html .= $this->output->box('', 'flush');
             $html .= $this->output->box_end();

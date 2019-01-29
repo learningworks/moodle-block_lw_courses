@@ -31,35 +31,60 @@ require(["jquery"],function($) {
 
     $('#showhidden').on('click', function(e){
         e.preventDefault();
-        $(this).html("Hide hidden courses");
+        $(this).addClass('currentview');
+        $('#showstarred').removeClass('currentview');
         $('.lw_courses_list').removeClass('showstarred');
-
-        if($('.lw_courses_list').hasClass('showhidden')){
-            $(this).html("Show hidden courses");
-        }
-        $('#showstarred').html("Show starred courses");
-        $('.lw_courses_list').toggleClass('showhidden');
+        $('.lw_courses_list').addClass('showhidden');
     });
 
     $('#showstarred').on('click', function(e){
         e.preventDefault();
-        $(this).html("show all courses");
-        if($('.lw_courses_list').hasClass('showstarred')){
-            $(this).html("Show starred courses");
-        }
+        $('#showhidden').removeClass('currentview');
+        $(this).addClass('currentview');
         $('.lw_courses_list').removeClass("showhidden");
-        $('#showhidden').html("Show hidden courses");
-        $('.lw_courses_list').toggleClass('showstarred');
+        $('.lw_courses_list').addClass('showstarred');
     });
 
     $("#box-or-lines").click(function(e) {
         e.preventDefault();
         $(this).toggleClass("grid");
         $(listview).each(function(i, v) {
-            $(".lw_courses_list .coursebox").toggleClass(v);
+            $(".lw_courses_list .box.coursebox").toggleClass(v);
         });
         $(gridview).each(function(i, v) {
-            $(".lw_courses_list .coursebox").toggleClass(v);
+            $(".lw_courses_list .box.coursebox").toggleClass(v);
         });
+    });
+
+    var divs;
+    $('.lw_courses_list .box.coursebox').each(function(i){
+        $(this).data('initial-index', i);
+    });
+    $('<a href="#" id="shows"  class="btn btn-primary">Starred Courses</a>').insertBefore('#showhidden');
+    $('#showhidden').remove();
+    $('#shows').on('click', function (e) {
+        e.preventDefault();
+        $(this).toggleClass('currentview');
+        if ($(this).hasClass('currentview')) {
+            divs = $('.lw_courses_list .box.coursebox').detach();
+            $(divs).appendTo('.lw_courses_list').each(function () {
+                var oldIndex = $(this).data('initial-index');
+                if ($(this).hasClass('isstar')) {
+                    oldIndex = 0;
+                }
+                $('.lw_courses_list .box.coursebox').eq(oldIndex).before(this);
+            });
+            $('.lw_courses_list .box.coursebox:not(.isstar)').fadeOut(500);
+            $(this).html('All My Courses');
+        } else {
+            $(this).html('Starred Courses');
+            if (divs) {
+                $(divs).appendTo('.lw_courses_list').each(function () {
+                    var oldIndex = $(this).data('initial-index');
+                    $('.lw_courses_list .box.coursebox').eq(oldIndex).before(this);
+                });
+                $('.lw_courses_list .box.coursebox:not(.isstar)').fadeIn(500);
+            }
+        }
     });
 });
